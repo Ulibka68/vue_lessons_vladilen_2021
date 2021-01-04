@@ -11,11 +11,13 @@
     <div class="card ">
       <h1>{{ title }}</h1>
       <div class="form-control">
+<!--        вместо v-bind можно писать :-->
+<!--        вместо v-on можно писать @ -->
         <input
                 type="text"
-                v-bind:placeholder="placeholderString"
+                :placeholder="placeholderString"
                 v-bind:value="inputValue"
-                v-on:input="inputChangeHandle"
+                @input="inputChangeHandle"
                 v-on:keypress.enter="addNewNote"
         >
       </div>
