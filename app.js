@@ -18,6 +18,12 @@ Vue.createApp({
         addItem() {
             this.items.unshift(this.$refs.myFormControlInput.value);
             this.$refs.myFormControlInput.value='';
+        },
+        removeItm(ind) {
+            items.splice(ind,1)
+        },
+        log(i) {
+            console.log(i);
         }
     }
 }).mount("#app");
