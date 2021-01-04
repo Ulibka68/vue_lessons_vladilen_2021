@@ -10,7 +10,10 @@
   <div class="container " id="app">
     <div class="card ">
       <h1
-        v-bind:style="{color:'red'}"
+        v-bind:style="{
+            color: notes.length > 1 ? 'blue' : 'yellow',
+            fontSize : inputValue.length < 3 ? '2rem' : '1rem'
+            }"
       >
           {{ title }}
       </h1>
