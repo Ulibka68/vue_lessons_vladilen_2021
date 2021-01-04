@@ -13,26 +13,17 @@
 <div class="container pt-5" id="app" v-cloak>
   <div class="card center">
     <div v-html="myHtml"></div>
-    <ul class="list">
-      <li class="list-item" v-for="i of 2">
-        {{i}}
-      </li>
-    </ul>
-
-    <ul class="list">
-      <li class="list-item" v-for="(val, keyPar) in person">
-        {{keyPar}} : {{val}}
-      </li>
-    </ul>
-    *****************
+   
 
     <ul class="list" v-if="items.length">
       <li
               class="list-item"
               v-for="(i,ind) in items"
               @click="items.splice(ind,1)"
+              v-bind:key="i"
       >
-        {{i}}
+        {{i}}&nbsp;
+        <input type="text" @click.stop>
       </li>
     </ul>
     <h3 v-else>Элементов нет</h3>
