@@ -10,6 +10,10 @@ const App = {
     methods: { // набор методов в HTML
         inputChangeHandle(event){
             this.inputValue = event.target.value;
+        },
+        addNewNote() {
+            this.notes.push(this.inputValue);
+            this.inputValue='';
         }
 
     }
