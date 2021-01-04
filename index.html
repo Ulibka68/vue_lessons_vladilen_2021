@@ -12,17 +12,12 @@
 <body>
 <div class="container pt-5" id="app" v-cloak>
   <div class="card center">
-    <div v-html="myHtml">
-
-    </div>
-    <h2 v-text="title"></h2>
-    <h2 v-once>{{title}}></h2>
-    <h3 v-pre>{{title}}</h3>
-    <button
-            class="btn"
-            @click="title='Другой заголовок'">
-      Название изменить
-    </button>
+    <div v-html="myHtml"></div>
+    <ul class="list">
+      <li class="list-item" v-for="i of 2">
+        {{i}}
+      </li>
+    </ul>
   </div>
 </div>
 
