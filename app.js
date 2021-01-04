@@ -14,6 +14,11 @@ const App = {
         addNewNote() {
             this.notes.push(this.inputValue);
             this.inputValue='';
+        },
+        inputKeyPress(event) {
+            if (event.key === 'Enter') {
+                this.addNewNote();
+            }
         }
 
     }
