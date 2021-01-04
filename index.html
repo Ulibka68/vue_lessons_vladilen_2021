@@ -26,7 +26,7 @@
         Добавить
       </button>
       <hr />
-      <ul class="list">
+      <ul class="list" v-if="notes.length > 0">
         <li
                 class="list-item"
                 v-for="(myNote, ind) in notes"
@@ -40,6 +40,9 @@
           </button>
         </li>
       </ul>
+      <div v-if=" notes.length === 0 ">
+        Заметок пока нет, добавьте первую
+      </div>
     </div>
   </div>
 
