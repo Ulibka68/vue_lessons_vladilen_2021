@@ -3,7 +3,8 @@ const App = {
         return {
             placeholderString : "Введите заметку",
             title : 'Список заметок',
-            inputValue: ''
+            inputValue: '',
+            notes: ['Заметка1','Заметка2']
         }
     },
     methods: { // набор методов в HTML

@@ -18,11 +18,14 @@
                 v-on:input="inputChangeHandle"
         >
       </div>
-      <h2>
-        /{{ inputValue }}/
-      </h2>inputValue :
+
       <button class="btn">Добавить</button>
       <hr />
+      <ul class="list">
+        <li class="list-item">
+          {{ notes[0] }}
+        </li>
+      </ul>
     </div>
   </div>
 
