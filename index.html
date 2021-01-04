@@ -18,7 +18,7 @@
     <ul class="list" v-if="items.length">
       <li
               class="list-item"
-              v-for="(i,ind) in items"
+              v-for="(i,ind) in evenItems"
               @click="items.splice(ind,1)"
               v-bind:key="i"
       >
