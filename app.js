@@ -23,13 +23,21 @@ const App = {
         removeNote(ind, event) {
             this.notes.splice(ind,1);
         },
-        dblCnt() {
-            return this.notes.length * 2;
-        }
     },
     computed: {
         dblCntComputed() {
             return this.notes.length * 2;
+        }
+    },
+    watch: {
+    //    можно следить за изменениями переменных
+    //    создаем метод название которого совпадает с названием переменной
+        inputValue(value) {
+            console.log('inputValue changed', value);
+        //    валидация
+            if (value.length > 10) {
+                this.inputValue = value.slice(0,9);
+            }
         }
     }
 }
