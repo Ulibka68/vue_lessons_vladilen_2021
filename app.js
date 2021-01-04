@@ -8,9 +8,7 @@ const App = {
         }
     },
     methods: { // набор методов в HTML
-        inputChangeHandle(event){
-            this.inputValue = event.target.value;
-        },
+
         addNewNote() {
             if (this.inputValue) {
                 this.notes.push(this.inputValue);
