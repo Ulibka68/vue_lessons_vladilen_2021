@@ -12,8 +12,13 @@ const App = {
             this.inputValue = event.target.value;
         },
         addNewNote() {
-            this.notes.push(this.inputValue);
-            this.inputValue='';
+            if (this.inputValue) {
+                this.notes.push(this.inputValue);
+                this.inputValue = '';
+            }
+        },
+        toUpperCase(item) {
+            return item.toUpperCase();
         },
         removeNote(ind, event) {
             this.notes.splice(ind,1);

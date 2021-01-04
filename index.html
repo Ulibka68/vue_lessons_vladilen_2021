@@ -32,7 +32,7 @@
                 v-for="(myNote, ind) in notes"
         >
           ({{ ind +1 }})
-          {{ myNote }}
+          {{ toUpperCase(myNote) }}
           <button class="btn danger"
                   v-on:click="removeNote(ind,$event)"
           >
