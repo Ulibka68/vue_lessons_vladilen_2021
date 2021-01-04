@@ -15,7 +15,9 @@ const App = {
             this.notes.push(this.inputValue);
             this.inputValue='';
         },
-
+        removeNote(ind, event) {
+            this.notes.splice(ind,1);
+        }
     }
 }
 Vue.createApp(App).mount("#app");
