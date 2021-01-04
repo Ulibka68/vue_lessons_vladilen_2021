@@ -24,6 +24,17 @@
         {{keyPar}} : {{val}}
       </li>
     </ul>
+    *****************
+
+    <ul class="list">
+      <li
+              class="list-item"
+              v-for="(i,ind) in items"
+              @click="items.splice(ind,1)"
+      >
+        {{i}}
+      </li>
+    </ul>
   </div>
 </div>
 
