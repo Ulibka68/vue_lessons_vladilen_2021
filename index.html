@@ -26,7 +26,7 @@
     </ul>
     *****************
 
-    <ul class="list">
+    <ul class="list" v-if="items.length">
       <li
               class="list-item"
               v-for="(i,ind) in items"
@@ -35,6 +35,8 @@
         {{i}}
       </li>
     </ul>
+    <h3 v-else>Элементов нет</h3>
+    <h4 v-show="! items.length"> Элементов нет</h4>
   </div>
 </div>
 

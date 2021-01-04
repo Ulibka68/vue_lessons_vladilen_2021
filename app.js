@@ -7,6 +7,6 @@ Vue.createApp({
             lastName : 'Власов',
             age : 26
         },
-        items : [1,2,8,22,68]
+        items : [8,22,68]
     })
 }).mount("#app");
