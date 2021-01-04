@@ -13,12 +13,16 @@
 <div class="container pt-5" id="app" v-cloak>
   <div class="card center">
     <div v-html="myHtml"></div>
+    
+    <div class="form-control">
+      <input type="text" @keypress.enter="addItem" ref="myFormControlInput">
+    </div>
    
 
     <ul class="list" v-if="items.length">
       <li
               class="list-item"
-              v-for="(i,ind) in evenItems"
+              v-for="(i,ind) in items"
               @click="items.splice(ind,1)"
               v-bind:key="i"
       >

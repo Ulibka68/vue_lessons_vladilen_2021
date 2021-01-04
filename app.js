@@ -13,5 +13,11 @@ Vue.createApp({
         evenItems() {
             return this.items.filter( i => i % 2 === 0);
         }
+    },
+    methods: {
+        addItem() {
+            this.items.unshift(this.$refs.myFormControlInput.value);
+            this.$refs.myFormControlInput.value='';
+        }
     }
 }).mount("#app");
