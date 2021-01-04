@@ -39,12 +39,9 @@
                 class="list-item"
                 v-for="(myNote, ind) in notes"
         >
-<!--        <span :class="notes.length > 2 ? 'primary' : 'bold' " >-->
+
         <span
-                :class="{
-                    'primary' : true,
-                    'bold' : myNote.length > 4
-                }"
+                :class="['primary',{'bold' : myNote.length > 4}]"
         >
             ({{ ind + 1 }})
             {{ toUpperCase(myNote) }}
