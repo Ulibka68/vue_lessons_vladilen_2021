@@ -11,8 +11,16 @@
     <div class="card ">
       <h1>{{ title }}</h1>
       <div class="form-control">
-        <input type="text" v-bind:placeholder="placeholderString" >
+        <input
+                type="text"
+                v-bind:placeholder="placeholderString"
+                v-bind:value="inputValue"
+                v-on:input="inputChangeHandle"
+        >
       </div>
+      <h2>
+        /{{ inputValue }}/
+      </h2>inputValue :
       <button class="btn">Добавить</button>
       <hr />
     </div>
