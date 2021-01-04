@@ -44,7 +44,8 @@
 
           <hr>
           <li>
-            <strong>Общее количество заметок : {{notes.length}}</strong> | calculated : {{ dblCnt() }}
+<!--      dblCntComputed не вызывается - оно является getter/setter        -->
+            <strong>Общее количество заметок : {{notes.length}}</strong> | calculated : {{ dblCntComputed }}
           </li>
       </ul>
       <div v-else>
