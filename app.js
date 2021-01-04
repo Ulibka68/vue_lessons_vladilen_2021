@@ -22,6 +22,14 @@ const App = {
         },
         removeNote(ind, event) {
             this.notes.splice(ind,1);
+        },
+        dblCnt() {
+            return this.notes.length * 2;
+        }
+    },
+    computed: {
+        dblCntComputed() {
+            return this.notes.length * 2;
         }
     }
 }

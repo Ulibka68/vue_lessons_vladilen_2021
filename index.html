@@ -41,6 +41,11 @@
             Удалить
           </button>
         </li>
+
+          <hr>
+          <li>
+            <strong>Общее количество заметок : {{notes.length}}</strong> | calculated : {{ dblCnt() }}
+          </li>
       </ul>
       <div v-else>
         Заметок пока нет, добавьте первую
