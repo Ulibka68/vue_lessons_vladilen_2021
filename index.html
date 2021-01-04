@@ -5,11 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Counter</title>
   <link rel="stylesheet" href="theme.css" />
+  <style>
+    [v-cloak] {display: none}
+  </style>
 </head>
 <body>
-<div class="container pt-5" id="app">
+<div class="container pt-5" id="app" v-cloak>
   <div class="card center">
-    <h1>{{title}}</h1>
+    <div v-html="myHtml">
+
+    </div>
+    <h2 v-text="title"></h2>
+    <h2 v-once>{{title}}></h2>
+    <h3 v-pre>{{title}}</h3>
+    <button
+            class="btn"
+            @click="title='Другой заголовок'">
+      Название изменить
+    </button>
   </div>
 </div>
 
