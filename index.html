@@ -22,8 +22,11 @@
       <button class="btn">Добавить</button>
       <hr />
       <ul class="list">
-        <li class="list-item">
-          {{ notes[0] }}
+        <li
+                class="list-item"
+                v-for="myNote in notes"
+        >
+          {{ myNote }}
         </li>
       </ul>
     </div>
