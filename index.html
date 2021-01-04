@@ -39,8 +39,10 @@
                 class="list-item"
                 v-for="(myNote, ind) in notes"
         >
-          ({{ ind +1 }})
-          {{ toUpperCase(myNote) }}
+        <span :class="notes.length > 2 ? 'primary' : 'bold' " >
+            ({{ ind + 1 }})
+            {{ toUpperCase(myNote) }}
+        </span>
           <button class="btn danger"
                   v-on:click="removeNote(ind,$event)"
           >
