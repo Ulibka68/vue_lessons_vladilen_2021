@@ -19,6 +19,9 @@ const app = Vue.createApp({
         changeTitle() {
             this.title = 'changeTitle';
         }
+    },
+    beforeCreate() {
+        console.log('Первое событие после Init');
     }
 });
 
