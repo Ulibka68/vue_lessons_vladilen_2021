@@ -14,21 +14,21 @@
 
       <div class="steps">
         <div class="steps-content">
-          {{ currentDescription }}
+          {{ steps[activeIndex].text }}
         </div>
         <ul class="steps-list">
-          <template v-for="(itm,i) in steps">
-            <li v-bind:class="['steps-item',{'done':i<activeIndex},{'active':i===activeIndex}]">
+            <li
+                    v-for="(itm,i) in steps"
+                    v-bind:class="['steps-item',{'done':i<activeIndex},{'active':i===activeIndex}]"
+            >
               <span>{{i}}</span> {{itm.title}}
             </li>
-          </template>
-
         </ul>
         <div>
-          <button class="btn">Назад</button>
-          <button class="btn primary">Вперед</button>
-          <button class="btn primary">Закончить</button>
-          <button class="btn">Начать заново</button>
+          <button class="btn" v-show="!isFinished && activeIndex >0" @click="activeIndexChanged(-1)">Назад</button>
+          <button class="btn primary" v-show="!isFinished && activeIndex < steps.length-1" @click="activeIndexChanged(1)">Вперед</button>
+          <button class="btn primary" v-show="!isFinished && activeIndex === steps.length-1" @click="isFinished=true">Закончить</button>
+          <button class="btn" v-show="isFinished" @click="isFinished=false,activeIndex=0">Начать заново</button>
         </div>
       </div>
     </div>
