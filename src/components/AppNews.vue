@@ -1,9 +1,9 @@
 <template>
   <div class="card">
     <h3>{{ title }}</h3>
-    <!--    <button class="btn" @click="isOpen = !isOpen">Открыть</button>-->
-    <button class="btn">Открыть</button>
-    <p v-if="isOpen">Lorem ipsum dolor sit amet.</p>
+    <button class="btn" @click="isOpenLocal = !isOpenLocal">Открыть</button>
+    <!--    <button class="btn">Открыть</button>-->
+    <p v-if="isOpenLocal">Lorem ipsum dolor sit amet.</p>
   </div>
 </template>
 
@@ -17,13 +17,18 @@ export default {
       type: Boolean,
       required: false,
       default: false,
-      validator(value) {
-        return value === true;
-      },
+      // eslint-disable-next-line no-unused-vars
+      // validator(value) {
+      //   return true;
+      // },
     },
   },
   data() {
-    // return { isOpen: false };
+    // return { isOpenLocal: this.props.isOpen };
+    return { isOpenLocal: false };
+  },
+  created() {
+    this.isOpenLocal = this.isOpen;
   },
 };
 </script>

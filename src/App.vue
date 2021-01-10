@@ -25,7 +25,7 @@ export default {
       now: new Date().toLocaleDateString(),
       news: [
         { title: "Джо байден выборы США", id: 1, isOpen: false },
-        { title: "Vue 3 работает", id: 2, isOpen: false },
+        { title: "Vue 3 работает", id: 2, isOpen: true },
       ],
     };
   },
