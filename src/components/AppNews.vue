@@ -4,7 +4,7 @@
     <button class="btn" @click="open">
       {{ isOpenLocal ? "Закрыть" : "Открыть" }}
     </button>
-    <button v-if="wasRead" @click="unMark" class="btn danger">
+    <button v-if="wasRead" @click="$emit('unmark', id)" class="btn danger">
       Отметить не прочитанной
     </button>
     <!--    <button class="btn">Открыть</button>-->
@@ -49,9 +49,6 @@ export default {
     readed() {
       this.isOpenLocal = false;
       this.$emit("read-news", this.id);
-    },
-    unMark() {
-      this.$emit("unmark", this.id);
     },
   },
   // кастомные события которые компонент отдает наверх
