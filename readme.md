@@ -5,8 +5,11 @@ npm view webpack version
 npm view typescript version
 4.1.3
 
-vue upgrade --next
+Просмотр конфигурации Webpack  
+vue inspect > output.js
 
+### vue upgrade --next
+запускать нельзя - проект падает  
 @vue/cli-service            4.5.10 ->> 5.0.0-alpha.2
 
 ### Customize configuration
