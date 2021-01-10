@@ -4,8 +4,17 @@
     <button class="btn" @click="open">
       {{ isOpenLocal ? "Закрыть" : "Открыть" }}
     </button>
+    <button v-if="wasRead" @click="unMark" class="btn danger">
+      Отметить не прочитанной
+    </button>
     <!--    <button class="btn">Открыть</button>-->
-    <p v-if="isOpenLocal">Lorem ipsum dolor sit amet.</p>
+    <div v-if="isOpenLocal">
+      <hr />
+      <p>Lorem ipsum dolor sit amet.</p>
+      <button v-if="!wasRead" class="btn primary" @click="readed">
+        Прочесть новость
+      </button>
+    </div>
   </div>
 </template>
 
@@ -24,6 +33,7 @@ export default {
       //   return true;
       // },
     },
+    wasRead: Boolean,
   },
   data() {
     return {
@@ -35,6 +45,13 @@ export default {
     open() {
       this.isOpenLocal = !this.isOpenLocal;
       this.isOpenLocal && this.$emit("open-news", 55, 66);
+    },
+    readed() {
+      this.isOpenLocal = false;
+      this.$emit("read-news", this.id);
+    },
+    unMark() {
+      this.$emit("unmark", this.id);
     },
   },
   // кастомные события которые компонент отдает наверх
@@ -50,6 +67,14 @@ export default {
         return false;
       },
     },
+    {
+      "read-news"(id) {
+        if (id) return true;
+        console.warn("Нет id");
+        return false;
+      },
+    },
+    "unmark",
   ],
 };
 </script>
