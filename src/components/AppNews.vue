@@ -1,26 +1,34 @@
 <template>
   <div class="card">
     <h3>{{ title }}</h3>
-    <button class="btn" @click="open">
-      {{ isOpenLocal ? "Закрыть" : "Открыть" }}
-    </button>
-    <button v-if="wasRead" @click="$emit('unmark', id)" class="btn danger">
-      Отметить не прочитанной
-    </button>
-    <!--    <button class="btn">Открыть</button>-->
+    <AppButton @action="open" :text="isOpenLocal ? 'Закрыть' : 'Открыть'" />
+
+    <AppButton
+      v-if="wasRead"
+      @action="$emit('unmark', id)"
+      color="danger"
+      text="Отметить не прочитанной"
+    />
+
     <div v-if="isOpenLocal">
       <hr />
       <p>Lorem ipsum dolor sit amet.</p>
-      <button v-if="!wasRead" class="btn primary" @click="readed">
-        Прочесть новость
-      </button>
+
+      <AppButton
+        v-if="!wasRead"
+        color="primary"
+        @action="readed"
+        text="Прочесть новость"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import AppButton from "@/components/AppButton";
 export default {
   // props: ["title"],
+  components: { AppButton },
   props: {
     title: { type: String, required: true },
     id: Number, // Proxy, Array, Promise
