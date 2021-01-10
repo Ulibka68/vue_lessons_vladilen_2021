@@ -17,7 +17,7 @@
       <AppButton v-if="!wasRead" color="primary" @action="readed">
         Прочесть новость
       </AppButton>
-      <AppNewsList :news="news" />
+      <AppNewsList />
     </div>
   </div>
 </template>

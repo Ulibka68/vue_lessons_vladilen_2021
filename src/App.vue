@@ -15,7 +15,6 @@
       :id="item.id"
       :is-open="item.isOpen"
       :was-read="item.wasRead"
-      :news="news"
       v-on:open-news="recieveEvent"
       v-on:read-news="readNews"
       v-on:unmark="unmark"
@@ -66,6 +65,12 @@ export default {
       news.wasRead = false;
       this.readRate--;
     },
+  },
+  provide() {
+    return {
+      titleProvide: "Список всех новостей",
+      news: this.news,
+    };
   },
 };
 </script>
