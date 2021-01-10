@@ -2,7 +2,9 @@
   <div class="container pt-1">
     <div class="card">
       <h2>Динамические и асинхронные компоненты</h2>
-      <AppButton :color="oneColor" @action="active = 'one'">One</AppButton>
+      <AppButton :color="oneColor" @action="active = 'one'" ref="myBtnOne"
+        >One</AppButton
+      >
       <AppButton :color="twoColor" @action="active = 'two'">Two</AppButton>
     </div>
     <keep-alive>
@@ -54,9 +56,8 @@ export default {
     },
   },
   mounted() {
-    setTimeout(() => {
-      this.componentNameObj = "new comp name";
-    }, 1500);
+    console.log(this.$refs.myBtnOne);
+    this.$refs.myBtnOne.btnLog();
   },
 };
 </script>

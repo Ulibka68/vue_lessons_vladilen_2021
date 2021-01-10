@@ -7,6 +7,7 @@
 
 <script>
 export default {
+  name: "AppButton",
   props: {
     color: {
       type: String,
@@ -21,6 +22,11 @@ export default {
     },
   },
   emits: ["action"],
+  methods: {
+    btnLog() {
+      console.log("AppButton : ", this.color);
+    },
+  },
 };
 </script>
 
