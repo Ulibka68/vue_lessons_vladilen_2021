@@ -37,5 +37,19 @@ export default {
       this.isOpenLocal && this.$emit("open-news", 55, 66);
     },
   },
+  // кастомные события которые компонент отдает наверх
+  // emits: ["open-news"],
+  emits: [
+    {
+      // Валидация события
+      "open-news"(num) {
+        if (num) {
+          return true;
+        }
+        console.warn("Не переданы дополнительные данные");
+        return false;
+      },
+    },
+  ],
 };
 </script>
