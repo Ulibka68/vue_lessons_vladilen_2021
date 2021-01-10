@@ -3,7 +3,8 @@
     <div class="card">
       <h2>Актуальные новости {{ now }}</h2>
     </div>
-    <app-news></app-news>
+
+    <AppNews v-for="item in news" :key="item" :title="item" />
     <hr />
   </div>
 </template>
@@ -15,7 +16,6 @@ export default {
   name: "App",
   data() {
     return {
-      isopen: false,
       now: new Date().toLocaleDateString(),
       news: ["Джо байден выборы США", "Vue 3 работает"],
     };
