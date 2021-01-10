@@ -1,26 +1,36 @@
 <template>
   <div class="container pt-1">
     <div class="card">
-      <h2>SLOT</h2>
+      <h2>Актуальные новости {{ now }}</h2>
+      <span
+        >Открыто {{ openRate }} &nbsp;&nbsp; | Прочитано:
+        <strong>{{ readRate }}</strong></span
+      >
     </div>
-    <AppBlock>
-      <p>Children для нового блока</p>
-      <template v-slot:header>
-        <h3>Заголовок</h3>
-      </template>
 
-      <!--      # - это сокращение от v-slot -->
-      <template #footer> Footer text</template>
-    </AppBlock>
+    <AppNews
+      v-for="item in news"
+      :key="item.id"
+      :title="item.title"
+      :id="item.id"
+      :is-open="item.isOpen"
+      :was-read="item.wasRead"
+      v-on:open-news="recieveEvent"
+      v-on:read-news="readNews"
+      v-on:unmark="unmark"
+    />
+    <hr />
   </div>
 </template>
 
 <script>
-import AppBlock from "@/components/AppBlock";
+import AppNews from "@/components/AppNews";
+
 export default {
   name: "App",
   data() {
     return {
+      now: new Date().toLocaleDateString(),
       openRate: 0,
       readRate: 0,
       news: [
@@ -36,7 +46,7 @@ export default {
   },
   components: {
     // "app-news": AppNews,
-    AppBlock,
+    AppNews,
   },
   methods: {
     recieveEvent(...data) {
@@ -65,4 +75,8 @@ export default {
 };
 </script>
 
-<style scoped lang="css"></style>
+<style scoped lang="css">
+h2 {
+  color: darkred;
+}
+</style>
