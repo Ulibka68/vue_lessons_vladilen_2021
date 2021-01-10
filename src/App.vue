@@ -3,6 +3,14 @@
     <div class="card">
       <h2>SLOT</h2>
     </div>
+    <AppList>
+      <template #default="slotProps"
+        ><span style="color: #c25205">Item : {{ slotProps.iter }}</span>
+        &nbsp;
+        <strong>{{ slotProps.idx + 1 }}</strong>
+      </template>
+    </AppList>
+
     <AppBlock>
       <p>Children для нового блока</p>
       <template v-slot:header>
@@ -17,6 +25,7 @@
 
 <script>
 import AppBlock from "@/components/AppBlock";
+import AppList from "@/components/AppList";
 export default {
   name: "App",
   data() {
@@ -37,6 +46,7 @@ export default {
   components: {
     // "app-news": AppNews,
     AppBlock,
+    AppList,
   },
   methods: {
     recieveEvent(...data) {
