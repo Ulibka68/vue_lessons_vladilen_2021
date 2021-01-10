@@ -1,6 +1,7 @@
 <template>
   <div class="container pt-1">
     <div class="card">
+      <async-component></async-component>
       <h2>Динамические и асинхронные компоненты</h2>
       <AppButton :color="oneColor" @action="active = 'one'" ref="myBtnOne"
         >One</AppButton
@@ -17,6 +18,7 @@
 import AppButton from "@/components/AppButton";
 import AppTextOne from "@/components/AppTextOne";
 import AppTextTwo from "@/components/AppTextTwo";
+
 export default {
   name: "App",
   data() {
