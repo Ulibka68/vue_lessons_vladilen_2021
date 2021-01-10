@@ -75,4 +75,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped lang="css">
+h2 {
+  color: darkred;
+}
+</style>
