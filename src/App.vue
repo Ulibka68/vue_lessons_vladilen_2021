@@ -2,19 +2,12 @@
   <div class="container pt-1">
     <div class="card">
       <h2>Динамические и асинхронные компоненты</h2>
-      <AppButton
-        :color="active === 'one' ? 'primary' : ''"
-        @action="active = 'one'"
-        >One</AppButton
-      >
-      <AppButton
-        :color="active === 'two' ? 'primary' : ''"
-        @action="active = 'two'"
-        >Two</AppButton
-      >
+      <AppButton :color="oneColor" @action="active = 'one'">One</AppButton>
+      <AppButton :color="twoColor" @action="active = 'two'">Two</AppButton>
     </div>
-
-    <component :is="componentName"></component>
+    <keep-alive>
+      <component :is="componentName"></component>
+    </keep-alive>
   </div>
 </template>
 
@@ -43,6 +36,12 @@ export default {
       }
 
       return "AppTextTwo";
+    },
+    oneColor() {
+      return this.active === "one" ? "primary" : "";
+    },
+    twoColor() {
+      return this.active === "two" ? "primary" : "";
     },
   },
 };
