@@ -14,12 +14,9 @@
       <hr />
       <p>Lorem ipsum dolor sit amet.</p>
 
-      <AppButton
-        v-if="!wasRead"
-        color="primary"
-        @action="readed"
-        text="Прочесть новость"
-      />
+      <AppButton v-if="!wasRead" color="primary" @action="readed">
+        Прочесть новость
+      </AppButton>
     </div>
   </div>
 </template>

@@ -1,6 +1,7 @@
 <template>
   <button class="btn" :class="color" @click="$emit('action')">
     {{ text }}
+    <slot />
   </button>
 </template>
 
@@ -16,7 +17,7 @@ export default {
     },
     text: {
       type: String,
-      required: true,
+      default: "",
     },
   },
   emits: ["action"],
