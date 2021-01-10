@@ -17,15 +17,17 @@
       <AppButton v-if="!wasRead" color="primary" @action="readed">
         Прочесть новость
       </AppButton>
+      <AppNewsList :news="news" />
     </div>
   </div>
 </template>
 
 <script>
 import AppButton from "@/components/AppButton";
+import AppNewsList from "@/components/AppNewsList";
 export default {
   // props: ["title"],
-  components: { AppButton },
+  components: { AppButton, AppNewsList },
   props: {
     title: { type: String, required: true },
     id: Number, // Proxy, Array, Promise
@@ -39,6 +41,7 @@ export default {
       // },
     },
     wasRead: Boolean,
+    news: Array,
   },
   data() {
     return {
