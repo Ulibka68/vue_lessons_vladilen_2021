@@ -1,4 +1,8 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from 'vue';
+import App from './App.vue';
+import TheHeader from './components/TheHeader';
 
-createApp(App).mount('#app')
+const app=createApp(App);
+app.component('');
+app.mount('#app');
+
