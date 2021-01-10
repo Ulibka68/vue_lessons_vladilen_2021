@@ -4,10 +4,11 @@
       <h2>SLOT</h2>
     </div>
     <AppList>
-      <template #default="slotProps"
-        ><span style="color: #c25205">Item : {{ slotProps.iter }}</span>
+<!--      Деструктуризация объекта -->
+      <template #default="{ iter, idx }"
+        ><span style="color: #c25205">Item : {{ iter }}</span>
         &nbsp;
-        <strong>{{ slotProps.idx + 1 }}</strong>
+        <strong>{{ idx + 1 }}</strong>
       </template>
     </AppList>
 
