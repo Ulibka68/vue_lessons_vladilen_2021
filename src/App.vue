@@ -2,6 +2,7 @@
   <div class="container pt-1">
     <div class="card">
       <h2>Актуальные новости {{ now }}</h2>
+      <span>Открыто {{ openRate }}</span>
     </div>
 
     <AppNews
@@ -10,6 +11,7 @@
       :title="item.title"
       :id="item.id"
       :is-open="item.isOpen"
+      v-on:open-news="recieveEvent"
     />
     <hr />
   </div>
@@ -23,6 +25,7 @@ export default {
   data() {
     return {
       now: new Date().toLocaleDateString(),
+      openRate: 0,
       news: [
         { title: "Джо байден выборы США", id: 1, isOpen: false },
         { title: "Vue 3 работает", id: 2, isOpen: true },
@@ -32,6 +35,12 @@ export default {
   components: {
     // "app-news": AppNews,
     AppNews,
+  },
+  methods: {
+    recieveEvent(...data) {
+      this.openRate++;
+      console.log(data);
+    },
   },
 };
 </script>

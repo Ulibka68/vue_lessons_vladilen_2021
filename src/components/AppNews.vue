@@ -1,7 +1,9 @@
 <template>
   <div class="card">
     <h3>{{ title }}</h3>
-    <button class="btn" @click="isOpenLocal = !isOpenLocal">Открыть</button>
+    <button class="btn" @click="open">
+      {{ isOpenLocal ? "Закрыть" : "Открыть" }}
+    </button>
     <!--    <button class="btn">Открыть</button>-->
     <p v-if="isOpenLocal">Lorem ipsum dolor sit amet.</p>
   </div>
@@ -24,11 +26,16 @@ export default {
     },
   },
   data() {
-    // return { isOpenLocal: this.props.isOpen };
-    return { isOpenLocal: false };
+    return {
+      // isOpenLocal: false,
+      isOpenLocal: this.isOpen,
+    };
   },
-  created() {
-    this.isOpenLocal = this.isOpen;
+  methods: {
+    open() {
+      this.isOpenLocal = !this.isOpenLocal;
+      this.isOpenLocal && this.$emit("open-news", 55, 66);
+    },
   },
 };
 </script>
