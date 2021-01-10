@@ -1,77 +1,49 @@
 <template>
   <div class="container pt-1">
     <div class="card">
-      <h2>SLOT</h2>
+      <h2>Динамические и асинхронные компоненты</h2>
+      <AppButton
+        :color="active === 'one' ? 'primary' : ''"
+        @action="active = 'one'"
+        >One</AppButton
+      >
+      <AppButton
+        :color="active === 'two' ? 'primary' : ''"
+        @action="active = 'two'"
+        >Two</AppButton
+      >
     </div>
-    <AppList>
-<!--      Деструктуризация объекта -->
-      <template #default="{ iter, idx }"
-        ><span style="color: #c25205">Item : {{ iter }}</span>
-        &nbsp;
-        <strong>{{ idx + 1 }}</strong>
-      </template>
-    </AppList>
 
-    <AppBlock>
-      <p>Children для нового блока</p>
-      <template v-slot:header>
-        <h3>Заголовок</h3>
-      </template>
-
-      <!--      # - это сокращение от v-slot -->
-      <template #footer> Footer text</template>
-    </AppBlock>
+    <component :is="componentName"></component>
   </div>
 </template>
 
 <script>
-import AppBlock from "@/components/AppBlock";
-import AppList from "@/components/AppList";
+import AppButton from "@/components/AppButton";
+import AppTextOne from "@/components/AppTextOne";
+import AppTextTwo from "@/components/AppTextTwo";
 export default {
   name: "App",
   data() {
     return {
-      openRate: 0,
-      readRate: 0,
-      news: [
-        {
-          title: "Джо байден выборы США",
-          id: 1,
-          isOpen: false,
-          wasRead: false,
-        },
-        { title: "Vue 3 работает", id: 2, isOpen: true, wasRead: false },
-      ],
+      active: "one", // two
     };
   },
   components: {
-    // "app-news": AppNews,
-    AppBlock,
-    AppList,
+    AppButton,
+    AppTextOne,
+    AppTextTwo,
   },
-  methods: {
-    recieveEvent(...data) {
-      this.openRate++;
-      console.log(data);
-    },
+  methods: {},
+  computed: {
+    componentName() {
+      switch (this.active) {
+        case "one":
+          return "AppTextOne";
+      }
 
-    readNews(id) {
-      this.readRate++;
-
-      const idx = this.news.findIndex((item) => item.id === id);
-      this.news[idx].wasRead = true;
+      return "AppTextTwo";
     },
-    unmark(id) {
-      const news = this.news.find((itm) => itm.id === id);
-      news.wasRead = false;
-      this.readRate--;
-    },
-  },
-  provide() {
-    return {
-      titleProvide: "Список всех новостей",
-      news: this.news,
-    };
   },
 };
 </script>
