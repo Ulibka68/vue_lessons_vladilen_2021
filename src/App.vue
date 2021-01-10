@@ -18,6 +18,7 @@
 import AppButton from "@/components/AppButton";
 import AppTextOne from "@/components/AppTextOne";
 import AppTextTwo from "@/components/AppTextTwo";
+import { defineAsyncComponent } from "vue";
 
 export default {
   name: "App",
@@ -30,6 +31,9 @@ export default {
     AppButton,
     AppTextOne,
     AppTextTwo,
+    AsyncComponent: defineAsyncComponent(() => {
+      return import("./components/AppAsyncComponent");
+    }),
   },
   methods: {},
   computed: {
