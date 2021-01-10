@@ -6,7 +6,7 @@
       <AppButton :color="twoColor" @action="active = 'two'">Two</AppButton>
     </div>
     <keep-alive>
-      <component :is="componentName"></component>
+      <component :is="componentNameObj"></component>
     </keep-alive>
   </div>
 </template>
@@ -37,12 +37,26 @@ export default {
 
       return "AppTextTwo";
     },
+    componentNameObj: {
+      get() {
+        return "app-text-" + this.active;
+      },
+      set(value) {
+        console.log("    componentNameObj", value);
+      },
+    },
+
     oneColor() {
       return this.active === "one" ? "primary" : "";
     },
     twoColor() {
       return this.active === "two" ? "primary" : "";
     },
+  },
+  mounted() {
+    setTimeout(() => {
+      this.componentNameObj = "new comp name";
+    }, 1500);
   },
 };
 </script>
