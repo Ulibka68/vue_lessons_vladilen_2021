@@ -52,3 +52,6 @@ var firebaseConfig = {
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+
+## Авторизация
+https://blog.logrocket.com/vue-firebase-authentication/
