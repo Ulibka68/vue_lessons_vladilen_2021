@@ -17,6 +17,10 @@
 
 <script>
 import AppPeopleList from "@/AppPeopleList";
+import axios from "axios";
+const firebasePostURL =
+  "https://vue-vladilen-4c695-default-rtdb.firebaseio.com/people.json";
+
 export default {
   data() {
     return { name: "", people: [] };
@@ -24,8 +28,7 @@ export default {
   methods: {
     async createPerson() {
       console.log(this.name);
-      const firebasePostURL =
-        "https://vue-vladilen-4c695-default-rtdb.firebaseio.com/people.json";
+
       const responce = await fetch(firebasePostURL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -35,7 +38,14 @@ export default {
       console.log(firebaseData);
       this.name = "";
     },
-    loadPeopleListHandler() {},
+    async loadPeopleListHandler() {
+      const { data } = await axios.get(firebasePostURL);
+
+      this.people = Object.keys(data).map((key) => ({
+        id: key,
+        ...data[key],
+      }));
+    },
   },
   components: { AppPeopleList },
 };

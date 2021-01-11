@@ -2,8 +2,8 @@
   <div class="card" v-if="people.length > 0">
     <h1>Person list</h1>
 
-    <div class="card" v-for="person in people" :key="person">
-      {{ person }}
+    <div class="card" v-for="person in people" :key="person.id">
+      {{ person.firstName }}
     </div>
   </div>
   <div class="card" v-else>
