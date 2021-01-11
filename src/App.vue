@@ -35,7 +35,8 @@ export default {
         body: JSON.stringify({ firstName: this.name }),
       });
       const firebaseData = await responce.json();
-      console.log(firebaseData);
+      // console.log(firebaseData);
+      this.people.push({ id: firebaseData.name, firstName: this.name });
       this.name = "";
     },
     async loadPeopleListHandler() {
@@ -46,6 +47,9 @@ export default {
         ...data[key],
       }));
     },
+  },
+  mounted() {
+    this.loadPeopleListHandler();
   },
   components: { AppPeopleList },
 };
