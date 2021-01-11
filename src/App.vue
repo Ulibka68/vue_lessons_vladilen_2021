@@ -19,9 +19,18 @@ export default {
     return { name: "" };
   },
   methods: {
-    createPerson() {
+    async createPerson() {
       console.log(this.name);
-      // https://vue-vladilen-4c695-default-rtdb.firebaseio.com/
+      const firebasePostURL =
+        "https://vue-vladilen-4c695-default-rtdb.firebaseio.com/people.json";
+      const responce = await fetch(firebasePostURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ firstName: this.name }),
+      });
+      const firebaseData = await responce.json();
+      console.log(firebaseData);
+      this.name = "";
     },
   },
 };
