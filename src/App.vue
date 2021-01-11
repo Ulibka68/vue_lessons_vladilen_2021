@@ -10,13 +10,16 @@
         <button class="btn primary" :disabled="!name">Отправить</button>
       </form>
     </div>
+
+    <AppPeopleList :people="people" @loadPeopleList="loadPeopleListHandler" />
   </div>
 </template>
 
 <script>
+import AppPeopleList from "@/AppPeopleList";
 export default {
   data() {
-    return { name: "" };
+    return { name: "", people: [] };
   },
   methods: {
     async createPerson() {
@@ -32,7 +35,9 @@ export default {
       console.log(firebaseData);
       this.name = "";
     },
+    loadPeopleListHandler() {},
   },
+  components: { AppPeopleList },
 };
 </script>
 
