@@ -13,7 +13,10 @@
       </form>
     </div>
 
+    <AppLoader v-if="loading" />
+
     <AppPeopleList
+      v-else
       :people="people"
       @loadPeopleList="loadPeopleListHandler"
       @remove="removePerson"
@@ -25,6 +28,8 @@
 import AppPeopleList from "@/AppPeopleList";
 import axios from "axios";
 import AppAlert from "@/AppAlert";
+import AppLoader from "@/AppLoader";
+
 const firebasePostURL =
   "https://vue-vladilen-4c695-default-rtdb.firebaseio.com/people.json";
 const firebasePostURLBase =
@@ -32,7 +37,7 @@ const firebasePostURLBase =
 
 export default {
   data() {
-    return { name: "", people: [], alert: null };
+    return { name: "", people: [], alert: null, loading: false };
   },
   methods: {
     async createPerson() {
@@ -50,6 +55,7 @@ export default {
     },
     async loadPeopleListHandler() {
       try {
+        this.loading = true;
         const { data } = await axios.get(firebasePostURL);
 
         if (!data) {
@@ -63,6 +69,8 @@ export default {
       } catch (e) {
         console.log(e);
         this.alert = { type: "danger", title: "Ошибка", text: e.message };
+      } finally {
+        this.loading = false;
       }
     },
     async removePerson(id) {
@@ -84,7 +92,7 @@ export default {
   mounted() {
     this.loadPeopleListHandler();
   },
-  components: { AppPeopleList, AppAlert },
+  components: { AppPeopleList, AppAlert, AppLoader },
 };
 </script>
 
