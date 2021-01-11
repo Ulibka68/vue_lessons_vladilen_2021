@@ -21,6 +21,7 @@ export default {
   methods: {
     createPerson() {
       console.log(this.name);
+      // https://vue-vladilen-4c695-default-rtdb.firebaseio.com/
     },
   },
 };
