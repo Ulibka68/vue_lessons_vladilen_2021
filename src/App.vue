@@ -1,5 +1,7 @@
 <template>
   <div class="container">
+    <AppAlert :alert="alert" @close="alert = null" />
+
     <div class="card">
       <form class="card" @submit.prevent="createPerson">
         <h2>Работа с базой данных</h2>
@@ -22,6 +24,7 @@
 <script>
 import AppPeopleList from "@/AppPeopleList";
 import axios from "axios";
+import AppAlert from "@/AppAlert";
 const firebasePostURL =
   "https://vue-vladilen-4c695-default-rtdb.firebaseio.com/people.json";
 const firebasePostURLBase =
@@ -29,7 +32,7 @@ const firebasePostURLBase =
 
 export default {
   data() {
-    return { name: "", people: [] };
+    return { name: "", people: [], alert: null };
   },
   methods: {
     async createPerson() {
@@ -46,12 +49,21 @@ export default {
       this.name = "";
     },
     async loadPeopleListHandler() {
-      const { data } = await axios.get(firebasePostURL);
+      try {
+        const { data } = await axios.get(firebasePostURL);
 
-      this.people = Object.keys(data).map((key) => ({
-        id: key,
-        ...data[key],
-      }));
+        if (!data) {
+          throw new Error("Список людей пуст");
+        }
+
+        this.people = Object.keys(data).map((key) => ({
+          id: key,
+          ...data[key],
+        }));
+      } catch (e) {
+        console.log(e);
+        this.alert = { type: "danger", title: "Ошибка", text: e.message };
+      }
     },
     async removePerson(id) {
       await axios.delete(firebasePostURLBase + `${id}.json`);
@@ -62,7 +74,7 @@ export default {
   mounted() {
     this.loadPeopleListHandler();
   },
-  components: { AppPeopleList },
+  components: { AppPeopleList, AppAlert },
 };
 </script>
 
