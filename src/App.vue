@@ -11,7 +11,11 @@
       </form>
     </div>
 
-    <AppPeopleList :people="people" @loadPeopleList="loadPeopleListHandler" />
+    <AppPeopleList
+      :people="people"
+      @loadPeopleList="loadPeopleListHandler"
+      @remove="removePerson"
+    />
   </div>
 </template>
 
@@ -20,6 +24,8 @@ import AppPeopleList from "@/AppPeopleList";
 import axios from "axios";
 const firebasePostURL =
   "https://vue-vladilen-4c695-default-rtdb.firebaseio.com/people.json";
+const firebasePostURLBase =
+  "https://vue-vladilen-4c695-default-rtdb.firebaseio.com/people/";
 
 export default {
   data() {
@@ -46,6 +52,11 @@ export default {
         id: key,
         ...data[key],
       }));
+    },
+    async removePerson(id) {
+      await axios.delete(firebasePostURLBase + `${id}.json`);
+      const idx = this.people.findIndex((person) => person.id === id);
+      this.people.splice(idx, 1);
     },
   },
   mounted() {
