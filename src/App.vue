@@ -66,9 +66,19 @@ export default {
       }
     },
     async removePerson(id) {
-      await axios.delete(firebasePostURLBase + `${id}.json`);
-      const idx = this.people.findIndex((person) => person.id === id);
-      this.people.splice(idx, 1);
+      try {
+        await axios.delete(firebasePostURLBase + `${id}.json`);
+        const idx = this.people.findIndex((person) => person.id === id);
+        const pName = this.people[idx].firstName;
+        this.people.splice(idx, 1);
+        this.alert = {
+          type: "primary",
+          title: "Успешно",
+          text: `Пользователь с именем ${pName} удален`,
+        };
+      } catch (e) {
+        console.warn(e);
+      }
     },
   },
   mounted() {
