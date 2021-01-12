@@ -90,6 +90,7 @@ export default {
   components: { ResumeHeader, ResumeAvatar, ResumeSubHeader, ResumeText },
   computed: {
     isEmpty() {
+      if (!this.blocks) return false;
       return this.blocks.length === 0;
     },
   },
@@ -102,8 +103,8 @@ export default {
       NewData(this.uid, this.blocks);
     },
     async readFromDB(uid) {
-      // console.log("readFromDB ", uid);
       if (!uid) return;
+      console.log("readFromDB ", uid);
       const newBlk = await readPost(uid);
       // newBlk[0].text = "Я поменял текст";
       // console.log(newBlk);
@@ -118,10 +119,11 @@ export default {
     console.log("mounted ==============================");
     console.log("this.$route.params.uid", puid);
 
-    if (!puid) return;
-    console.log("------ читаю бд", puid);
-    this.readFromDB(puid);
-    this.localUid = puid;
+    if (puid && puid !== null) {
+      console.log("------ читаю бд", puid);
+      this.readFromDB(puid);
+      this.localUid = puid;
+    }
   },
   // async beforeUpdate() {
   //   console.log("beforeUpdate");
