@@ -79,8 +79,6 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.form.email, this.form.password)
         .then((data) => {
-          this.$router.replace({ name: "Dashboard" });
-
           const logedUser = {
             displayName: data.user.displayName,
             email: data.user.email,
@@ -89,6 +87,8 @@ export default {
           };
 
           this.changeCurrentUserDispatch(logedUser);
+
+          this.$router.replace({ name: "Dashboard" });
 
           // this.$emit("userloged", logedUser);
 

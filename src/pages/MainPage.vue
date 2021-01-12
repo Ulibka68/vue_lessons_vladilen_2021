@@ -38,15 +38,7 @@
       <h3 v-if="isEmpty">Добавьте первый блок, чтобы увидеть результат</h3>
     </div>
   </div>
-  <!--  <div style="display: none">-->
-  <!--  <div class="container">-->
-  <!--    props.uid :-->
-  <!--    {{ uid }}-->
-  <!--    <p>-->
-  <!--      localUid :-->
-  <!--      {{ localUid }}-->
-  <!--    </p>-->
-  <!--  </div>-->
+
   <div class="container">
     <p>
       <button class="btn primary">Загрузить комментарии</button>
@@ -125,24 +117,7 @@ export default {
       this.localUid = puid;
     }
   },
-  // async beforeUpdate() {
-  //   console.log("beforeUpdate");
-  //   const puid = this.$route.params.uid;
-  //   console.log(this.localUid, puid);
-  //   if (!puid && this.localUid) {
-  //     // SignOut
-  //     this.localUid = null;
-  //     this.blocks = [];
-  //   }
-  //
-  //   if (!puid) return;
-  //
-  //   if (this.localUid !== puid) {
-  //     console.log("------ читаю бд", puid);
-  //     this.readFromDB(puid);
-  //     this.localUid = puid;
-  //   }
-  // },
+
 };
 </script>
 

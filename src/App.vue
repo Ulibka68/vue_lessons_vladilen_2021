@@ -104,6 +104,7 @@ export default {
     handleLogout() {
       firebase.auth().signOut();
       //  обнуление свойств словит hearEvent
+      this.$router.replace({ name: "Home" });
     },
   },
 
