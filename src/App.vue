@@ -22,9 +22,7 @@
       <li v-if="user.displayName">
         <button class="btn" @click="handleLogout">Logout</button>
       </li>
-      <li>
-        <router-link to="/testbtn">testbtn</router-link>
-      </li>
+      <li><router-link to="/testbtn">testbtn</router-link></li>
     </ul>
     <div class="displayUser">{{ user.displayName }}</div>
   </nav>

@@ -93,6 +93,7 @@ export default {
       error: null,
     };
   },
+  inject: ["changeCurrentUserDispatch"],
   methods: {
     submit() {
       firebase
@@ -103,7 +104,21 @@ export default {
             .updateProfile({
               displayName: this.form.name,
             })
-            .then(() => {});
+            .then(() => {
+              const logedUser = {
+                displayName: this.form.name,
+                email: this.form.email,
+                emailVerified: false,
+                uid: data.user.uid,
+              };
+
+              this.changeCurrentUserDispatch(logedUser);
+              // this.$router.replace({ name: "Home" });
+              this.$router.replace({
+                name: "resume",
+                params: { uid: data.user.uid },
+              });
+            });
         })
         .catch((err) => {
           this.error = err.message;

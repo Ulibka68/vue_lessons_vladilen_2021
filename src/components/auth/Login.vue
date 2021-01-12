@@ -94,9 +94,6 @@ export default {
             params: { uid: data.user.uid },
           });
 
-          // named route with params to let the router build the url
-          // router.push({ name: 'user', params: { username: 'eduardo' } })
-
           // this.$emit("userloged", logedUser);
 
           // console.log("data.user.displayName : ", data.user.displayName);

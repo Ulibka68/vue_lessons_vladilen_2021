@@ -29,9 +29,6 @@
       <button class="btn primary mg-1 fit-width" @click="writeToDB">
         Записать изменения в базу данных
       </button>
-      <button class="btn primary mg-1 fit-width" @click="readFromDB(uid)">
-        Прочитать данные
-      </button>
     </div>
     <div class="card card-w70">
       <component
@@ -124,6 +121,7 @@ export default {
       console.log(this.textAreaValue, this.headerType);
       console.log(this.nextBlockId);
       if (!(this.textAreaValue && this.headerType)) return;
+      if (!this.blocks) this.blocks = [];
       this.blocks.push({
         id: this.nextBlockId,
         blockType: this.headerType,
