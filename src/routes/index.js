@@ -2,8 +2,9 @@ import { createRouter, createWebHashHistory } from "vue-router";
 
 import Login from "@auth/Login";
 import Register from "@auth/Register";
-import Dashboard from "@auth/Dashboard";
+import Dashboard from "@comp/Dashboard";
 import MainPage from "@pages/MainPage";
+import TestBtn from "@comp/TestBtn";
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -29,6 +30,11 @@ const router = createRouter({
       path: "/dashboard",
       name: "Dashboard",
       component: Dashboard,
+    },
+    {
+      path: "/testbtn",
+      name: "TestBtn",
+      component: TestBtn,
     },
   ],
 });

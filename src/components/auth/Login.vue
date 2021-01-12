@@ -71,6 +71,8 @@ export default {
       error: null,
     };
   },
+  inject: ["changeCurrentUserDispatch"],
+  emits: ["userloged"],
   methods: {
     submit() {
       firebase
@@ -79,9 +81,21 @@ export default {
         .then((data) => {
           this.$router.replace({ name: "Dashboard" });
 
-          console.log("data.user.displayName : ", data.user.displayName);
-          console.log("data.user.email : ", data.user.email);
-          console.log("data.user.emailVerified :", data.user.emailVerified);
+          const logedUser = {
+            displayName: data.user.displayName,
+            email: data.user.email,
+            emailVerified: data.user.emailVerified,
+            uid: data.user.uid,
+          };
+
+          this.changeCurrentUserDispatch(logedUser);
+
+          // this.$emit("userloged", logedUser);
+
+          // console.log("data.user.displayName : ", data.user.displayName);
+          // console.log("data.user.email : ", data.user.email);
+          // console.log("data.user.emailVerified :", data.user.emailVerified);
+          // console.log("data.user", data.user);
         })
         .catch((err) => {
           this.error = err.message;
