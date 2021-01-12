@@ -77,18 +77,22 @@ export default {
     hearEvent() {
       firebase.auth().onAuthStateChanged((user) => {
         // console.log("hearEvent : ", user);
-        const { displayName, email, emailVerified, uid } = user;
-        this.changeCurrentUser({ displayName, email, emailVerified, uid });
+        if (user) {
+          const { displayName, email, emailVerified, uid } = user;
+          this.changeCurrentUser({ displayName, email, emailVerified, uid });
+        } else {
+          this.changeCurrentUser({
+            displayName: "",
+            email: "",
+            emailVerified: false,
+            uid: null,
+          });
+        }
       });
     },
     handleLogout() {
       firebase.auth().signOut();
-      this.changeCurrentUser({
-        displayName: "",
-        email: "",
-        emailVerified: false,
-        uid: null,
-      });
+      //  обнуление свойств словит hearEvent
     },
   },
 
