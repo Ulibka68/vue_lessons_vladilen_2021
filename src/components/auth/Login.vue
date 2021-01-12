@@ -88,7 +88,14 @@ export default {
 
           this.changeCurrentUserDispatch(logedUser);
 
-          this.$router.replace({ name: "Dashboard" });
+          // this.$router.replace({ name: "resume" });
+          this.$router.replace({
+            name: "resume",
+            params: { uid: data.user.uid },
+          });
+
+          // named route with params to let the router build the url
+          // router.push({ name: 'user', params: { username: 'eduardo' } })
 
           // this.$emit("userloged", logedUser);
 

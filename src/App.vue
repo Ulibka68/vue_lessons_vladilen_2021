@@ -2,7 +2,7 @@
   <nav>
     <ul>
       <li><router-link to="/">Home</router-link></li>
-      <li>
+      <li v-if="user.uid">
         <router-link
           :to="{
             name: 'resume',
@@ -18,9 +18,6 @@
       </li>
       <li v-if="!user.displayName">
         <router-link to="/register">register</router-link>
-      </li>
-      <li v-if="user.displayName">
-        <router-link to="/dashboard">dashboard</router-link>
       </li>
       <li v-if="user.displayName">
         <button class="btn" @click="handleLogout">Logout</button>

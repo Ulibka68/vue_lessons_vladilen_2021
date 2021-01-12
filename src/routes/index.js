@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 
 import Login from "@auth/Login";
 import Register from "@auth/Register";
-import Dashboard from "@comp/Dashboard";
+
 import MainPage from "@pages/MainPage";
 import TestBtn from "@comp/TestBtn";
 import HomePage from "@pages/HomePage";
@@ -32,11 +32,6 @@ const router = createRouter({
       path: "/post/:uid",
       name: "resume",
       component: MainPage,
-    },
-    {
-      path: "/dashboard",
-      name: "Dashboard",
-      component: Dashboard,
     },
     {
       path: "/testbtn",

@@ -4,20 +4,26 @@
       <form>
         <div class="form-control">
           <label for="type">Тип блока</label>
-          <select id="type">
-            <option value="title">Заголовок</option>
-            <option value="subtitle">Подзаголовок</option>
-            <option value="avatar">Аватар</option>
-            <option value="text">Текст</option>
+          <select id="type" v-model="headerType">
+            <option value="ResumeHeader">Заголовок</option>
+            <option value="ResumeSubHeader">Подзаголовок</option>
+            <option value="ResumeAvatar">Аватар</option>
+            <option value="ResumeText">Текст</option>
           </select>
         </div>
 
         <div class="form-control">
           <label for="value">Значение</label>
-          <textarea id="value" rows="3"></textarea>
+          <textarea id="value" rows="3" v-model="textAreaValue"></textarea>
         </div>
 
-        <button class="btn primary">Добавить</button>
+        <button
+          :disabled="!(headerType && textAreaValue)"
+          class="btn primary"
+          @click.prevent.stop="addBlockToText"
+        >
+          Добавить
+        </button>
       </form>
 
       <button class="btn primary mg-1 fit-width" @click="writeToDB">
@@ -76,6 +82,8 @@ export default {
       // blocks: MainPageData,
       blocks: [],
       localUid: null,
+      textAreaValue: "",
+      headerType: null,
     };
   },
 
@@ -85,14 +93,24 @@ export default {
       if (!this.blocks) return false;
       return this.blocks.length === 0;
     },
+    nextBlockId() {
+      if (!this.blocks) return 0;
+      let i = 0;
+      this.blocks.forEach((val) => {
+        if (val.id > i) i = val.id + 1;
+      });
+      return i;
+    },
   },
   methods: {
     writeToDB() {
-      // console.log("---");
-      // console.log(this.user);
-      if (!this.uid) return;
+      const puid = this.$route.params.uid;
 
-      NewData(this.uid, this.blocks);
+      console.log("Записываю в базу ---", puid);
+
+      if (!puid) return;
+
+      NewData(puid, this.blocks);
     },
     async readFromDB(uid) {
       if (!uid) return;
@@ -101,6 +119,18 @@ export default {
       // newBlk[0].text = "Я поменял текст";
       // console.log(newBlk);
       this.blocks = newBlk;
+    },
+    addBlockToText() {
+      console.log(this.textAreaValue, this.headerType);
+      console.log(this.nextBlockId);
+      if (!(this.textAreaValue && this.headerType)) return;
+      this.blocks.push({
+        id: this.nextBlockId,
+        blockType: this.headerType,
+        text: this.textAreaValue,
+      });
+      this.textAreaValue = "";
+      this.headerType = null;
     },
   },
   created() {
@@ -117,7 +147,6 @@ export default {
       this.localUid = puid;
     }
   },
-
 };
 </script>
 
