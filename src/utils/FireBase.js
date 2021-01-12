@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/database";
 import { firebaseConfig } from "../../fbconf";
+// import FK from "./fakeComments.json";
 
 // блок выполняется один раз
 // инициализация Firebase
@@ -37,3 +38,27 @@ export function readPost(uid) {
       console.error("Ошибка бд", e);
     });
 }
+
+/*
+export function postCommentsToDB() {
+  const database = firebase.database();
+
+  console.log(FK.length);
+  let itm = FK[0];
+  console.log(itm);
+
+  for (let i = 0; i < FK.length; i++) {
+    console.log("Начало записи в бд : ", itm.id);
+    itm = FK[i];
+    database.ref("comments/" + itm.id).set(itm, function (error) {
+      if (error) {
+        // The write failed...
+        console.error("Ошибка записи в бд ", error.message);
+      } else {
+        // Data saved successfully!
+        console.log("Данные записаны");
+      }
+    });
+  }
+}
+*/

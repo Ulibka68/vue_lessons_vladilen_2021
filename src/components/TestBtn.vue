@@ -4,14 +4,13 @@
 </template>
 
 <script>
-import firebase from "firebase";
+import { postCommentsToDB } from "@utils/FireBase";
 
 export default {
   name: "TestBtn",
   methods: {
     handleClick() {
-      const resUser = firebase.auth().currentUser;
-      console.log(resUser);
+      postCommentsToDB();
     },
   },
 };
