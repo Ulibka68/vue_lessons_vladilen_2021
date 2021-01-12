@@ -5,10 +5,17 @@ import Register from "@auth/Register";
 import Dashboard from "@comp/Dashboard";
 import MainPage from "@pages/MainPage";
 import TestBtn from "@comp/TestBtn";
+import HomePage from "@pages/HomePage";
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [
+    {
+      path: "/",
+      name: "Home",
+      component: HomePage,
+    },
+
     {
       path: "/login",
       name: "login",
@@ -22,8 +29,8 @@ const router = createRouter({
       component: Register,
     },
     {
-      path: "/",
-      name: "Home",
+      path: "/post/:uid",
+      name: "resume",
       component: MainPage,
     },
     {

@@ -8,6 +8,7 @@ module.exports = {
         "@comp": path.resolve(__dirname, "./src/components"),
         "@auth": path.resolve(__dirname, "./src/components/auth"),
         "@pages": path.resolve(__dirname, "./src/pages"),
+        "@utils": path.resolve(__dirname, "./src/utils"),
       },
       // extensions: [".js", ".vue", ".ts",".json"],
     },

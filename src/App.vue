@@ -2,6 +2,17 @@
   <nav>
     <ul>
       <li><router-link to="/">Home</router-link></li>
+      <li>
+        <router-link
+          :to="{
+            name: 'resume',
+            params: { uid: user.uid },
+          }"
+        >
+          Резюме
+        </router-link>
+      </li>
+
       <li v-if="!user.displayName">
         <router-link to="/login">login</router-link>
       </li>
