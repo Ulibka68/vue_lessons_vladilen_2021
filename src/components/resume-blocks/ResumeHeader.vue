@@ -1,6 +1,6 @@
 <template>
   <h1>
-    {{ headerText }}
+    {{ text }}
   </h1>
 </template>
 
@@ -8,7 +8,7 @@
 export default {
   name: "ResumeHeader",
   props: {
-    headerText: { type: String, required: true },
+    text: { type: String, required: true },
   },
 };
 </script>

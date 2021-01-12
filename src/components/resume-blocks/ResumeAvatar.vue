@@ -1,6 +1,6 @@
 <template>
   <div class="avatar">
-    <img :src="srcUrl" />
+    <img :src="text" />
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 export default {
   name: "ResumeAvatar",
   props: {
-    srcUrl: { type: String, required: true },
+    text: { type: String, required: true },
   },
 };
 </script>
