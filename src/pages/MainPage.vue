@@ -41,27 +41,7 @@
       <h3 v-if="isEmpty">Добавьте первый блок, чтобы увидеть результат</h3>
     </div>
   </div>
-
-  <div class="container">
-    <p>
-      <button class="btn primary">Загрузить комментарии</button>
-    </p>
-    <div class="card">
-      <h2>Комментарии</h2>
-      <ul class="list">
-        <li class="list-item">
-          <div>
-            <p><strong>test@microsoft.com</strong></p>
-            <small
-              >Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Eligendi, reiciendis.</small
-            >
-          </div>
-        </li>
-      </ul>
-    </div>
-    <div class="loader"></div>
-  </div>
+  <ResumeComments />
 </template>
 
 <script>
@@ -69,6 +49,8 @@ import ResumeHeader from "@comp/resume-blocks/ResumeHeader";
 import ResumeAvatar from "@comp/resume-blocks/ResumeAvatar";
 import ResumeSubHeader from "@comp/resume-blocks/ResumeSubHeader";
 import ResumeText from "@comp/resume-blocks/ResumeText";
+import ResumeComments from "@comp/comments/Сomments";
+
 // eslint-disable-next-line no-unused-vars
 import { MainPageData } from "./MainPageData"; // временные тестовые данные
 import { NewData, readPost } from "@utils/FireBase";
@@ -84,7 +66,13 @@ export default {
     };
   },
 
-  components: { ResumeHeader, ResumeAvatar, ResumeSubHeader, ResumeText },
+  components: {
+    ResumeHeader,
+    ResumeAvatar,
+    ResumeSubHeader,
+    ResumeText,
+    ResumeComments,
+  },
   computed: {
     isEmpty() {
       if (!this.blocks) return false;

@@ -4,13 +4,13 @@
 </template>
 
 <script>
-import { postCommentsToDB } from "@utils/FireBase";
+// import { postCommentsToDB } from "@utils/FireBase";
 
 export default {
   name: "TestBtn",
   methods: {
     handleClick() {
-      postCommentsToDB();
+      // postCommentsToDB();
     },
   },
 };

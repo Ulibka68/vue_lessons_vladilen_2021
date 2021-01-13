@@ -39,6 +39,20 @@ export function readPost(uid) {
     });
 }
 
+export function readComments() {
+  return firebase
+    .database()
+    .ref("comments/")
+    .once("value")
+    .then((snapshot) => {
+      // console.log(" данные прочитаны", snapshot.val());
+      return snapshot.val();
+    })
+    .catch((e) => {
+      console.error("Ошибка бд", e);
+    });
+}
+
 /*
 export function postCommentsToDB() {
   const database = firebase.database();
