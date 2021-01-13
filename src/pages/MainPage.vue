@@ -59,12 +59,30 @@ export default {
       if (!this.blocks) return 0;
       let i = 0;
       this.blocks.forEach((val) => {
-        if (val.id > i) i = val.id + 1;
+        if (val.id >= i) i = val.id + 1;
       });
       return i;
     },
   },
   methods: {
+    // обнаружена ошибка когда у меня все id==0
+    revalidateBlockIDS() {
+      let maxId = 0;
+      let idSet = new Set();
+      // вычислить новый maxId
+      this.blocks.forEach((val) => {
+        idSet.add(val.id);
+        if (val.id >= maxId) maxId = val.id + 1;
+      });
+      this.blocks.forEach((val) => {
+        if (idSet.has(val.id)) {
+          val.id = maxId;
+          idSet.add(maxId);
+          maxId++;
+        }
+      });
+    },
+
     writeToDB() {
       const puid = this.$route.params.uid;
 
@@ -81,22 +99,23 @@ export default {
       // newBlk[0].text = "Я поменял текст";
       // console.log(newBlk);
       this.blocks = newBlk;
+      this.revalidateBlockIDS();
     },
     addBlockToText(blk_to_add) {
       console.log("blk_to_add", blk_to_add);
-      console.log(this.nextBlockId);
-      return;
-      /*
-      if (!(this.textAreaValue && this.headerType)) return;
+      console.log("this.nextBlockId", this.nextBlockId);
+      console.log("this.blocks", this.blocks);
+
+      if (!(blk_to_add.blockType && blk_to_add.text)) return;
       if (!this.blocks) this.blocks = [];
+      console.log("push add");
       this.blocks.push({
         id: this.nextBlockId,
-        blockType: this.headerType,
-        text: this.textAreaValue,
+        blockType: blk_to_add.blockType,
+        text: blk_to_add.text,
       });
       this.textAreaValue = "";
       this.headerType = null;
-      */
     },
   },
   created() {
