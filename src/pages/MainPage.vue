@@ -1,31 +1,7 @@
 <template>
   <div class="container column">
     <div class="card card-w30">
-      <form>
-        <div class="form-control">
-          <label for="type">Тип блока</label>
-          <select id="type" v-model="headerType">
-            <option value="ResumeHeader">Заголовок</option>
-            <option value="ResumeSubHeader">Подзаголовок</option>
-            <option value="ResumeAvatar">Аватар</option>
-            <option value="ResumeText">Текст</option>
-          </select>
-        </div>
-
-        <div class="form-control">
-          <label for="value">Значение</label>
-          <textarea id="value" rows="3" v-model="textAreaValue"></textarea>
-        </div>
-
-        <button
-          :disabled="!(headerType && textAreaValue)"
-          class="btn primary"
-          @click.prevent.stop="addBlockToText"
-        >
-          Добавить
-        </button>
-      </form>
-
+      <ResumeBlockAdd @ResumeBlockAdd-addblock="addBlockToText" />
       <button class="btn primary mg-1 fit-width" @click="writeToDB">
         Записать изменения в базу данных
       </button>
@@ -50,10 +26,10 @@ import ResumeAvatar from "@comp/resume-blocks/ResumeAvatar";
 import ResumeSubHeader from "@comp/resume-blocks/ResumeSubHeader";
 import ResumeText from "@comp/resume-blocks/ResumeText";
 import ResumeComments from "@comp/comments/Сomments";
-
-// eslint-disable-next-line no-unused-vars
-import { MainPageData } from "./MainPageData"; // временные тестовые данные
+import ResumeBlockAdd from "@comp/ResumeBlockAdd";
 import { NewData, readPost } from "@utils/FireBase";
+
+// import { MainPageData } from "./MainPageData"; // временные тестовые данные
 
 export default {
   data() {
@@ -72,6 +48,7 @@ export default {
     ResumeSubHeader,
     ResumeText,
     ResumeComments,
+    ResumeBlockAdd,
   },
   computed: {
     isEmpty() {
@@ -105,9 +82,11 @@ export default {
       // console.log(newBlk);
       this.blocks = newBlk;
     },
-    addBlockToText() {
-      console.log(this.textAreaValue, this.headerType);
+    addBlockToText(blk_to_add) {
+      console.log("blk_to_add", blk_to_add);
       console.log(this.nextBlockId);
+      return;
+      /*
       if (!(this.textAreaValue && this.headerType)) return;
       if (!this.blocks) this.blocks = [];
       this.blocks.push({
@@ -117,6 +96,7 @@ export default {
       });
       this.textAreaValue = "";
       this.headerType = null;
+      */
     },
   },
   created() {
