@@ -79,10 +79,13 @@
   </div>
 </template>
 
-<script>
-import firebase from "firebase";
+<script lang="ts">
+// import { Options, Vue } from "vue-class-component";
+import { registerNewUser } from "@utils/Firebase";
+import { defineComponent, PropType } from "vue";
 
-export default {
+export default defineComponent({
+  name: "RegisterNewUser",
   data() {
     return {
       form: {
@@ -95,35 +98,25 @@ export default {
   },
   inject: ["changeCurrentUserDispatch"],
   methods: {
-    submit() {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(this.form.email, this.form.password)
-        .then((data) => {
-          data.user
-            .updateProfile({
-              displayName: this.form.name,
-            })
-            .then(() => {
-              const logedUser = {
-                displayName: this.form.name,
-                email: this.form.email,
-                emailVerified: false,
-                uid: data.user.uid,
-              };
+    async submit() {
+      try {
+        const logedUser = await registerNewUser(
+          this.form.email,
+          this.form.password,
+          this.form.name
+        );
 
-              this.changeCurrentUserDispatch(logedUser);
-              // this.$router.replace({ name: "Home" });
-              this.$router.replace({
-                name: "resume",
-                params: { uid: data.user.uid },
-              });
-            });
-        })
-        .catch((err) => {
-          this.error = err.message;
+        this.changeCurrentUserDispatch(logedUser);
+        this.$emit("aa");
+
+        this.$router.replace({
+          name: "resume",
+          params: { uid: logedUser.uid },
         });
+      } catch (err) {
+        this.error = err.message;
+      }
     },
   },
-};
+});
 </script>
