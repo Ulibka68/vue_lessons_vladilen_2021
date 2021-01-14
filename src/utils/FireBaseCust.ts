@@ -86,6 +86,37 @@ export async function registerNewUser(
   };
 }
 
+interface loginUserByEmailReturnType {
+  result: boolean;
+  logedUser: logedUserType;
+  errMsg: string;
+}
+
+export async function loginUserByEmail(
+  email: string,
+  password: string
+): Promise<loginUserByEmailReturnType> {
+  try {
+    const data: firebase.auth.UserCredential = await firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password);
+    const user: firebase.User = data.user as firebase.User;
+    const logedUser: logedUserType = {
+      displayName: user.displayName!,
+      email: user.email!,
+      emailVerified: user.emailVerified,
+      uid: user.uid,
+    };
+    return { result: true, logedUser, errMsg: "" };
+  } catch (err) {
+    return {
+      result: false,
+      logedUser: { displayName: "", email: "", emailVerified: false, uid: "" },
+      errMsg: err.message,
+    };
+  }
+}
+
 /*
 export function postCommentsToDB() {
   const database = firebase.database();

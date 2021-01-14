@@ -20,6 +20,7 @@
       "@/*": ["src/*"],
       "@utils/*": ["src/utils/*"],
       "@pages/*": ["src/pages/*"],
+      "@auth/*": ["src/components/auth/*"],
 
     },
     "lib": [

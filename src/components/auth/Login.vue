@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import firebase from "firebase";
+import { loginUserByEmail } from "@utils/FireBaseCust";
 
 export default {
   data() {
@@ -51,38 +51,25 @@ export default {
     };
   },
   inject: ["changeCurrentUserDispatch"],
-  emits: ["userloged"],
+
   methods: {
-    submit() {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(this.form.email, this.form.password)
-        .then((data) => {
-          const logedUser = {
-            displayName: data.user.displayName,
-            email: data.user.email,
-            emailVerified: data.user.emailVerified,
-            uid: data.user.uid,
-          };
+    async submit() {
+      // console.log("Login start");
+      const result = await loginUserByEmail(
+        this.form.email,
+        this.form.password
+      );
+      // console.log(result);
+      if (result.result) {
+        this.changeCurrentUserDispatch(result.logedUser);
 
-          this.changeCurrentUserDispatch(logedUser);
-
-          // this.$router.replace({ name: "resume" });
-          this.$router.replace({
-            name: "resume",
-            params: { uid: data.user.uid },
-          });
-
-          // this.$emit("userloged", logedUser);
-
-          // console.log("data.user.displayName : ", data.user.displayName);
-          // console.log("data.user.email : ", data.user.email);
-          // console.log("data.user.emailVerified :", data.user.emailVerified);
-          // console.log("data.user", data.user);
-        })
-        .catch((err) => {
-          this.error = err.message;
+        this.$router.replace({
+          name: "resume",
+          params: { uid: result.logedUser.uid },
         });
+      } else {
+        this.error = result.errMsg;
+      }
     },
   },
 };
