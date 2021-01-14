@@ -102,7 +102,9 @@ export async function loginUserByEmail(
       .signInWithEmailAndPassword(email, password);
     const user: firebase.User = data.user as firebase.User;
     const logedUser: logedUserType = {
+      // eslint-disable-next-line
       displayName: user.displayName!,
+      // eslint-disable-next-line
       email: user.email!,
       emailVerified: user.emailVerified,
       uid: user.uid,

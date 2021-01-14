@@ -37,17 +37,18 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { loginUserByEmail } from "@utils/FireBaseCust";
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   data() {
     return {
       form: {
         email: "",
         password: "",
       },
-      error: null,
+      error: "",
     };
   },
   inject: ["changeCurrentUserDispatch"],
@@ -61,7 +62,8 @@ export default {
       );
       // console.log(result);
       if (result.result) {
-        this.changeCurrentUserDispatch(result.logedUser);
+        // eslint-disable-next-line
+        (this as any).changeCurrentUserDispatch(result.logedUser);
 
         this.$router.replace({
           name: "resume",
@@ -72,5 +74,5 @@ export default {
       }
     },
   },
-};
+});
 </script>
