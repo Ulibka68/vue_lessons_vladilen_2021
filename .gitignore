@@ -2,7 +2,7 @@
 node_modules
 /dist
 
-# secret
+# secrets
 fbconf.js
 
 # local env files
