@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { readComments } from "@utils/FireBase";
+import { readComments } from "@utils/FireBaseCust";
 
 export default {
   name: "Сomments",

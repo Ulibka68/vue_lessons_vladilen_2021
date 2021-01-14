@@ -8,7 +8,7 @@ import router from "./routes";
 import App from "./App.vue";
 import "./theme.css";
 
-import "@/utils/FireBase";
+import "@utils/FireBaseCust";
 // import firebase from "firebase";
 // import { firebaseConfig } from "../fbconf";
 // firebase.initializeApp(firebaseConfig);

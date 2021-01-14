@@ -39,7 +39,7 @@ import ResumeComments from "@comp/comments/Сomments";
 import ResumeBlockAdd from "@comp/ResumeBlockAdd";
 import InfoPanelShow from "@comp/InfoPanelShow";
 // eslint-disable-next-line no-unused-vars
-import { NewData, readPost } from "@utils/FireBase";
+import { NewData, readPost } from "@utils/FireBaseCust";
 
 // import { MainPageData } from "./MainPageData"; // временные тестовые данные
 

@@ -4,6 +4,7 @@
   <p>Примеры доступны при вводе</p>
   <p>login: ivan@ivan.ru password:1234567</p>
   <p>login: petr@petr.ru password:1234567</p>
+  <p>login: leha@leha.ru password:1234567</p>
   <p>
     Вы также можете зарегистрироваться и ввести свой текст. E-mail не
     проверяется.

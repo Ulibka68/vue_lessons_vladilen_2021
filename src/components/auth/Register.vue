@@ -81,8 +81,8 @@
 
 <script lang="ts">
 // import { Options, Vue } from "vue-class-component";
-import { registerNewUser } from "@utils/Firebase";
-import { defineComponent, PropType } from "vue";
+import { registerNewUser } from "@utils/FireBaseCust";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "RegisterNewUser",
@@ -106,10 +106,10 @@ export default defineComponent({
           this.form.name
         );
 
-        this.changeCurrentUserDispatch(logedUser);
+        (this as any).changeCurrentUserDispatch(logedUser);
         this.$emit("aa");
 
-        this.$router.replace({
+        (this as any).$router.replace({
           name: "resume",
           params: { uid: logedUser.uid },
         });

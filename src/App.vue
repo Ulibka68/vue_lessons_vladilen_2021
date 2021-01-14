@@ -68,10 +68,11 @@ export default {
   methods: {
     changeCurrentUser(user) {
       // this.user = newUser;
-      this.user.displayName = user.displayName;
-      this.user.email = user.email;
-      this.user.emailVerified = user.emailVerified;
-      this.user.uid = user.uid;
+      // this.user.displayName = user.displayName;
+      // this.user.email = user.email;
+      // this.user.emailVerified = user.emailVerified;
+      // this.user.uid = user.uid;
+      Object.assign(this.user, user);
     },
     handleLogin(user) {
       console.log("handleLogin :", user);
