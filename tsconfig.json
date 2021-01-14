@@ -16,12 +16,13 @@
       "webpack-env"
     ],
     "paths": {
+      "components/*": ["src/components/*"],
       "@/*": [
         "src/*"
       ]
     },
     "lib": [
-      "esnext",
+      "es2020",
       "dom",
       "dom.iterable",
       "scripthost"
