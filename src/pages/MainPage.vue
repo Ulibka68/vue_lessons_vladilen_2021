@@ -1,4 +1,12 @@
 <template>
+  <div class="container">
+    <InfoPanelShow
+      ref="InfoPanelShow"
+      :info-panel-class="infoPanelClass"
+      :info-panel-message="infoPanelMessage"
+    />
+  </div>
+
   <div class="container column">
     <div class="card card-w30">
       <ResumeBlockAdd @ResumeBlockAdd-addblock="addBlockToText" />
@@ -6,6 +14,7 @@
         Записать изменения в базу данных
       </button>
     </div>
+    <!--    цикл вывода содержимого поста -->
     <div class="card card-w70">
       <component
         :is="item.blockType"
@@ -16,6 +25,7 @@
 
       <h3 v-if="isEmpty">Добавьте первый блок, чтобы увидеть результат</h3>
     </div>
+    <!-- END    цикл вывода содержимого поста -->
   </div>
   <ResumeComments />
 </template>
@@ -27,6 +37,8 @@ import ResumeSubHeader from "@comp/resume-blocks/ResumeSubHeader";
 import ResumeText from "@comp/resume-blocks/ResumeText";
 import ResumeComments from "@comp/comments/Сomments";
 import ResumeBlockAdd from "@comp/ResumeBlockAdd";
+import InfoPanelShow from "@comp/InfoPanelShow";
+// eslint-disable-next-line no-unused-vars
 import { NewData, readPost } from "@utils/FireBase";
 
 // import { MainPageData } from "./MainPageData"; // временные тестовые данные
@@ -39,6 +51,8 @@ export default {
       localUid: null,
       textAreaValue: "",
       headerType: null,
+      infoPanelMessage: "infoPanelMessage3",
+      infoPanelClass: "primary", // еще может быть danger
     };
   },
 
@@ -49,6 +63,7 @@ export default {
     ResumeText,
     ResumeComments,
     ResumeBlockAdd,
+    InfoPanelShow,
   },
   computed: {
     isEmpty() {
@@ -90,7 +105,13 @@ export default {
 
       if (!puid) return;
 
-      NewData(puid, this.blocks);
+      const res = NewData(puid, this.blocks);
+      // const res = { result: false, msg: "Ошибка записи в бд " };
+      console.log(res);
+
+      this.infoPanelClass = res.result ? "primary" : "danger";
+      this.infoPanelMessage = res.result ? "Данные успешно записаны" : res.msg;
+      this.$refs.InfoPanelShow.ShowInfo();
     },
     async readFromDB(uid) {
       if (!uid) return;
@@ -102,9 +123,9 @@ export default {
       this.revalidateBlockIDS();
     },
     addBlockToText(blk_to_add) {
-      console.log("blk_to_add", blk_to_add);
-      console.log("this.nextBlockId", this.nextBlockId);
-      console.log("this.blocks", this.blocks);
+      // console.log("blk_to_add", blk_to_add);
+      // console.log("this.nextBlockId", this.nextBlockId);
+      // console.log("this.blocks", this.blocks);
 
       if (!(blk_to_add.blockType && blk_to_add.text)) return;
       if (!this.blocks) this.blocks = [];
@@ -121,6 +142,7 @@ export default {
   created() {
     document.title = "Домашнее задание по VUE - вторая неделя";
   },
+
   mounted() {
     const puid = this.$route.params.uid;
     console.log("mounted ==============================");

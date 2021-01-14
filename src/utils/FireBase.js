@@ -9,7 +9,7 @@ firebase.initializeApp(firebaseConfig);
 // эта опция для web выставлена изначально
 // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 
-export function NewData(uid, blocks) {
+export async function NewData(uid, blocks) {
   // firebase.database.Reference;
   let database = firebase.database();
 
@@ -18,9 +18,11 @@ export function NewData(uid, blocks) {
     if (error) {
       // The write failed...
       console.error("Ошибка записи в бд ", error.message);
+      return { result: false, msg: "Ошибка записи в бд " + error.message };
     } else {
       // Data saved successfully!
       console.log("Данные записаны");
+      return { result: true, msg: "OK" };
     }
   });
 }
