@@ -1,6 +1,6 @@
 <template>
   <h1>Test</h1>
-  <button class="btn" @click="handleClick">firebase.auth().currentUser</button>
+  <!--  <button class="btn" @click="handleClick">firebase.auth().currentUser</button>-->
 </template>
 
 <script>

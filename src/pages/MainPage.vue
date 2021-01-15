@@ -98,14 +98,14 @@ export default {
       });
     },
 
-    writeToDB() {
+    async writeToDB() {
       const puid = this.$route.params.uid;
 
       console.log("Записываю в базу ---", puid);
 
       if (!puid) return;
 
-      const res = NewData(puid, this.blocks);
+      const res = await NewData(puid, this.blocks);
       // const res = { result: false, msg: "Ошибка записи в бд " };
       console.log(res);
 
