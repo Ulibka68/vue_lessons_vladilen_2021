@@ -39,9 +39,11 @@
 // import "firebase/auth";
 
 import {fbAppAuth, listenersCallbacks} from "@utils/FBCustInit"
+import {CheckFirebaseDatabaseLoad,loadFirebaseDatabaseAsyncModule} from "@utils/FBCustDatabase"
 
 export default {
   name: "App",
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   data() {
     return {
       user: { displayName: "", email: "", emailVerified: false, uid: null },
@@ -50,6 +52,7 @@ export default {
       },
     };
   },
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   provide() {
     return {
       changeCurrentUserDispatch: (newUser) => {
@@ -59,6 +62,7 @@ export default {
     };
   },
   computed: {
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     isLogged() {
       console.log("this.uid : ", this.user.uid);
       return Boolean(this.user.uid);
@@ -68,6 +72,7 @@ export default {
     // MainPage,
   },
   methods: {
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     changeCurrentUser(user) {
       // this.user = newUser;
       // this.user.displayName = user.displayName;
@@ -76,6 +81,7 @@ export default {
       // this.user.uid = user.uid;
       Object.assign(this.user, user);
     },
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     handleLogin(user) {
       console.log("handleLogin :", user);
       this.user.displayName = user.displayName;
@@ -83,6 +89,7 @@ export default {
       this.user.emailVerified = user.emailVerified;
       this.user.uid = user.uid;
     },
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     hearEvent() {
       fbAppAuth.onAuthStateChanged((user) => {
         // console.log("hearEvent : ", user);
@@ -98,7 +105,11 @@ export default {
           });
         }
       });
+
+      // данная функция вызывается после инициализации auth - Значит пора инициализировать DB
+      loadFirebaseDatabaseAsyncModule();
     },
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     handleLogout() {
       if (fbAppAuth) fbAppAuth.signOut();
       //  обнуление свойств словит hearEvent
@@ -106,6 +117,7 @@ export default {
     },
   },
 
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   mounted() {
     if (fbAppAuth)  this.hearEvent()
     else {

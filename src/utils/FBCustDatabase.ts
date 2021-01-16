@@ -5,9 +5,9 @@ import { Database, DataSnapshot } from "@firebase/database-types";
 let fbAppDatabaseTs: Database;
 let fbAppDatabaseTsInitialized = false;
 
-function loadAsyncModule() {
+export function loadFirebaseDatabaseAsyncModule() {
   import(
-    /* webpackChunkName: "firebase-app" */
+    /* webpackChunkName: "firebase-database" */
     /* webpackMode: "lazy-once" */
     "firebase/database"
   ).then((fbDbProp) => {
@@ -22,9 +22,9 @@ function loadAsyncModule() {
   });
 }
 
-export function CheckModuleLoad() {
+export function CheckFirebaseDatabaseLoad() {
   if (!fbAppDatabaseTsInitialized) {
-    loadAsyncModule();
+    loadFirebaseDatabaseAsyncModule();
     throw new Error("Подождите - идет загрузка модуля авторизации");
   }
 }
@@ -38,7 +38,7 @@ export async function NewData(
   uid: string,
   blocks: onePostType[]
 ): Promise<NewDataResult> {
-  CheckModuleLoad();
+  CheckFirebaseDatabaseLoad();
   const db: Database = fbAppDatabaseTs;
   try {
     await db.ref("post/" + uid).set(blocks);
@@ -50,7 +50,7 @@ export async function NewData(
 }
 
 export function readPost(uid: string): Promise<onePostType[]> {
-  CheckModuleLoad();
+  CheckFirebaseDatabaseLoad();
   return fbAppDatabaseTs
     .ref("post/" + uid)
     .once("value")
@@ -64,7 +64,7 @@ export function readPost(uid: string): Promise<onePostType[]> {
 }
 
 export function readComments(): Promise<oneCommentType[]> {
-  CheckModuleLoad();
+  CheckFirebaseDatabaseLoad();
   return fbAppDatabaseTs
     .ref("comments/")
     .once("value")

@@ -10,8 +10,6 @@ import(
   /* webpackMode: "lazy-once" */
   "firebase/app"
 ).then((fbAppProp) => {
-  console.log("*********************************************");
-  console.log(fbAppProp);
   // блок выполняется один раз
   // инициализация Firebase
   fbApp = fbAppProp.default;

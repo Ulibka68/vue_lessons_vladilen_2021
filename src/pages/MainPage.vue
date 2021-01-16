@@ -145,7 +145,7 @@ export default {
 
   mounted() {
     const puid = this.$route.params.uid;
-    console.log("mounted ==============================");
+    console.log("Mainpage mounted ==============================");
     console.log("this.$route.params.uid", puid);
 
     if (puid && puid !== null) {
