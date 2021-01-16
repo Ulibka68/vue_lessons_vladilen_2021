@@ -13,4 +13,9 @@ module.exports = {
       // extensions: [".js", ".vue", ".ts",".json"],
     },
   },
+  pluginOptions: {
+    webpackBundleAnalyzer: {
+      openAnalyzer: false
+    }
+  }
 };
