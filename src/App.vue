@@ -33,10 +33,12 @@
   </div>
 </template>
 
-<script>
-// import firebase from "firebase";
-import firebase from "firebase/app";
-import "firebase/auth";
+<script lang="js">
+
+// import firebase from "firebase/app";
+// import "firebase/auth";
+
+import {fbAppAuth, listenersCallbacks} from "@utils/FBCustInit"
 
 export default {
   name: "App",
@@ -82,7 +84,7 @@ export default {
       this.user.uid = user.uid;
     },
     hearEvent() {
-      firebase.auth().onAuthStateChanged((user) => {
+      fbAppAuth.onAuthStateChanged((user) => {
         // console.log("hearEvent : ", user);
         if (user) {
           const { displayName, email, emailVerified, uid } = user;
@@ -98,14 +100,18 @@ export default {
       });
     },
     handleLogout() {
-      firebase.auth().signOut();
+      if (fbAppAuth) fbAppAuth.signOut();
       //  обнуление свойств словит hearEvent
       this.$router.replace({ name: "Home" });
     },
   },
 
   mounted() {
-    this.hearEvent();
+    if (fbAppAuth)  this.hearEvent()
+    else {
+      listenersCallbacks.push(this.hearEvent.bind(this));
+    }
+
   },
 };
 </script>

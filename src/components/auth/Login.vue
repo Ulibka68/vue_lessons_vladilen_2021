@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import { loginUserByEmail } from "@utils/FireBaseCust";
+import { loginUserByEmail } from "@utils/FBCustAuth";
 import { defineComponent } from "vue";
 
 export default defineComponent({

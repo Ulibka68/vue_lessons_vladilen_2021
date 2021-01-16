@@ -49,7 +49,7 @@
 </template>
 
 <script lang="ts">
-import { registerNewUser } from "@utils/FireBaseCust";
+import { registerNewUser } from "@utils/FBCustAuth";
 import { defineComponent } from "vue";
 
 export default defineComponent({

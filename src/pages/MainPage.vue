@@ -30,7 +30,7 @@
   <ResumeComments />
 </template>
 
-<script>
+<script lang="js">
 import ResumeHeader from "@comp/resume-blocks/ResumeHeader";
 import ResumeAvatar from "@comp/resume-blocks/ResumeAvatar";
 import ResumeSubHeader from "@comp/resume-blocks/ResumeSubHeader";
@@ -39,7 +39,7 @@ import ResumeComments from "@comp/comments/Сomments";
 import ResumeBlockAdd from "@comp/ResumeBlockAdd";
 import InfoPanelShow from "@comp/InfoPanelShow";
 // eslint-disable-next-line no-unused-vars
-import { NewData, readPost } from "@utils/FireBaseCust";
+import { NewData, readPost } from "@utils/FBCustDatabase";
 
 // import { MainPageData } from "./MainPageData"; // временные тестовые данные
 

@@ -26,8 +26,8 @@
   </div>
 </template>
 
-<script>
-import { readComments } from "@utils/FireBaseCust";
+<script lang="js">
+import { readComments } from "@utils/FBCustDatabase";
 
 export default {
   name: "Сomments",
