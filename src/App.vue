@@ -24,6 +24,8 @@ import AppBlock from "@/components/AppBlock";
 
 export default {
   components: { AppAlert, AppBlock },
+  // поскольку это описано в глобальном миксине - то vue добавит этот кусок кода сам
+  /*
   data() {
     return {
       alert: false,
@@ -34,5 +36,7 @@ export default {
       this.alert = !this.alert;
     },
   },
+
+   */
 };
 </script>

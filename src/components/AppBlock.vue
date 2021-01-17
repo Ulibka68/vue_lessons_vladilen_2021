@@ -20,6 +20,8 @@
 import AppAlert from "@/components/AppAlert";
 export default {
   components: { AppAlert },
+  // поскольку это описано в глобальном миксине - то vue добавит этот кусок кода сам
+  /*
   data() {
     return {
       alert: false,
@@ -30,5 +32,7 @@ export default {
       this.alert = !this.alert;
     },
   },
+
+   */
 };
 </script>
