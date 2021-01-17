@@ -11,13 +11,11 @@
 </template>
 
 <script>
+import focusDirective from "./focusDirective";
+
 export default {
   directives: {
-    focus: {
-      mounted(el) {
-        el.focus;
-      },
-    },
+    focus: focusDirective,
   },
 };
 </script>
