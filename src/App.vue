@@ -1,7 +1,8 @@
 <template>
   <the-navbar></the-navbar>
   <div class="container with-nav">
-    <login></login>
+    <!--    место рендера роутера-->
+    <router-view></router-view>
   </div>
 </template>
 
