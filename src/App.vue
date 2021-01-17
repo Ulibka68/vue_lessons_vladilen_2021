@@ -8,7 +8,11 @@
       </button>
       <button class="btn primary" @click="modal = true">Открыть модалку</button>
 
-      <app-modal v-if="modal" @close="modal = false"></app-modal>
+      <!--      при disabled телепортация не включается -->
+      <!--      <teleport to="body" disabled>-->
+      <teleport to="body">
+        <app-modal v-if="modal" @close="modal = false"></app-modal>
+      </teleport>
     </div>
   </div>
 </template>
