@@ -4,6 +4,8 @@ export default {
     console.log(binding);
     el.style.color = binding.value;
   },
-  updated() {},
+  updated(el, binding) {
+    el.style.color = binding.value;
+  },
   unmount() {},
 };
