@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <div class="card">
-      <h2 v-color:color="myColor">Разговор про директивы</h2>
+      <h2 v-color:color.blink="myColor">Разговор про директивы</h2>
+      <h2 v-color:color.hover="myColor">Hover</h2>
       <h2 v-color:backgroundColor="myColor">Разговор про директивы</h2>
       <h2 v-color:[type]="myColor">Динамический параметр</h2>
       <div class="form-control">
