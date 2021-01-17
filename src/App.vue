@@ -21,9 +21,11 @@
 <script>
 import AppAlert from "@/components/AppAlert";
 import AppBlock from "@/components/AppBlock";
+import alertMixin from "./alertMixin";
 
 export default {
   components: { AppAlert, AppBlock },
+  mixins: [alertMixin],
   // поскольку это описано в глобальном миксине - то vue добавит этот кусок кода сам
   /*
   data() {
