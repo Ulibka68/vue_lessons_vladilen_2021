@@ -4,7 +4,7 @@
       v-if="alert"
       text="Это важно"
       title="Alert"
-      type="warning"
+      type="primary"
       closable
       @click="alert = false"
     ></app-alert>
@@ -13,17 +13,13 @@
         {{ alert ? "Скрыть сообщение" : "Показать сообщение" }}
       </button>
     </div>
-
-    <app-block></app-block>
   </div>
 </template>
 
 <script>
 import AppAlert from "@/components/AppAlert";
-import AppBlock from "@/components/AppBlock";
-
 export default {
-  components: { AppAlert, AppBlock },
+  components: { AppAlert },
   data() {
     return {
       alert: false,
