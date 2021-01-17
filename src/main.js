@@ -1,12 +1,8 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import "./theme.css";
+import translatePlagin from "@/translatePlagin";
 
-createApp(App)
-  // директива v-focus
-  // .directive("focus", {
-  //   mounted(el) {
-  //     el.focus();
-  //   },
-  // })
-  .mount("#app");
+const app = createApp(App);
+app.use(translatePlagin, { test: 1 });
+app.mount("#app");
