@@ -4,5 +4,20 @@ import "./theme.css";
 import translatePlagin from "@/translatePlagin";
 
 const app = createApp(App);
-app.use(translatePlagin, { test: 1 });
+
+const ru = {
+  app: {
+    title: "Как работают плагины VUE",
+    btnTitle: "Переключить язык",
+  },
+};
+
+const en = {
+  app: {
+    title: "How VUE plagins works",
+    btnTitle: "Switch language",
+  },
+};
+
+app.use(translatePlagin, { ru, en });
 app.mount("#app");
