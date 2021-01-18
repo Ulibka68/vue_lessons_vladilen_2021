@@ -6,12 +6,20 @@ import Mail from "@/views/Mail";
 import AppEmailBody from "@/components/AppEmailBody";
 import NotFound from "@/views/NotFound";
 
-export default createRouter({
+const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: "/login", component: Login, alias: "/" },
-    { path: "/forget", component: Forget },
-    { path: "/dashboard", component: Dashboard },
+    { path: "/forget", component: Forget, meta: { cantEnter: true } },
+    {
+      path: "/dashboard",
+      component: Dashboard,
+      name: "home",
+      beforeEnter() {
+        // метод вызывается до того как перейти на страницу
+        console.log("BeforeEnter");
+      },
+    },
     {
       path: "/mail",
       component: Mail,
@@ -24,3 +32,17 @@ export default createRouter({
   linkActiveClass: "active",
   linkExactActiveClass: "active",
 });
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.cantEnter) {
+    // защита Forget - нельзя перейти по адресу Forhet
+    // next(false);
+    // next("/dashboard"); // редирекут на dashborad
+    next({ name: "home" }); // редирекут на dashborad
+  } else next();
+});
+
+// можно собрать аналитику
+// router.afterEach()
+
+export default router;

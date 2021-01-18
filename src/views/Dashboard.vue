@@ -12,7 +12,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+  beforeRouteEnter() {
+    console.log("beforeRouteEnter");
+  },
+};
 </script>
 
 <style scoped></style>
