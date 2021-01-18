@@ -12,4 +12,7 @@ export default createRouter({
     { path: "/dashboard", component: Dashboard },
     { path: "/mail", component: Mail },
   ],
+  //замен названия классов по умолчанию
+  linkActiveClass: "active",
+  linkExactActiveClass: "active",
 });
