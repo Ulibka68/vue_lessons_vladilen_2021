@@ -1,6 +1,6 @@
 <template>
   <header class="navbar">
-    <strong>Счетчик {{ $store.state.counter }}</strong>
+    <strong>Счетчик {{ $store.getters.doubleCounter }}</strong>
   </header>
 </template>
 

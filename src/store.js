@@ -14,4 +14,13 @@ export default createStore({
       state.counter += payload.value; // redux style
     },
   },
+  getters: {
+    counter(state) {
+      if (state.counter > 50) return 0;
+      return state.counter;
+    },
+    doubleCounter(_, getters) {
+      return getters.counter * 2;
+    },
+  },
 });

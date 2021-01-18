@@ -3,7 +3,7 @@
   <div class="container with-nav">
     <div class="card">
       <h1>Про Vuex</h1>
-      <h2>Счетчик {{ $store.state.counter }}</h2>
+      <h2>Счетчик {{ $store.getters.counter }}</h2>
       <button class="btn" @click="increment">Добавить</button>
     </div>
   </div>
