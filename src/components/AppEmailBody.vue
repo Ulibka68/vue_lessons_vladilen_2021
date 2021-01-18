@@ -17,24 +17,8 @@ export default {
   inject: ["emails"],
   props: ["mailId"],
   computed: {
-    email2() {
-      return this.emails.find((e) => e.id === this.mailId);
-    },
     email() {
-      const mId = this.mailId;
-      const curemail = this.emails.find((oneEmail) => oneEmail.id === mId);
-      const curemail2 = this.emails.find((e) => e.id === 1);
-      console.log(this.emails);
-      console.log(
-        " curemail:",
-        curemail,
-        "this.mailId",
-        this.mailId,
-        " mId:",
-        mId
-      );
-      console.log(" curemail2:", curemail2);
-      return curemail;
+      return this.emails.find((e) => e.id == this.mailId);
     },
   },
 };
