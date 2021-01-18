@@ -15,7 +15,9 @@ export default {
   components: { TheNavbar },
   methods: {
     increment() {
-      this.$store.state.counter++;
+      // this.$store.state.counter++;
+      // this.$store.commit("add", 5);
+      this.$store.commit({ type: "add", value: 5 });
     },
   },
 };

@@ -1,5 +1,7 @@
 <template>
-  <header class="navbar">Vuex</header>
+  <header class="navbar">
+    <strong>Счетчик {{ $store.state.counter }}</strong>
+  </header>
 </template>
 
 <script>
