@@ -12,18 +12,18 @@
     </div>
 
     <button class="btn primary" type="submit">Войти</button>
-    <button class="btn warning">Забыл пароль?</button>
 
-    <!--    <br />
-    <a href="/forget">Забыл пароль</a><br />
-    <router-link to="/forget">Переход на Forget без перезагрузки</router-link>-->
-
-    <router-link to="/forget" class="btn warning"
-      >Забыл пароль - router</router-link
-    >
-    <!--    добавляем слот к router link-->
     <router-link to="/forget">
-      <button class="warning btn">Забыл пароль button slot</button>
+      <button class="btn warning" @click="clickHanle2">
+        Забыл пароль? clickHanle2
+      </button>
+    </router-link>
+
+    <!--    custom позволяет не оборачивать в тег a-->
+    <router-link to="/forget" v-slot="{ navigate }" custom>
+      <button class="warning btn" @click="navigate">
+        Забыл пароль v-slot={ navigate }
+      </button>
     </router-link>
   </form>
 </template>
@@ -46,6 +46,9 @@ export default {
       if (this.isValid) {
         // login
       }
+    },
+    clickHanle2() {
+      this.navigate;
     },
   },
 };
