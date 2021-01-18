@@ -4,6 +4,7 @@ import Forget from "@/views/Forget";
 import Dashboard from "@/views/Dashboard";
 import Mail from "@/views/Mail";
 import AppEmailBody from "@/components/AppEmailBody";
+import NotFound from "@/views/NotFound";
 
 export default createRouter({
   history: createWebHistory(),
@@ -16,6 +17,8 @@ export default createRouter({
       component: Mail,
       children: [{ path: ":mailId?", component: AppEmailBody, props: true }],
     },
+    // { path: "/:notFound(.*)", redirect: "/login" },
+    { path: "/:notFound(.*)", component: NotFound },
   ],
   //замен названия классов по умолчанию
   linkActiveClass: "active",
