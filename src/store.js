@@ -24,10 +24,10 @@ export default createStore({
     },
   },
   actions: {
-    incrementAsync(context, payload) {
+    incrementAsync({ commit }, payload) {
       console.log("incrementAsync start");
       setTimeout(() => {
-        context.commit({ type: "add", ...payload });
+        commit({ type: "add", ...payload });
         console.log("incrementAsync end");
       }, 500);
     },
