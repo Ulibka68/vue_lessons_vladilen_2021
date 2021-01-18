@@ -13,17 +13,9 @@
 
     <button class="btn primary" type="submit">Войти</button>
 
-    <router-link to="/forget">
-      <button class="btn warning" @click="clickHanle2">
-        Забыл пароль? clickHanle2
-      </button>
-    </router-link>
-
     <!--    custom позволяет не оборачивать в тег a-->
     <router-link to="/forget" v-slot="{ navigate }" custom>
-      <button class="warning btn" @click="navigate">
-        Забыл пароль v-slot={ navigate }
-      </button>
+      <button class="warning btn" @click="navigate">Забыл пароль</button>
     </router-link>
   </form>
 </template>
@@ -41,10 +33,13 @@ export default {
       return this.email !== "" && this.password !== "";
     },
   },
+  inject: ["login"],
   methods: {
     submit() {
       if (this.isValid) {
         // login
+        // this.$router.replace("/dashboard");
+        this.login();
       }
     },
     clickHanle2() {

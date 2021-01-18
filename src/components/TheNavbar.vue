@@ -6,7 +6,7 @@
       <li>
         <a custom to="/mail">Почта</a>
       </li>
-      <li><a href="#">Выйти</a></li>
+      <li><a href="#" @click.prevent="logout">Выйти</a></li>
     </ul>
   </header>
 </template>
@@ -19,5 +19,6 @@ export default {
       default: false,
     },
   },
+  inject: ["logout"],
 };
 </script>
