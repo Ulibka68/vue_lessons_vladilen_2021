@@ -1,11 +1,7 @@
 <template>
-  <header class="navbar">
-    Vuex
-  </header>
+  <header class="navbar">Vuex</header>
 </template>
 
 <script>
-  export default {
-
-  }
+export default {};
 </script>
