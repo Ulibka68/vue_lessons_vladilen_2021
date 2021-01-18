@@ -25,7 +25,7 @@ export default {
     AppEmailBody,
   },
   updated() {
-    console.log("Mail :", this.$route.params.mailId);
+    // console.log("Mail :", this.$route.params.mailId);
   },
 };
 </script>

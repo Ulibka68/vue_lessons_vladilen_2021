@@ -7,34 +7,35 @@
     </p>
     <button class="btn" @click="$router.push('/mail')">Закрыть</button>
   </div>
-  <div v-else>Выберите письмо</div>
+  <div v-else>
+    <h4>Выберите письмо</h4>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "AppEmailBody",
-  props: ["mailId"],
   inject: ["emails"],
+  props: ["mailId"],
   computed: {
+    email2() {
+      return this.emails.find((e) => e.id === this.mailId);
+    },
     email() {
       const mId = this.mailId;
-      const curemail = this.emails.find((el) => el.id === mId);
-      const curemail2 = this.emails.find((el) => el.id === 1);
+      const curemail = this.emails.find((oneEmail) => oneEmail.id === mId);
+      const curemail2 = this.emails.find((e) => e.id === 1);
+      console.log(this.emails);
       console.log(
+        " curemail:",
+        curemail,
         "this.mailId",
         this.mailId,
         " mId:",
-        mId,
-        " curemail2:",
-        curemail2,
-        " curemail:",
-        curemail
+        mId
       );
+      console.log(" curemail2:", curemail2);
       return curemail;
     },
-  },
-  updated() {
-    console.log("AppEmailBody ", this.mailId);
   },
 };
 </script>
