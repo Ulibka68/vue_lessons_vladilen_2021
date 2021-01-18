@@ -23,4 +23,13 @@ export default createStore({
       return getters.counter * 2;
     },
   },
+  actions: {
+    incrementAsync(context, payload) {
+      console.log("incrementAsync start");
+      setTimeout(() => {
+        context.commit({ type: "add", ...payload });
+        console.log("incrementAsync end");
+      }, 500);
+    },
+  },
 });
