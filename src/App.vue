@@ -25,7 +25,7 @@ composition Заменяет data, methods, computed, watch
  */
 
 // eslint-disable-next-line no-unused-vars
-import { ref, reactive, toRefs, computed } from "vue";
+import { ref, reactive, toRefs, computed, watch } from "vue";
 
 export default {
   setup() {
@@ -50,6 +50,10 @@ export default {
 
     const doubleVer = computed(() => {
       return `<<${name3.value}>>`;
+    });
+
+    watch([doubleVer, name3], (newVal, oldVal) => {
+      console.log(newVal, oldVal);
     });
 
     const doubleFrame = computed(() => `<<${framework.name}>>`);
