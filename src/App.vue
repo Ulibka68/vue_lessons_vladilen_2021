@@ -11,6 +11,8 @@
       </p>
       <p>name: {{ name }} + version: {{ version }}</p>
       <p>name2: {{ framework2.name2 }} + name3: {{ name3 }}</p>
+      <p>doubleVer: {{ doubleVer }}</p>
+      <p>doubleFrame: {{ doubleFrame }}</p>
 
       <button class="btn" @click="change">Изменить</button>
     </div>
@@ -23,7 +25,7 @@ composition Заменяет data, methods, computed, watch
  */
 
 // eslint-disable-next-line no-unused-vars
-import { ref, reactive, toRefs } from "vue";
+import { ref, reactive, toRefs, computed } from "vue";
 
 export default {
   setup() {
@@ -41,11 +43,16 @@ export default {
     const name3 = ref("name3");
 
     function changeInfo() {
-      // framework.value.name = "VUE JS changed"; // для ref
       framework.name = "VUE JS changed";
       framework2.value.name2 = "Name2 changed";
       name3.value = "name3 changed";
     }
+
+    const doubleVer = computed(() => {
+      return `<<${name3.value}>>`;
+    });
+
+    const doubleFrame = computed(() => `<<${framework.name}>>`);
 
     // то что в return будет доступно в шаблоне
     return {
@@ -54,6 +61,8 @@ export default {
       name3,
 
       change: changeInfo,
+      doubleVer,
+      doubleFrame,
     };
   },
 };
