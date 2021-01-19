@@ -16,7 +16,25 @@
 </template>
 
 <script>
+/*
+composition Заменяет data, methods, computed, watch
+ */
+
+import { ref } from "vue";
+
 export default {
+  setup() {
+    // первая модель
+    const name = ref("Vue JS!");
+    const version = ref(3);
+
+    // то что в return будет доступно в шаблоне
+    return {
+      name,
+      version,
+    };
+  },
+  /*
   data() {
     return {
       name: "VueJS",
@@ -29,5 +47,7 @@ export default {
       this.version = 4;
     },
   },
+
+   */
 };
 </script>
