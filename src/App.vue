@@ -2,7 +2,7 @@
   <the-navbar></the-navbar>
   <div class="container with-nav">
     <div class="card">
-      <h1>Про Vuex</h1>
+      <h1>{{ uppercaseTitle }}</h1>
       <h2>Счетчик {{ counter }} ({{ doubleCounter }})</h2>
       <button class="btn" @click="add">Добавить</button>
       <!--      <button class="btn danger" @click="incrementAsync">Добавить 10</button>-->
@@ -23,7 +23,7 @@ import { mapGetters, mapMutations, mapActions } from "vuex";
 export default {
   components: { TheNavbar },
 
-  computed: mapGetters(["counter", "doubleCounter"]),
+  computed: mapGetters(["counter", "doubleCounter", "uppercaseTitle"]),
 
   methods: {
     /*
