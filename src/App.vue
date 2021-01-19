@@ -10,7 +10,7 @@
         Версия: <strong>{{ version }}</strong>
       </p>
 
-      <button class="btn" @click="changeInfo">Изменить</button>
+      <button class="btn" @click="change">Изменить</button>
     </div>
   </div>
 </template>
@@ -28,10 +28,15 @@ export default {
     const name = ref("Vue JS!");
     const version = ref(3);
 
+    function changeInfo() {
+      name.value = "VUE JS changed";
+    }
+
     // то что в return будет доступно в шаблоне
     return {
       name,
       version,
+      change: changeInfo,
     };
   },
   /*
