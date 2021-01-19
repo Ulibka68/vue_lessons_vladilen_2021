@@ -18,6 +18,16 @@
         <input type="text" ref="textInput" />
       </div>
 
+      <br />
+      <p>input v-model="firstName" /></p>
+      <div class="form-control">
+        <input type="text" v-model="firstName" />
+      </div>
+      <p>input v-model="formInpust" /></p>
+      <div class="form-control">
+        <input type="text" v-model="formInputs.lName" />
+      </div>
+
       <button class="btn" @click="change">Изменить</button>
       <button class="btn" @click="handleInpVal">Получить значение input</button>
     </div>
@@ -46,6 +56,22 @@ export default {
     });
 
     const name3 = ref("name3");
+
+    const formInputs = reactive({
+      fName: "",
+      lName: "",
+    });
+    watch(formInputs, (val) => {
+      console.log("keys:", Object.keys(val));
+      console.log(val);
+      console.log(val.lName);
+    });
+
+    const firstName = ref("");
+    watch(firstName, (newVal) => {
+      // console.log(newVal);
+      console.log(newVal);
+    });
 
     // инициализация ref на Dom
     const textInput = ref(null);
@@ -82,6 +108,8 @@ export default {
       doubleFrame,
       textInput,
       handleInpVal,
+      firstName,
+      formInputs,
     };
   },
 };
