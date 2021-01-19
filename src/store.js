@@ -31,5 +31,12 @@ export default createStore({
         console.log("incrementAsync end");
       }, 500);
     },
+    incrementAsyncDelay({ commit }, { value, delay }) {
+      console.log("incrementAsync start");
+      setTimeout(() => {
+        commit({ type: "add", value });
+        console.log("incrementAsync end");
+      }, delay);
+    },
   },
 });
