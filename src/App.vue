@@ -14,8 +14,13 @@
     <FrameworkInfo
       :name="name"
       :version="version"
+      class="test-attr-from-app"
       @change-ver="changeVersions"
-    />
+    >
+      <template #footer>
+        <p>Вася footer</p>
+      </template>
+    </FrameworkInfo>
   </div>
 </template>
 

@@ -19,10 +19,14 @@ export default {
   props: ["name", "version"],
   emits: ["changeVer"],
   setup(props, context) {
+    console.log(context);
+
     const doubleVer = computed(() => props.version * 2);
 
     function changeVer() {
       context.emit("changeVer", 4);
+      // есть attr  props slots
+      // it is not reactive
     }
 
     return {
