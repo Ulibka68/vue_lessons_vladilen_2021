@@ -4,11 +4,13 @@
       <h1>Vue Composition Api</h1>
       <hr />
       <p>
-        Название: <strong>{{ name }}</strong>
+        Название: <strong>{{ framework2.name2 }}</strong>
       </p>
       <p>
-        Версия: <strong>{{ version }}</strong>
+        Версия: <strong>{{ framework2.version2 }}</strong>
       </p>
+      <p>name: {{ name }} + version: {{ version }}</p>
+      <p>name2: {{ framework2.name2 }} + name3: {{ name3 }}</p>
 
       <button class="btn" @click="change">Изменить</button>
     </div>
@@ -20,39 +22,39 @@
 composition Заменяет data, methods, computed, watch
  */
 
-import { ref } from "vue";
+// eslint-disable-next-line no-unused-vars
+import { ref, reactive, toRefs } from "vue";
 
 export default {
   setup() {
-    // первая модель
-    const name = ref("Vue JS!");
-    const version = ref(3);
+    // reactive - proxy для работы с объектами
+    const framework = reactive({
+      name: "Vue JS!",
+      version: 3,
+    });
+
+    const framework2 = ref({
+      name2: "name2",
+      version2: 23,
+    });
+
+    const name3 = ref("name3");
 
     function changeInfo() {
-      name.value = "VUE JS changed";
+      // framework.value.name = "VUE JS changed"; // для ref
+      framework.name = "VUE JS changed";
+      framework2.value.name2 = "Name2 changed";
+      name3.value = "name3 changed";
     }
 
     // то что в return будет доступно в шаблоне
     return {
-      name,
-      version,
+      ...toRefs(framework), // на выходе name + version в реактивном виде
+      framework2,
+      name3,
+
       change: changeInfo,
     };
   },
-  /*
-  data() {
-    return {
-      name: "VueJS",
-      version: 3,
-    };
-  },
-  methods: {
-    changeInfo() {
-      this.name = "Vue JS!";
-      this.version = 4;
-    },
-  },
-
-   */
 };
 </script>
