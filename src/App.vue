@@ -24,9 +24,25 @@
 composition Заменяет data, methods, computed, watch
  */
 
-// eslint-disable-next-line no-unused-vars
-import { ref, reactive, toRefs, computed, watch, provide } from "vue";
+// Хуки
+// https://v3.vuejs.org/guide/composition-api-lifecycle-hooks.html#lifecycle-hooks
+
+/* eslint-disable no-unused-vars */
+import {
+  ref,
+  reactive,
+  toRefs,
+  computed,
+  watch,
+  provide,
+  onMounted,
+  onBeforeMount,
+  onBeforeUpdate,
+  onUpdated,
+  onBeforeUnmount,
+} from "vue";
 import FrameworkInfo from "@/FrameworkInfo";
+/* eslint-enable no-unused-vars */
 
 export default {
   setup() {
@@ -46,6 +62,10 @@ export default {
     }
 
     provide("framework", framework);
+
+    onMounted(() => {
+      console.log("Mounted");
+    });
 
     // то что в return будет доступно в шаблоне
     return {
