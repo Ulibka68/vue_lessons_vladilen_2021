@@ -11,7 +11,11 @@
       <button class="btn" @click="change">Изменить</button>
     </div>
 
-    <FrameworkInfo :name="name" :version="version" />
+    <FrameworkInfo
+      :name="name"
+      :version="version"
+      @change-ver="changeVersions"
+    />
   </div>
 </template>
 
@@ -36,10 +40,15 @@ export default {
       framework.name = "VUE JS changed";
     }
 
+    function changeVersions(val) {
+      framework.version = val;
+    }
+
     // то что в return будет доступно в шаблоне
     return {
       ...toRefs(framework), // на выходе name + version в реактивном виде
       change: changeInfo,
+      changeVersions,
     };
   },
   components: { FrameworkInfo },
