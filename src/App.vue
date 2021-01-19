@@ -11,12 +11,7 @@
       <button class="btn" @click="change">Изменить</button>
     </div>
 
-    <FrameworkInfo
-      :name="name"
-      :version="version"
-      class="test-attr-from-app"
-      @change-ver="changeVersions"
-    >
+    <FrameworkInfo class="test-attr-from-app" @change-ver="changeVersions">
       <template #footer>
         <p>Вася footer</p>
       </template>
@@ -30,7 +25,7 @@ composition Заменяет data, methods, computed, watch
  */
 
 // eslint-disable-next-line no-unused-vars
-import { ref, reactive, toRefs, computed, watch } from "vue";
+import { ref, reactive, toRefs, computed, watch, provide } from "vue";
 import FrameworkInfo from "@/FrameworkInfo";
 
 export default {
@@ -46,12 +41,15 @@ export default {
     }
 
     function changeVersions(val) {
+      console.log("changeVersions:", val);
       framework.version = val;
     }
 
+    provide("framework", framework);
+
     // то что в return будет доступно в шаблоне
     return {
-      ...toRefs(framework), // на выходе name + version в реактивном виде
+      // ...toRefs(framework), // на выходе name + version в реактивном виде
       change: changeInfo,
       changeVersions,
     };
