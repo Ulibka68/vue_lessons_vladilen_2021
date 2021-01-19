@@ -22,26 +22,24 @@ import { mapGetters, mapMutations, mapActions } from "vuex";
 
 export default {
   components: { TheNavbar },
+  /*
+  computed: {
+    ...mapGetters({ counter: "count/counter" }),
+    ...mapGetters({ doubleCounter: "count/doubleCounter" }),
+    ...mapGetters(["uppercaseTitle"]),
+  },
 
-  computed: mapGetters(["counter", "doubleCounter", "uppercaseTitle"]),
+  */
+
+  computed: {
+    ...mapGetters("count", ["counter", "doubleCounter"]),
+    ...mapGetters(["uppercaseTitle"]),
+  },
 
   methods: {
-    /*
-    add() {
-      // this.$store.state.counter++;
-      // this.$store.commit("add", 5);
-      this.$store.commit("incrCounter");
-    },
-
-     */
-    ...mapMutations({ add: "incrCounter" }),
-    ...mapActions(["incrementAsyncDelay"]),
-    /*
-    incrementAsync() {
-      this.$store.dispatch("incrementAsync", { value: 3 });
-    },
-
-     */
+    ...mapMutations({ add: "count/incrCounter" }),
+    // ...mapActions({ incrementAsyncDelay: "count/incrementAsyncDelay" }),
+    ...mapActions("count", ["incrementAsyncDelay"]),
   },
 };
 </script>

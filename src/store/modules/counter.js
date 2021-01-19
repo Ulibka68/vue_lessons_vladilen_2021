@@ -1,4 +1,5 @@
 export default {
+  namespaced: true,
   state() {
     return { counter: 1 };
   },
@@ -19,6 +20,9 @@ export default {
     },
     doubleCounter(_, getters) {
       return getters.counter * 2;
+    },
+    doubleCounterGlob(_, getters, rootState, rootGetters) {
+      return rootGetters.uppercaseTitle + " " + getters.counter * 2;
     },
   },
   actions: {
