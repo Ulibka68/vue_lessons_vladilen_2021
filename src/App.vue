@@ -14,7 +14,12 @@
       <p>doubleVer: {{ doubleVer }}</p>
       <p>doubleFrame: {{ doubleFrame }}</p>
 
+      <div class="form-control">
+        <input type="text" ref="textInput" />
+      </div>
+
       <button class="btn" @click="change">Изменить</button>
+      <button class="btn" @click="handleInpVal">Получить значение input</button>
     </div>
   </div>
 </template>
@@ -42,6 +47,9 @@ export default {
 
     const name3 = ref("name3");
 
+    // инициализация ref на Dom
+    const textInput = ref(null);
+
     function changeInfo() {
       framework.name = "VUE JS changed";
       framework2.value.name2 = "Name2 changed";
@@ -58,6 +66,11 @@ export default {
 
     const doubleFrame = computed(() => `<<${framework.name}>>`);
 
+    function handleInpVal() {
+      // textInput.value - указатель на DOM Node input
+      console.log(textInput.value.value);
+    }
+
     // то что в return будет доступно в шаблоне
     return {
       ...toRefs(framework), // на выходе name + version в реактивном виде
@@ -67,6 +80,8 @@ export default {
       change: changeInfo,
       doubleVer,
       doubleFrame,
+      textInput,
+      handleInpVal,
     };
   },
 };
