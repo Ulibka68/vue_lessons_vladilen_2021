@@ -16,13 +16,11 @@
 </template>
 
 <script>
-import AppStatus from '../components/AppStatus'
+import AppStatus from "../components/AppStatus";
 
 export default {
-  components: {AppStatus}
-}
+  components: { AppStatus },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
