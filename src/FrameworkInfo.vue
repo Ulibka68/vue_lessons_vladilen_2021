@@ -1,13 +1,15 @@
 <template>
   <div class="card">
     <p>
-      Название: <strong>{{ framework.name }}</strong>
+      Название: <strong>{{ name }}</strong>
     </p>
     <p>
-      Версия: <strong>{{ framework.version }}</strong> - ({{ doubleVer }})
+      Версия: <strong>{{ version }} ({{ doubleVersion }})</strong>
     </p>
 
-    <button class="btn warning" @click="changeVer">Изменить на 3.3</button>
+    <button class="btn warning" @click="changeToThree">
+      Изменить на 3 версию
+    </button>
   </div>
 </template>
 
@@ -15,22 +17,20 @@
 import { computed, inject } from "vue";
 
 export default {
-  name: "FrameworkInfo",
-
-  emits: ["changeVer"],
+  emits: ["change-version"],
   setup(props, context) {
-    const doubleVer = computed(() => framework.version * 2);
-
-    function changeVer() {
-      context.emit("changeVer", 4);
+    function change() {
+      // logic
+      context.emit("change-version", 3);
     }
 
-    const framework = inject("framework");
+    const version = inject("version");
 
     return {
-      doubleVer,
-      changeVer,
-      framework,
+      name: inject("name"),
+      version: version,
+      changeToThree: change,
+      doubleVersion: computed(() => version.value * 2),
     };
   },
 };

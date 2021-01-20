@@ -7,9 +7,8 @@
 
 <script>
 export default {
-  name: "AppAlert",
-  props: ["title", "type"],
   emits: ["close"],
+  props: ["title", "type"],
 };
 </script>
 
