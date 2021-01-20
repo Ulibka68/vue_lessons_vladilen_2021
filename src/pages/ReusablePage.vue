@@ -17,13 +17,13 @@
 
 <script>
 import { useRouter, useRoute } from "vue-router";
-import { ref } from "vue";
 import AppAlert from "@/components/AppAlert";
+import { useAlert } from "@/use/alert";
 
 export default {
   name: "ReusablePage",
   setup() {
-    const alert = ref(false);
+    const { alert, toggle, close } = useAlert();
 
     const router = useRouter();
     const route = useRoute();
@@ -32,14 +32,6 @@ export default {
       console.log(route.path);
       router.push({ name: "home" });
     }
-
-    const toggle = () => {
-      alert.value = !alert.value;
-    };
-
-    const close = () => {
-      alert.value = false;
-    };
 
     return {
       navigateHome,
