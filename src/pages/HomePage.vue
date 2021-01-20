@@ -52,6 +52,7 @@ import {
 import FrameworkInfo from "@/FrameworkInfo";
 /* eslint-enable no-unused-vars */
 import AppAlert from "@/components/AppAlert";
+import { useAlert } from "@/use/alert";
 
 export default {
   name: "HomePage",
@@ -80,13 +81,7 @@ export default {
     });
 
     // код для alert
-    const alert = ref(false);
-    const toggle = () => {
-      alert.value = !alert.value;
-    };
-    const close = () => {
-      alert.value = false;
-    };
+    const { alert, toggle, close } = useAlert();
 
     // то что в return будет доступно в шаблоне
     return {
