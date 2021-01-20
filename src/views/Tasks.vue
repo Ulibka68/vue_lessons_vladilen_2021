@@ -1,6 +1,6 @@
 <template>
   <h1 class="text-white center">Задач пока нет</h1>
-  <template>
+  <template v-if="true">
     <h3 class="text-white">Всего активных задач: 0</h3>
     <div class="card">
       <h2 class="card-title">
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import AppStatus from "../components/AppStatus";
+import AppStatus from "@/components/AppStatus";
 
 export default {
   components: { AppStatus },

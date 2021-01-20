@@ -1,8 +1,16 @@
 import { createStore } from "vuex";
+import counterModule from "@/store/modules/counter";
 
 export default createStore({
-  state: {},
-  mutations: {},
-  actions: {},
-  modules: {},
+  modules: { count: counterModule },
+  state() {
+    return {
+      appTitle: "Vuex Working",
+    };
+  },
+  getters: {
+    uppercaseTitle(state) {
+      return state.appTitle.toUpperCase();
+    },
+  },
 });
