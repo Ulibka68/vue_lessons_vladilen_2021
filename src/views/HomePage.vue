@@ -17,21 +17,19 @@
 </template>
 
 <script>
-// eslint-disable no-unused-vars
+/* eslint-disable no-unused-vars */
 import {
   onBeforeMount,
   onBeforeUpdate,
   onMounted,
   onUpdated,
   provide,
-
   reactive,
   ref,
   watch,
 } from "vue";
 import FrameworkInfo from "../FrameworkInfo";
-// eslint-enable no-unused-vars
-
+/* eslint-enable no-unused-vars */
 
 export default {
   setup() {

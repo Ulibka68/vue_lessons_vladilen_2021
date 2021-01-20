@@ -17,21 +17,13 @@
 </template>
 
 <script>
-import { reactive } from "vue";
-import { useRouter, useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 import AppAlert from "../AppAlert";
 import { useAlert } from "../use/alert";
 
 export default {
   setup() {
-    // const alert = reactive({
-    //   type: 'warning',
-    //   title: 'Reactive Alert'
-    // })
-    // const {alert, close, toggle} = useAlert()
-
     const router = useRouter();
-    const route = useRoute();
 
     const navigate = () => router.push("/");
 
