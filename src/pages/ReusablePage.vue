@@ -23,7 +23,7 @@ import { useAlert } from "@/use/alert";
 export default {
   name: "ReusablePage",
   setup() {
-    const { alert, toggle, close } = useAlert();
+    // const { alert, toggle, close } = useAlert();
 
     const router = useRouter();
     const route = useRoute();
@@ -35,9 +35,7 @@ export default {
 
     return {
       navigateHome,
-      alert,
-      toggle,
-      close,
+      ...useAlert(),
     };
   },
   components: { AppAlert },
