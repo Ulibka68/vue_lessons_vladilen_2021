@@ -1,4 +1,11 @@
 <template>
+  <AppAlert
+    v-if="alert"
+    @close="close"
+    title="Работа с Composition"
+    type="danger"
+  />
+
   <div class="container with-nav">
     <div class="card">
       <h1>HOME</h1>
@@ -9,6 +16,7 @@
       </div>
 
       <button class="btn" @click="change">Изменить</button>
+      <button class="btn danger" @click="toggle">Открыть Alert</button>
     </div>
 
     <FrameworkInfo class="test-attr-from-app" @change-ver="changeVersions">
@@ -43,11 +51,12 @@ import {
 } from "vue";
 import FrameworkInfo from "@/FrameworkInfo";
 /* eslint-enable no-unused-vars */
+import AppAlert from "@/components/AppAlert";
 
 export default {
   name: "HomePage",
 
-  components: { FrameworkInfo },
+  components: { FrameworkInfo, AppAlert },
   setup() {
     // reactive - proxy для работы с объектами
     const framework = reactive({
@@ -70,11 +79,24 @@ export default {
       console.log("Mounted");
     });
 
+    // код для alert
+    const alert = ref(false);
+    const toggle = () => {
+      alert.value = !alert.value;
+    };
+    const close = () => {
+      alert.value = false;
+    };
+
     // то что в return будет доступно в шаблоне
     return {
       // ...toRefs(framework), // на выходе name + version в реактивном виде
       change: changeInfo,
       changeVersions,
+      // код для alert
+      alert,
+      toggle,
+      close,
     };
   },
 };
