@@ -35,7 +35,7 @@ export default {
 
     return {
       navigateHome,
-      ...useAlert(),
+      ...useAlert(true),
     };
   },
   components: { AppAlert },
