@@ -48,11 +48,11 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="js">
 import { registerNewUser } from "@utils/FBCustAuth";
-import { defineComponent } from "vue";
 
-export default defineComponent({
+
+export default {
   name: "RegisterNewUser",
   data() {
     return {
@@ -75,8 +75,8 @@ export default defineComponent({
         );
 
         // eslint-disable-next-line
-        (this as any).changeCurrentUserDispatch(logedUser);
-        this.$emit("aa");
+        this.changeCurrentUserDispatch(logedUser);
+
 
         this.$router.replace({
           name: "resume",
@@ -87,5 +87,5 @@ export default defineComponent({
       }
     },
   },
-});
+};
 </script>

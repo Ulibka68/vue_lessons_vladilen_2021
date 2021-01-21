@@ -5,6 +5,7 @@ import Login from "@auth/Login";
 import Logout from "@auth/Logout";
 import New from "@/views/New";
 import Tasks from "@/views/Tasks";
+import Test from "@comp/Test";
 
 const routes = [
   {
@@ -40,6 +41,11 @@ const routes = [
     path: "/logout",
     name: "logout",
     component: Logout,
+  },
+  {
+    path: "/test",
+    name: "test",
+    component: Test,
   },
   { path: "/:notFound(.*)", component: NotFound },
 ];

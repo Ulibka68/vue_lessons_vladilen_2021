@@ -1,8 +1,10 @@
 export default {
   namespaced: true,
-  state() {
-    return { counter: 1 };
-  },
+  // state() {
+  //   return { counter: 1 };
+  // },
+  state: { counter: 1 },
+
   mutations: {
     incrCounter(state) {
       state.counter++;
