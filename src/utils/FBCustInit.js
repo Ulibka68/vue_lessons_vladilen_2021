@@ -20,12 +20,14 @@ import(
     /* webpackChunkName: "firebase-auth" */
     /* webpackMode: "lazy-once" */
     "firebase/auth"
-  ).then((fbAppProp) => {
+  ).then(() => {
     fbAppAuth = fbApp.auth();
     console.log("Система авторизации инициализирована");
 
     // после получения интерфейса вызвать зарегистрированных слушателей
-    console.log(`listenersCallbacks has ${listenersCallbacks.length} elements`);
+    console.log(
+      `Firebase listenersCallbacks has ${listenersCallbacks.length} elements`
+    );
     listenersCallbacks.map((funcCallBack) => {
       funcCallBack(fbAppAuth);
     });
