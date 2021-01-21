@@ -2,6 +2,7 @@
 node_modules
 /dist
 fbconf.js
+.firebase
 
 # local env files
 .env.local

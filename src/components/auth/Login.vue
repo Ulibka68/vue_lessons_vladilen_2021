@@ -37,11 +37,11 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="js">
 import { loginUserByEmail } from "@utils/FBCustAuth";
-import { defineComponent } from "vue";
 
-export default defineComponent({
+
+export default {
   data() {
     return {
       form: {
@@ -63,7 +63,7 @@ export default defineComponent({
       // console.log(result);
       if (result.result) {
         // eslint-disable-next-line
-        (this as any).changeCurrentUserDispatch(result.logedUser);
+        this.changeCurrentUserDispatch(result.logedUser);
 
         this.$router.replace({
           name: "resume",
@@ -74,5 +74,5 @@ export default defineComponent({
       }
     },
   },
-});
+};
 </script>

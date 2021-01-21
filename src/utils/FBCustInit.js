@@ -7,7 +7,7 @@ export let listenersCallbacks = []; // будут вызываны зареги�
 // в этот модуль включим инициализацию Firebase
 import(
   /* webpackChunkName: "firebase-app" */
-  /* webpackMode: "lazy-once" */
+  /* webpackMode: "lazy" */
   "firebase/app"
 ).then((fbAppProp) => {
   // блок выполняется один раз
@@ -18,7 +18,7 @@ import(
 
   import(
     /* webpackChunkName: "firebase-auth" */
-    /* webpackMode: "lazy-once" */
+    /* webpackMode: "lazy" */
     "firebase/auth"
   ).then(() => {
     fbAppAuth = fbApp.auth();
