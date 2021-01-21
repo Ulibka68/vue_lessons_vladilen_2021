@@ -1,8 +1,9 @@
-import { onePostType, oneCommentType } from "@/utils/commonTypes";
+// import { onePostType, oneCommentType } from "@/utils/commonTypes";
 import { fbApp } from "./FBCustInit";
-import { Database, DataSnapshot } from "@firebase/database-types";
+// import { Database, DataSnapshot } from "@firebase/database-types";
 
-let fbAppDatabaseTs: Database;
+// let fbAppDatabaseTs: Database;
+let fbAppDatabaseTs;
 let fbAppDatabaseTsInitialized = false;
 
 export function loadFirebaseDatabaseAsyncModule() {
@@ -10,14 +11,14 @@ export function loadFirebaseDatabaseAsyncModule() {
     /* webpackChunkName: "firebase-database" */
     /* webpackMode: "lazy-once" */
     "firebase/database"
-  ).then((fbDbProp) => {
+  ).then(() => {
     if (fbApp) {
       fbAppDatabaseTs = fbApp.database();
       fbAppDatabaseTsInitialized = true;
       console.log("Firebase Database инициализирован");
     } else {
       //  буду считать что app загружен и инициализирован
-      throw new Error("fbApp не загружен");
+      throw new Error("Firebase fbApp не загружен");
     }
   });
 }
@@ -29,17 +30,25 @@ export function CheckFirebaseDatabaseLoad() {
   }
 }
 
+/*
 interface NewDataResult {
   result: boolean;
   msg: string;
 }
+*/
 
+/*
 export async function NewData(
-  uid: string,
-  blocks: onePostType[]
+    uid: string,
+    blocks: onePostType[]
 ): Promise<NewDataResult> {
+
+ */
+
+export async function NewData(uid, blocks) {
   CheckFirebaseDatabaseLoad();
-  const db: Database = fbAppDatabaseTs;
+  // const db: Database = fbAppDatabaseTs;
+  const db = fbAppDatabaseTs;
   try {
     await db.ref("post/" + uid).set(blocks);
 
@@ -49,30 +58,20 @@ export async function NewData(
   }
 }
 
-export function readPost(uid: string): Promise<onePostType[]> {
+// export function readPost(uid: string): Promise<onePostType[]> {
+export function readPost(uid) {
   CheckFirebaseDatabaseLoad();
-  return fbAppDatabaseTs
-    .ref("post/" + uid)
-    .once("value")
-    .then((snapshot: DataSnapshot) => {
-      // console.log(" данные прочитаны", snapshot.val());
-      return snapshot.val();
-    })
-    .catch((e) => {
-      console.error("Ошибка бд", e);
-    });
-}
-
-export function readComments(): Promise<oneCommentType[]> {
-  CheckFirebaseDatabaseLoad();
-  return fbAppDatabaseTs
-    .ref("comments/")
-    .once("value")
-    .then((snapshot: DataSnapshot) => {
-      // console.log(" данные прочитаны", snapshot.val());
-      return snapshot.val();
-    })
-    .catch((e) => {
-      console.error("Ошибка бд", e);
-    });
+  return (
+    fbAppDatabaseTs
+      .ref("post/" + uid)
+      .once("value")
+      // .then((snapshot: DataSnapshot) => {
+      .then((snapshot) => {
+        // console.log(" данные прочитаны", snapshot.val());
+        return snapshot.val();
+      })
+      .catch((e) => {
+        console.error("Ошибка бд", e);
+      })
+  );
 }
