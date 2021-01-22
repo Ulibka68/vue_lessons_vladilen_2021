@@ -49,6 +49,7 @@
 </template>
 
 <script lang="js">
+import { mapMutations } from 'vuex'
 import { registerNewUser } from "@utils/FBCustAuth";
 
 
@@ -64,7 +65,7 @@ export default {
       error: null,
     };
   },
-  inject: ["changeCurrentUserDispatch"],
+
   methods: {
     async submit() {
       try {
@@ -75,17 +76,24 @@ export default {
         );
 
         // eslint-disable-next-line
-        this.changeCurrentUserDispatch(logedUser);
+        // console.log(this)
+        this['Auth/setCurrentUser'](logedUser);
 
 
+        // this.$router.replace({
+        //   name: "resume",
+        //   params: { uid: logedUser.uid },
+        // });
         this.$router.replace({
-          name: "resume",
-          params: { uid: logedUser.uid },
+          name: "Home"
         });
+
+
       } catch (err) {
         this.error = err.message;
       }
     },
+    ...mapMutations(['Auth/setCurrentUser'])
   },
 };
 </script>

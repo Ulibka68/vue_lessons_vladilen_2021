@@ -9,7 +9,7 @@ let fbAppDatabaseTsInitialized = false;
 export function loadFirebaseDatabaseAsyncModule() {
   import(
     /* webpackChunkName: "firebase-database" */
-    /* webpackMode: "lazy-once" */
+    /* webpackMode: "lazy" */
     "firebase/database"
   ).then(() => {
     if (fbApp) {

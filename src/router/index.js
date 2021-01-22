@@ -6,6 +6,7 @@ import Logout from "@auth/Logout";
 import New from "@/views/New";
 import Tasks from "@/views/Tasks";
 import Test from "@comp/Test";
+import Register from "@auth/Register";
 
 const routes = [
   {
@@ -38,6 +39,11 @@ const routes = [
     component: Login,
   },
   {
+    path: "/register",
+    name: "register",
+    component: Register,
+  },
+  {
     path: "/logout",
     name: "logout",
     component: Logout,
@@ -53,6 +59,9 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+  //замен названия классов по умолчанию
+  linkActiveClass: "active",
+  linkExactActiveClass: "active",
 });
 
 // не забудь удалить

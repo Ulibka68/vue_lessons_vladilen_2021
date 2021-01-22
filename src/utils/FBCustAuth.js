@@ -1,5 +1,6 @@
 // import { FirebaseAuth, UserCredential, User } from "@firebase/auth-types";
 import { fbAppAuth } from "./FBCustInit";
+import { useStore } from "vuex";
 
 // import { logedUserType } from "@/utils/commonTypes";
 
@@ -82,4 +83,13 @@ export async function loginUserByEmail(email, password) {
       errMsg: err.message,
     };
   }
+}
+
+export async function logout() {
+  CheckModuleLoad();
+  if (fbAppAuth) fbAppAuth.signOut();
+  const store = useStore();
+  store.commit("Auth/setEmptyUser");
+  store.commit("Auth/setAuth", false);
+  // this.$router.replace({ name: "Home" });
 }

@@ -1,5 +1,7 @@
 // initial state
 
+import { fbAppAuth, listenersCallbacks } from "@/utils/FBCustInit";
+
 const EmptyUser = {
   displayName: "Неизвестный",
   email: "",
@@ -26,8 +28,14 @@ const mutations = {
   setCurrentUser(state, newUser) {
     state.logedUser = newUser;
   },
+  setCurrentUserName(state, newUserName) {
+    state.logedUser.displayName = newUserName;
+  },
   setEmptyUser(state) {
     state.logedUser = EmptyUser;
+  },
+  setAuth(state, authState) {
+    state.isAuth = authState;
   },
 };
 
