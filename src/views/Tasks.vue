@@ -25,4 +25,5 @@ import AppStatus from "@/components/AppStatus";
 export default {
   components: { AppStatus },
 };
+// Статус может быть 4х типов: ['active', 'done', 'cancelled', 'pending']
 </script>
