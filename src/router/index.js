@@ -1,4 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
+import store from "@/store";
+import { computed } from "vue";
+
 import Home from "@/views/Home";
 import NotFound from "@/views/NotFound";
 import Login from "@auth/Login";
@@ -65,16 +68,12 @@ const router = createRouter({
   linkExactActiveClass: "active",
 });
 
-// не забудь удалить
-// eslint-disable-next-line no-unused-vars
-const auth = {
-  isLoggedIn: () => false,
-};
+const isLogged = computed(() => store.getters["Auth/isLogged"]);
 
 router.beforeEach((to) => {
   // instead of having to check every route record with
   // to.matched.some(record => record.meta.requiresAuth)
-  if (to.meta.requiresAuth && !auth.isLoggedIn()) {
+  if (to.meta.requiresAuth && !isLogged.value) {
     // this route requires auth, check if logged in
     // if not, redirect to login page.
     return {
