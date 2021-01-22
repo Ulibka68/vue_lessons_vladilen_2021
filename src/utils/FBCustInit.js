@@ -1,15 +1,11 @@
 import { firebaseConfig } from "../../fbconf";
 import { loadFirebaseDatabaseAsyncModule } from "./FBCustDatabase";
 import store from "@/store";
+import { hearFirebaseAuthEvent } from "./FBCustAuth";
 
 export let fbApp = null;
 export let fbAppAuth = null;
 export let listenersCallbacks = []; // будут вызываны зарегистрированные слушатели
-
-function testStore() {
-  store.commit("Counter/incrCounter");
-  console.log("testStore getter", store.getters["Counter/counter"]);
-}
 
 // в этот модуль включим инициализацию Firebase
 import(
@@ -30,7 +26,9 @@ import(
   ).then(() => {
     fbAppAuth = fbApp.auth();
     console.log("Система авторизации инициализирована");
-    testStore();
+
+    store.commit("Auth/storeFirebaseCurrentUser");
+    hearFirebaseAuthEvent();
 
     // данная функция вызывается после инициализации auth - Значит пора инициализировать DB
     loadFirebaseDatabaseAsyncModule();

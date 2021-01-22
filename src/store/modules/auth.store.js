@@ -1,6 +1,7 @@
 // initial state
 
-import { fbAppAuth, listenersCallbacks } from "@/utils/FBCustInit";
+import { fbAppAuth } from "@/utils/FBCustInit";
+import store from "@/store";
 
 const EmptyUser = {
   displayName: "Неизвестный",
@@ -36,6 +37,23 @@ const mutations = {
   },
   setAuth(state, authState) {
     state.isAuth = authState;
+  },
+
+  storeFirebaseCurrentUser() {
+    const user = fbAppAuth.currentUser;
+    if (user) {
+      const { displayName, email, emailVerified, uid } = user;
+      store.commit("Auth/setAuth", true);
+      store.commit("Auth/setCurrentUser", {
+        displayName,
+        email,
+        emailVerified,
+        uid,
+      });
+    } else {
+      store.commit("Auth/setAuth", false);
+      store.commit("Auth/setEmptyUser");
+    }
   },
 };
 

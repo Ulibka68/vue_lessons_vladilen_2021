@@ -1,6 +1,6 @@
 // import { FirebaseAuth, UserCredential, User } from "@firebase/auth-types";
 import { fbAppAuth } from "./FBCustInit";
-import { useStore } from "vuex";
+import store from "@/store";
 
 // import { logedUserType } from "@/utils/commonTypes";
 
@@ -22,14 +22,16 @@ export async function registerNewUser(email, password, name) {
   // const data: UserCredential
   const data = await fbAppAuth.createUserWithEmailAndPassword(email, password);
 
-  await data.user.updateProfile({ displayName: name });
+  if (data) {
+    await data.user.updateProfile({ displayName: name });
 
-  return {
-    displayName: name,
-    email: email,
-    emailVerified: false,
-    uid: data.user.uid,
-  };
+    return {
+      displayName: name,
+      email: email,
+      emailVerified: false,
+      uid: data.user.uid,
+    };
+  }
 }
 
 /*
@@ -53,43 +55,39 @@ export async function loginUserByEmail(email, password) {
     CheckModuleLoad();
     // const data: UserCredential
     const data = await fbAppAuth.signInWithEmailAndPassword(email, password);
+
     if (data.user) {
-      // const user: User
-      const user = data.user;
-      // const logedUser: logedUserType
-      const logedUser = {
-        displayName: user.displayName,
-        email: user.email,
-        emailVerified: user.emailVerified,
-        uid: user.uid,
-      };
-      return { result: true, logedUser, errMsg: "" };
+      return { result: true, errMsg: "" };
     } else {
       return {
         result: false,
-        logedUser: {
-          displayName: "",
-          email: "",
-          emailVerified: false,
-          uid: "",
-        },
         errMsg: "вход не выполнен",
       };
     }
   } catch (err) {
     return {
       result: false,
-      logedUser: { displayName: "", email: "", emailVerified: false, uid: "" },
       errMsg: err.message,
     };
+  } finally {
+    store.commit("Auth/storeFirebaseCurrentUser");
   }
 }
 
 export async function logout() {
   CheckModuleLoad();
   if (fbAppAuth) fbAppAuth.signOut();
-  const store = useStore();
-  store.commit("Auth/setEmptyUser");
-  store.commit("Auth/setAuth", false);
-  // this.$router.replace({ name: "Home" });
+
+  // будет вызвано автоматом по событию
+  // store.commit("Auth/storeFirebaseCurrentUser");
+}
+
+export function hearFirebaseAuthEvent() {
+  if (fbAppAuth) {
+    // eslint-disable-next-line no-unused-vars
+    fbAppAuth.onAuthStateChanged((user) => {
+      console.log("onAuthStateChanged fired");
+      store.commit("Auth/storeFirebaseCurrentUser");
+    });
+  }
 }

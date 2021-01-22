@@ -9,7 +9,11 @@
       <TheNavbarElement path="/create-task" title="Создать задачу" />
       <TheNavbarElement path="/login" title="Login" />
       <TheNavbarElement path="/register" title="Зарегистирироваться" />
-      <TheNavbarElement path="/logout" title="Logout" />
+      <TheNavbarElement
+        path="/logout"
+        title="Logout"
+        @click.prevent.stop="handleLogout()"
+      />
       <TheNavbarElement path="/test" title="Test" />
     </ul>
   </header>
@@ -18,14 +22,24 @@
 <script>
 import { computed } from "vue";
 import { useStore } from "vuex";
+import { logout } from "@/utils/FBCustAuth";
 import TheNavbarElement from "@comp/TheNavbarElement";
+import { useRouter } from "vue-router";
 
 export default {
   components: { TheNavbarElement },
   setup() {
     const store = useStore();
+    const router = useRouter();
+
+    const handleLogout = () => {
+      logout();
+      router.replace({ name: "Home" });
+    };
+
     return {
       currentUser: computed(() => store.getters["Auth/currentUser"]),
+      handleLogout,
     };
   },
 };

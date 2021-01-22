@@ -51,7 +51,7 @@ export default {
       error: "",
     };
   },
-  inject: ["changeCurrentUserDispatch"],
+
 
   methods: {
     async submit() {
@@ -63,11 +63,9 @@ export default {
       // console.log(result);
       if (result.result) {
         // eslint-disable-next-line
-        this.changeCurrentUserDispatch(result.logedUser);
 
         this.$router.replace({
-          name: "resume",
-          params: { uid: result.logedUser.uid },
+          name: "Home"
         });
       } else {
         this.error = result.errMsg;
