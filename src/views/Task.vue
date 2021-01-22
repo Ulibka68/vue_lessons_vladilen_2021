@@ -1,4 +1,4 @@
-<template>
+<template v-if="true">
   <div class="card">
     <h2>Название задачи</h2>
     <p><strong>Статус</strong>: <AppStatus :type="'done'" /></p>

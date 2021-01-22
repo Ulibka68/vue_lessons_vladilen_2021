@@ -30,7 +30,8 @@ const routes = [
   {
     path: "/view-task/:id",
     name: "view-task",
-    component: Home,
+    component: Tasks,
+    props: true,
     meta: { requiresAuth: true },
   },
   {

@@ -1,4 +1,4 @@
-<template>
+<template v-if="true">
   <h1 class="text-white center">Задач пока нет</h1>
   <template v-if="true">
     <h3 class="text-white">Всего активных задач: 0</h3>
