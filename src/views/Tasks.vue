@@ -1,29 +1,30 @@
-<template v-if="true">
-  <h1 class="text-white center">Задач пока нет</h1>
-  <template v-if="true">
-    <h3 class="text-white">Всего активных задач: 0</h3>
-    <div class="card">
-      <h2 class="card-title">
-        Название задачи
-        <AppStatus :type="'done'" />
-      </h2>
-      <p>
-        <strong>
-          <small>
-            {{ new Date().toLocaleDateString() }}
-          </small>
-        </strong>
-      </p>
-      <button class="btn primary">Посмотреть</button>
-    </div>
-  </template>
+<template>
+  <div class="card">
+    <h1 class="text-white center">Задач пока нет</h1>
+    <!--    <AppStatus :type="'done'" />-->
+  </div>
 </template>
 
 <script>
-import AppStatus from "@/components/AppStatus";
+// import AppStatus from "@/components/AppStatus";
 
+/* eslint-disable no-unused-vars */
+import { useStore } from "vuex";
+/* eslint-endable no-unused-vars */
+
+// composition Заменяет data, methods, computed, watch
 export default {
-  components: { AppStatus },
+  // components: { AppStatus },
+  async setup() {
+    // const store = useStore();
+    //
+    // // загрузить данные пользователей Start
+    // const countUsers = store.getters["Auth/getUserListLength"];
+    // console.log("countUsers ---------------------", countUsers);
+    // if (countUsers <= 1) {
+    //   await store.dispatch("Auth/readUserListFromDB");
+    // }
+    // загрузить данные пользователей END
+  },
 };
-// Статус может быть 4х типов: ['active', 'done', 'cancelled', 'pending']
 </script>

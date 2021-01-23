@@ -55,12 +55,12 @@ export default {
 
   methods: {
     async submit() {
-      // console.log("Login start");
+      console.log("Login start");
       const result = await loginUserByEmail(
         this.form.email,
         this.form.password
       );
-      // console.log(result);
+      console.log(result);
       if (result.result) {
         // eslint-disable-next-line
 

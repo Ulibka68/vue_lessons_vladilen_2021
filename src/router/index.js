@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
+/* eslint-disable no-unused-vars */
 import store from "@/store";
 import { computed } from "vue";
+/* eslint-endable no-unused-vars */
 
 import Home from "@/views/Home";
 import NotFound from "@/views/NotFound";
@@ -68,8 +70,9 @@ const router = createRouter({
   linkExactActiveClass: "active",
 });
 
-const isLogged = computed(() => store.getters["Auth/isLogged"]);
+// const isLogged = computed(() => store.getters["Auth/isLogged"]);
 
+/*
 router.beforeEach((to) => {
   // instead of having to check every route record with
   // to.matched.some(record => record.meta.requiresAuth)
@@ -83,5 +86,7 @@ router.beforeEach((to) => {
     };
   }
 });
+
+ */
 
 export default router;

@@ -49,7 +49,7 @@
 </template>
 
 <script lang="js">
-import { mapMutations } from 'vuex'
+import { mapMutations,mapActions } from 'vuex'
 import { registerNewUser } from "@utils/FBCustAuth";
 
 
@@ -74,9 +74,9 @@ export default {
           this.form.password,
           this.form.name
         );
+        console.log('registerNewUser')
 
-        // eslint-disable-next-line
-        // console.log(this)
+        await this['Auth/addNewUserToDB'](logedUser);
         this['Auth/setCurrentUser'](logedUser);
 
 
@@ -93,7 +93,8 @@ export default {
         this.error = err.message;
       }
     },
-    ...mapMutations(['Auth/setCurrentUser'])
+    ...mapMutations(['Auth/setCurrentUser']),
+    ...mapActions(['Auth/addNewUserToDB'])
   },
 };
 </script>

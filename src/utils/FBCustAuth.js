@@ -1,6 +1,7 @@
 // import { FirebaseAuth, UserCredential, User } from "@firebase/auth-types";
 import { fbAppAuth } from "./FBCustInit";
 import store from "@/store";
+import router from "@/router";
 
 // import { logedUserType } from "@/utils/commonTypes";
 
@@ -88,6 +89,8 @@ export function hearFirebaseAuthEvent() {
     fbAppAuth.onAuthStateChanged((user) => {
       console.log("onAuthStateChanged fired");
       store.commit("Auth/storeFirebaseCurrentUser");
+      router.push({ name: "Home" });
+      console.log("onAuthStateChanged fired END --");
     });
   }
 }

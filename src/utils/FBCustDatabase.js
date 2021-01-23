@@ -3,7 +3,7 @@ import { fbApp } from "./FBCustInit";
 // import { Database, DataSnapshot } from "@firebase/database-types";
 
 // let fbAppDatabaseTs: Database;
-let fbAppDatabaseTs;
+export let fbAppDatabaseTs;
 let fbAppDatabaseTsInitialized = false;
 
 export function loadFirebaseDatabaseAsyncModule() {
@@ -59,12 +59,35 @@ export async function NewData(uid, blocks) {
   }
 }
 
+export async function readUsers() {
+  CheckFirebaseDatabaseLoad();
+  // console.log("readUsers start >->->->->->->->->->->->->->->-");
+  return (
+    fbAppDatabaseTs
+      .ref("users/")
+      .once("value")
+      // .then((snapshot: DataSnapshot) => {
+      .then((snapshot) => {
+        // console.log(" данные прочитаны", snapshot.val());
+        return snapshot.val();
+      })
+      .catch((e) => {
+        console.error("Ошибка бд", e);
+      })
+  );
+}
+
+export async function addUser({ displayName, uid }) {
+  CheckFirebaseDatabaseLoad();
+  return await fbAppDatabaseTs.ref("users/" + uid).set(displayName);
+}
+
 // export function readPost(uid: string): Promise<onePostType[]> {
-export function readPost(uid) {
+export function readTasks() {
   CheckFirebaseDatabaseLoad();
   return (
     fbAppDatabaseTs
-      .ref("post/" + uid)
+      .ref("tasks/")
       .once("value")
       // .then((snapshot: DataSnapshot) => {
       .then((snapshot) => {
