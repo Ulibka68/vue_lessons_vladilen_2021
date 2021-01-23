@@ -16,7 +16,9 @@
           </small>
         </strong>
       </p>
-      <button class="btn primary">Посмотреть</button>
+      <button class="btn primary" :disabled="currentUserUid != task.uid">
+        Посмотреть
+      </button>
     </div>
   </template>
 </template>
@@ -45,6 +47,7 @@ export default {
       taskListLength: computed(() => store.getters["Tasks/taskListLength"]),
       taskList: computed(() => store.getters["Tasks/taskList"]),
       countUsers: computed(() => store.getters["Auth/getUserListLength"]),
+      currentUserUid: computed(() => store.getters["Auth/currentUserUid"]),
       getUserByUid: computed(() => (uid) =>
         store.getters["Auth/getUserByUid"](uid)
       ),
