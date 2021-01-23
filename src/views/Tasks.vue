@@ -2,6 +2,7 @@
   <h1 class="text-white center">Задач пока нет</h1>
   <template v-if="true">
     <h3 class="text-white">Всего активных задач: 0</h3>
+    <h3 class="text-white">Всего задач: {{ taskListLength }}</h3>
     <div class="card">
       <h2 class="card-title">
         Название задачи
@@ -22,8 +23,20 @@
 <script>
 import AppStatus from "@/components/AppStatus";
 
+/* eslint-disable no-unused-vars */
+import { useStore } from "vuex";
+import { computed } from "vue";
+/* eslint-endable no-unused-vars */
+
 export default {
   components: { AppStatus },
+  setup() {
+    const store = useStore();
+
+    return {
+      taskListLength: computed(() => store.getters["Tasks/taskListLength"]),
+    };
+  },
 };
 // Статус может быть 4х типов: ['active', 'done', 'cancelled', 'pending']
 </script>
