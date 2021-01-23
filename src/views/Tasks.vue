@@ -43,21 +43,24 @@ export default {
     const store = useStore();
     const router = useRouter();
 
-    await store.dispatch("Auth/readUserListFromDB");
-    await store.dispatch("Tasks/readTasks");
-
-    console.log(
-      store.getters["Auth/getUserByUid"]("W8VQvIZ2tuYmTUAd0aHfaxgWXSp2")
+    const taskListLength = computed(
+      () => store.getters["Tasks/taskListLength"]
     );
+    const countUsers = computed(() => store.getters["Auth/getUserListLength"]);
+    // console.log("taskListLength ", taskListLength.value);
+
+    if (countUsers.value <= 1) await store.dispatch("Auth/readUserListFromDB");
+    if (!taskListLength.value) await store.dispatch("Tasks/readTasks");
+
     const handleView = (key) => {
       console.log(key);
       router.push("/viewtask/" + key);
     };
 
     return {
-      taskListLength: computed(() => store.getters["Tasks/taskListLength"]),
+      taskListLength,
       taskList: computed(() => store.getters["Tasks/taskList"]),
-      countUsers: computed(() => store.getters["Auth/getUserListLength"]),
+      countUsers,
       currentUserUid: computed(() => store.getters["Auth/currentUserUid"]),
       getUserByUid: computed(() => (uid) =>
         store.getters["Auth/getUserByUid"](uid)

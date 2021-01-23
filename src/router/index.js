@@ -10,6 +10,7 @@ import New from "@/views/New";
 import Tasks from "@/views/Tasks";
 
 import Register from "@auth/Register";
+import Task from "@/views/Task";
 
 const routes = [
   {
@@ -33,7 +34,7 @@ const routes = [
   {
     path: "/viewtask/:id",
     name: "viewtask",
-    component: Tasks,
+    component: Task,
     props: true,
     meta: { requiresAuth: true },
   },

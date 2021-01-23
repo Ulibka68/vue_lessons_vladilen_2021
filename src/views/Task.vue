@@ -1,18 +1,27 @@
 <template>
-  <div class="card" v-if="nonUser">
-    <h3 class="text-white center">
-      Задачи с id = <strong>Tут {{ taskByID.key }}</strong> нет.
-    </h3>
-  </div>
+  <h3 class="text-white center" v-if="nonUser">
+    Задачи с id = <strong>{{ taskByID.key }}</strong> Tут нет.
+  </h3>
+
   <div class="card" v-else>
     <h2>{{ taskByID.title }}</h2>
     <p><strong>Статус</strong>: <AppStatus :type="taskByID.status" /></p>
     <p><strong>Дэдлайн</strong>: {{ taskByID.date }}</p>
     <p><strong>Описание</strong>: {{ taskByID.description }}</p>
     <div>
-      <button class="btn">Взять в работу</button>
-      <button class="btn primary">Завершить</button>
-      <button class="btn danger">Отменить</button>
+      <!--      / Статус может быть 4х типов: ['active', 'done', 'cancelled', 'pending']-->
+      <button class="btn" @click.prevent.stop="changeStatus('pending')">
+        Взять в работу
+      </button>
+      <button class="btn primary" @click.prevent.stop="changeStatus('done')">
+        Завершить
+      </button>
+      <button
+        class="btn danger"
+        @click.prevent.stop="changeStatus('cancelled')"
+      >
+        Отменить
+      </button>
     </div>
   </div>
 </template>
@@ -21,21 +30,35 @@
 import AppStatus from "../components/AppStatus";
 import { computed } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
 // composition Заменяет data, methods, computed, watch
 
 export default {
   components: { AppStatus },
-  props: { id: String },
+  props: ["id"],
   setup(props) {
     console.log("Task props", props);
 
     const store = useStore();
+    const router = useRouter();
 
-    const taskByID = computed(() => store.getters["Tasks/taskByID"](props.id));
-    const currentUserUid = computed(() => store.getters["Auth/currentUserUid"]);
-    console.log(taskByID.value.uid, currentUserUid.value);
-    const nonUser = () => taskByID.value.uid != currentUserUid.value;
+    const taskByID = store.getters["Tasks/taskByID"](props.id);
+    // console.log("taskByID: ", taskByID);
+    // console.log("taskByID.uid: ", taskByID.uid);
+    const currentUserUid = store.getters["Auth/currentUserUid"];
+    // console.log("currentUserUid ", currentUserUid);
+
+    const nonUser = taskByID.uid != currentUserUid;
+    // console.log(nonUser);
+
+    const changeStatus = async (newStatus) => {
+      await store.dispatch("Tasks/replaceTaskStatusFB", {
+        key: props.id,
+        newStatus,
+      });
+      router.push({ name: "tasks" });
+    };
 
     return {
       taskListLength: computed(() => store.getters["Tasks/taskListLength"]),
@@ -47,6 +70,7 @@ export default {
       ),
       taskByID,
       nonUser,
+      changeStatus,
     };
   },
 };
