@@ -1,15 +1,26 @@
+// eslint-disable-next-line no-unused-vars
+import {
+  CheckFirebaseDatabaseLoad,
+  fbAppDatabaseTs,
+} from "@/utils/FBCustDatabase";
+
 export default {
   namespaced: true,
 
   /*
   В tasklist лежат записи вида
 
-  title: "",
-  date: "",
-  description: "",
-  status: "",
-  key:"MRi0CryREnCRqqHtsry"
-  */
+ // вид одного элемента
+
+            createdAt: 1611394328248
+            date: "2021-01-23"
+            description: "Задача1 descr"
+            status: "active"
+            title: "Задача1"
+
+            key: "-MRi_XPr-LUD8WNWPiF4"
+            uid: "W8VQvIZ2tuYmTUAd0aHfaxgWXSp2"
+     */
 
   state: () => ({
     taskList: [],
@@ -19,36 +30,67 @@ export default {
     addNewTask(state, newTask) {
       state.taskList.push(newTask);
     },
-    // add(state, payload) {
-    //   state.counter += payload.value; // redux style
-    // },
+    replaceTaskList(state, newTaskList) {
+      state.taskList = newTaskList;
+    },
   },
   getters: {
-    counter(state) {
-      if (state.counter > 50) return 0;
-      return state.counter;
+    taskListLength(state) {
+      return state.taskList.length;
     },
-    doubleCounter(_, getters) {
-      return getters.counter * 2;
-    },
-    doubleCounterGlob(_, getters, rootState, rootGetters) {
-      return rootGetters.uppercaseTitle + " " + getters.counter * 2;
+    taskList(state) {
+      return state.taskList;
     },
   },
   actions: {
-    incrementAsync({ commit }, payload) {
-      console.log("incrementAsync start");
-      setTimeout(() => {
-        commit({ type: "add", ...payload });
-        console.log("incrementAsync end");
-      }, 500);
-    },
-    incrementAsyncDelay({ commit }, { value, delay }) {
-      console.log("incrementAsync start");
-      setTimeout(() => {
-        commit({ type: "add", value });
-        console.log("incrementAsync end");
-      }, delay);
+    /*
+    {W8VQvIZ2tuYmTUAd0aHfaxgWXSp2: {…}, pRIM5flM8uOO2vLjr4N0uNV61B93: {…}}
+  W8VQvIZ2tuYmTUAd0aHfaxgWXSp2: uuid
+  W8VQvIZ2tuYmTUAd0aHfaxgWXSp2 - Иван
+      -MRi_XPr-LUD8WNWPiF4: key
+      createdAt: 1611394328248
+      date: "2021-01-23"
+      description: "Задача1 descr"
+      status: "active"
+      title: "Задача1"
+      __proto__: Object
+     */
+
+    // eslint-disable-next-line no-unused-vars
+    async readTasks({ commit }) {
+      console.log("readTasks start");
+
+      CheckFirebaseDatabaseLoad();
+      const dataSnapshot = await fbAppDatabaseTs.ref("tasks/").once("value");
+      const taskList = await dataSnapshot.val();
+      // console.log(taskList);
+      const newtasks = [];
+
+      // Преобразуем таски в плоский массив
+
+      Object.keys(taskList) // ключи uuid
+        .forEach((item) => {
+          // console.log("taskList[item] ", taskList[item]);
+          Object.keys(taskList[item]).forEach((itm) => {
+            taskList[item][itm].uid = item;
+            taskList[item][itm].key = itm;
+            newtasks.push({ ...taskList[item][itm] });
+          });
+
+          // console.log("taskList[item] :", taskList[item]);
+        });
+      commit("replaceTaskList", newtasks);
+      // console.log(newtasks);
+      // вид одного элемента
+      /*
+            createdAt: 1611394328248
+            date: "2021-01-23"
+            description: "Задача1 descr"
+            key: "-MRi_XPr-LUD8WNWPiF4"
+            status: "active"
+            title: "Задача1"
+            uid: "W8VQvIZ2tuYmTUAd0aHfaxgWXSp2"
+       */
     },
   },
 };

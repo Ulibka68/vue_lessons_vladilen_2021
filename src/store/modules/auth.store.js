@@ -1,6 +1,7 @@
 // initial state
 
 import { fbAppAuth } from "@/utils/FBCustInit";
+import { readUsers, addUser } from "@/utils/FBCustDatabase";
 import store from "@/store";
 
 const EmptyUser = {
@@ -11,9 +12,15 @@ const EmptyUser = {
   provider: "email",
 };
 
+// userList содержит записи вида:
+//  {  masmkas : Вася, asdm:Петя}
+//  userName: Вася,  masmkas : uid}
+// поскольку ключ уникальный - то храню в объекте
+
 const state = () => ({
   logedUser: EmptyUser,
   isAuth: false,
+  userList: {}, // список пользователей
 });
 
 // getters
@@ -22,6 +29,12 @@ const getters = {
   currentUser: (state) => state.logedUser.displayName,
   currentUserUid: (state) => state.logedUser.uid,
   isLogged: (state) => state.isAuth,
+
+  getUserByUid: (state, uid) => state.userList[uid], // возвращает displayName
+  getUserListLength: (state) => {
+    // console.log("getUserListLength");
+    return Object.keys(state.userList).length;
+  },
 };
 
 // mutations
@@ -39,20 +52,41 @@ const mutations = {
     state.isAuth = authState;
   },
 
-  storeFirebaseCurrentUser() {
+  // eslint-disable-next-line no-unused-vars
+  storeFirebaseCurrentUser(state) {
     const user = fbAppAuth.currentUser;
     if (user) {
       const { displayName, email, emailVerified, uid } = user;
       store.commit("Auth/setAuth", true);
+      console.log({
+        displayName,
+        email,
+        emailVerified,
+        uid,
+      });
       store.commit("Auth/setCurrentUser", {
         displayName,
         email,
         emailVerified,
         uid,
       });
+      console.log('"Auth/addUserToList"', { displayName, uid });
+      store.commit("Auth/addUserToList", { displayName, uid });
+      console.log('"Auth/addUserToList" END --');
     } else {
       store.commit("Auth/setAuth", false);
       store.commit("Auth/setEmptyUser");
+    }
+  },
+
+  // userList
+  storeUserList(state, newUserList) {
+    state.userList = newUserList;
+  },
+
+  addUserToList(state, { displayName, uid }) {
+    if (displayName) {
+      state.userList[uid] = displayName;
     }
   },
 };
@@ -65,6 +99,18 @@ const actions = {
   },
   setEmptyUserAction({ commit }) {
     commit("setEmptyUser");
+  },
+
+  // eslint-disable-next-line no-unused-vars
+  async readUserListFromDB({ commit, state, getters, dispatch, rootState }) {
+    const userList = await readUsers();
+    console.log(userList);
+    commit("storeUserList", userList);
+  },
+
+  // eslint-disable-next-line no-unused-vars
+  async addNewUserToDB(_, { displayName, uid }) {
+    addUser({ displayName, uid });
   },
 };
 
