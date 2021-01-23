@@ -16,7 +16,11 @@
           </small>
         </strong>
       </p>
-      <button class="btn primary" :disabled="currentUserUid != task.uid">
+      <button
+        class="btn primary"
+        :disabled="currentUserUid != task.uid"
+        @click.prevent.stop="handleView(task.key)"
+      >
         Посмотреть
       </button>
     </div>
@@ -29,12 +33,15 @@ import AppStatus from "@/components/AppStatus";
 /* eslint-disable no-unused-vars */
 import { useStore } from "vuex";
 import { computed, ref } from "vue";
+import { useRouter } from "vue-router";
+
 /* eslint-endable no-unused-vars */
 
 export default {
   components: { AppStatus },
   async setup() {
     const store = useStore();
+    const router = useRouter();
 
     await store.dispatch("Auth/readUserListFromDB");
     await store.dispatch("Tasks/readTasks");
@@ -42,6 +49,10 @@ export default {
     console.log(
       store.getters["Auth/getUserByUid"]("W8VQvIZ2tuYmTUAd0aHfaxgWXSp2")
     );
+    const handleView = (key) => {
+      console.log(key);
+      router.push("/viewtask/" + key);
+    };
 
     return {
       taskListLength: computed(() => store.getters["Tasks/taskListLength"]),
@@ -51,6 +62,7 @@ export default {
       getUserByUid: computed(() => (uid) =>
         store.getters["Auth/getUserByUid"](uid)
       ),
+      handleView,
     };
   },
 };

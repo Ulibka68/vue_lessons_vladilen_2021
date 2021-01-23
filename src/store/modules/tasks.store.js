@@ -41,6 +41,9 @@ export default {
     taskList(state) {
       return state.taskList;
     },
+    taskByID(state, id) {
+      return state.taskList.find((task) => task.key == id);
+    },
   },
   actions: {
     /*

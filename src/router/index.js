@@ -8,7 +8,7 @@ import Login from "@auth/Login";
 import Logout from "@auth/Logout";
 import New from "@/views/New";
 import Tasks from "@/views/Tasks";
-import Test from "@comp/Test";
+
 import Register from "@auth/Register";
 
 const routes = [
@@ -31,8 +31,8 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: "/view-task/:id",
-    name: "view-task",
+    path: "/viewtask/:id",
+    name: "viewtask",
     component: Tasks,
     props: true,
     meta: { requiresAuth: true },
@@ -52,11 +52,7 @@ const routes = [
     name: "logout",
     component: Logout,
   },
-  {
-    path: "/test",
-    name: "test",
-    component: Test,
-  },
+
   { path: "/:notFound(.*)", component: NotFound },
 ];
 
