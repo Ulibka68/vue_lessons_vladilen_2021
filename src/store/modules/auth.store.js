@@ -34,7 +34,11 @@ const getters = {
   currentUserUid: (state) => state.logedUser.uid,
   isLogged: (state) => state.isAuth,
 
-  getUserByUid: (state, uid) => state.userList[uid], // возвращает displayName
+  // возвращает displayName
+  getUserByUid: (state) => (uid) => {
+    return state.userList[uid];
+  },
+
   getUserListLength: (state) => {
     // console.log("getUserListLength");
     return Object.keys(state.userList).length;

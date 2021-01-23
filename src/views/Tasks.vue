@@ -3,15 +3,16 @@
   <template v-if="true">
     <h3 class="text-white">Всего активных задач: 0</h3>
     <h3 class="text-white">Всего задач: {{ taskListLength }}</h3>
-    <div class="card">
+    <div class="card" v-for="task in taskList" :key="task.key">
       <h2 class="card-title">
-        Название задачи
-        <AppStatus :type="'done'" />
+        {{ task.title }}
+        <AppStatus :type="task.status" />
       </h2>
+      <p>Пользователь: {{ getUserByUid(task.uid) }}</p>
       <p>
         <strong>
           <small>
-            {{ new Date().toLocaleDateString() }}
+            {{ task.date }}
           </small>
         </strong>
       </p>
@@ -33,16 +34,32 @@ export default {
   async setup() {
     const store = useStore();
 
-    const countUsers = computed(() => store.getters["Auth/getUserListLength"]);
-    console.log(countUsers.value);
-
     await store.dispatch("Auth/readUserListFromDB");
+    await store.dispatch("Tasks/readTasks");
+
+    console.log(
+      store.getters["Auth/getUserByUid"]("W8VQvIZ2tuYmTUAd0aHfaxgWXSp2")
+    );
 
     return {
       taskListLength: computed(() => store.getters["Tasks/taskListLength"]),
-      countUsers,
+      taskList: computed(() => store.getters["Tasks/taskList"]),
+      countUsers: computed(() => store.getters["Auth/getUserListLength"]),
+      getUserByUid: computed(() => (uid) =>
+        store.getters["Auth/getUserByUid"](uid)
+      ),
     };
   },
 };
 // Статус может быть 4х типов: ['active', 'done', 'cancelled', 'pending']
+/*
+Пример:
+  createdAt: 1611394328248
+  date: "2021-01-23"
+  description: "Задача1 descr"
+  key: "-MRi_XPr-LUD8WNWPiF4"
+  status: "active"
+  title: "Задача1"
+  uid: "W8VQvIZ2tuYmTUAd0aHfaxgWXSp2"
+ */
 </script>
