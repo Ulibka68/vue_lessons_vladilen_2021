@@ -1,7 +1,7 @@
 <template>
   <h1 class="text-white center">Задач пока нет</h1>
   <template v-if="true">
-    <h3 class="text-white">Всего активных задач: 0</h3>
+    <h3 class="text-white">Всего активных задач: {{ taskListActiveLength }}</h3>
     <h3 class="text-white">Всего задач: {{ taskListLength }}</h3>
     <div class="card" v-for="task in taskList" :key="task.key">
       <h2 class="card-title">
@@ -60,6 +60,9 @@ export default {
     return {
       taskListLength,
       taskList: computed(() => store.getters["Tasks/taskList"]),
+      taskListActiveLength: computed(
+        () => store.getters["Tasks/taskListActiveLength"]
+      ),
       countUsers,
       currentUserUid: computed(() => store.getters["Auth/currentUserUid"]),
       getUserByUid: computed(() => (uid) =>

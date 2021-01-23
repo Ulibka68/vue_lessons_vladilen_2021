@@ -31,7 +31,8 @@
 // eslint-disable-next-line no-unused-vars
 import { computed, reactive, ref, toRaw } from "vue";
 import { useStore } from "vuex";
-import { NewData } from "@/utils/FBCustDatabase";
+import router from "@/router";
+// import { NewData } from "@/utils/FBCustDatabase";
 
 function zA(n) {
   if (n < 10) return "0" + n;
@@ -72,18 +73,15 @@ export default {
 
         const uuid2 = store.getters["Auth/currentUserUid"];
 
-        const resFB = await NewData(uuid2, rawData);
+        // const resFB = await NewData (  uuid2, rawData);
+        store.dispatch("Tasks/addNewTaskFB", { uid: uuid2, newTask: rawData });
 
-        // результат возвращается в виде
-        // {result: true, msg: "", taskNewRef: "-MRi0CryREnCRqqHtsry"}
-        if (resFB.result) {
-          // запись в Firebase прошла успешно
-          rawData.key = resFB.taskNewRef;
-          store.commit("Tasks/addNewTask", rawData);
-        } else {
-          erors.err = [];
+        erors.err = [];
+        if (!dbStatus.value) {
           erors.err.push("Ошибка записи в базу данных");
-          erors.err.push(resFB.msg);
+          erors.err.push(errMsg.value);
+        } else {
+          router.push({ name: "tasks" });
         }
       }
     };
@@ -131,11 +129,16 @@ export default {
       description: "",
     });
 
+    const dbStatus = computed(() => store.getters["Tasks/getDbStatus"]);
+    const errMsg = computed(() => store.getters["Tasks/getErrMsg"]);
+
     return {
       handleSubmit,
       formData,
       erors,
       uuid,
+      dbStatus,
+      errMsg,
     };
   },
 };

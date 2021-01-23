@@ -21,9 +21,12 @@ export default {
             key: "-MRi_XPr-LUD8WNWPiF4"
             uid: "W8VQvIZ2tuYmTUAd0aHfaxgWXSp2"
      */
+  // Статус может быть 4х типов: ['active', 'done', 'cancelled', 'pending']
 
   state: () => ({
     taskList: [],
+    dbStatus: true,
+    errMsg: "",
   }),
 
   mutations: {
@@ -42,11 +45,20 @@ export default {
     taskListLength(state) {
       return state.taskList.length;
     },
+    taskListActiveLength(state) {
+      return state.taskList.filter((task) => task.status == "active").length;
+    },
     taskList(state) {
       return state.taskList;
     },
     taskByID(state) {
       return (id) => state.taskList.find((task) => task.key == id);
+    },
+    getDbStatus(state) {
+      return state.dbStatus;
+    },
+    getErrMsg(state) {
+      return state.errMsg;
     },
   },
   actions: {
@@ -101,7 +113,7 @@ export default {
     },
 
     async replaceTaskStatusFB({ state }, { key, newStatus }) {
-      console.log("replaceTaskStatusFB start", newStatus);
+      // console.log("replaceTaskStatusFB start", newStatus);
       const taskCur = state.taskList.find((task) => task.key == key);
       if (!taskCur) return;
       taskCur.status = newStatus;
@@ -112,11 +124,30 @@ export default {
       delete copyTask.uid;
 
       CheckFirebaseDatabaseLoad();
-      console.log("replaceTaskStatusFB before fbAppDatabaseTs");
+      // console.log("replaceTaskStatusFB before fbAppDatabaseTs");
       const refPath = `tasks/${taskCur.uid}/${taskCur.key}`;
-      console.log(refPath);
-      console.log(copyTask);
+      // console.log(refPath);
+      // console.log(copyTask);
       await fbAppDatabaseTs.ref(refPath).set(copyTask);
+    },
+
+    async addNewTaskFB({ state }, { uid, newTask }) {
+      CheckFirebaseDatabaseLoad();
+      try {
+        const taskNewRef = await fbAppDatabaseTs.ref("tasks/" + uid).push();
+        const copyTask = { ...newTask };
+        copyTask.createdAt = Date.now();
+        await taskNewRef.set(copyTask);
+        copyTask.uid = uid;
+        copyTask.key = taskNewRef.key;
+
+        state.dbStatus = true;
+        state.errMsg = "";
+        state.taskList.unshift(copyTask);
+      } catch (error) {
+        state.dbStatus = false;
+        state.errMsg = "Ошибка записи в бд " + error.message;
+      }
     },
   },
 };
