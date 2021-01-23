@@ -3,7 +3,7 @@ import { fbApp } from "./FBCustInit";
 // import { Database, DataSnapshot } from "@firebase/database-types";
 
 // let fbAppDatabaseTs: Database;
-let fbAppDatabaseTs;
+export let fbAppDatabaseTs;
 let fbAppDatabaseTsInitialized = false;
 
 export function loadFirebaseDatabaseAsyncModule() {
@@ -75,4 +75,9 @@ export function readPost(uid) {
         console.error("Ошибка бд", e);
       })
   );
+}
+
+export async function addUser({ displayName, uid }) {
+  CheckFirebaseDatabaseLoad();
+  return await fbAppDatabaseTs.ref("users/" + uid).set(displayName);
 }

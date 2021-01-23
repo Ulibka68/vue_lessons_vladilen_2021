@@ -33,8 +33,12 @@ export default {
   setup() {
     const store = useStore();
 
+    const countUsers = computed(() => store.getters["Auth/getUserListLength"]);
+    console.log(countUsers.value);
+
     return {
       taskListLength: computed(() => store.getters["Tasks/taskListLength"]),
+      countUsers,
     };
   },
 };
