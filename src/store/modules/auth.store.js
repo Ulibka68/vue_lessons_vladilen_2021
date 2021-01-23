@@ -110,7 +110,8 @@ const actions = {
     CheckFirebaseDatabaseLoad();
     const snapshot = await fbAppDatabaseTs.ref("users/").once("value");
     const userList = await snapshot.val();
-    console.log(userList);
+    commit("storeUserList", userList);
+    // console.log(userList);
   },
 
   // eslint-disable-next-line no-unused-vars

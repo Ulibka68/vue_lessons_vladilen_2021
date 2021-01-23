@@ -1,7 +1,9 @@
 <template>
   <the-navbar></the-navbar>
   <div class="container with-nav">
-    <router-view />
+    <Suspense>
+      <router-view />
+    </Suspense>
   </div>
 </template>
 

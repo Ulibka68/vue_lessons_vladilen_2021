@@ -1,4 +1,4 @@
-<template v-if="true">
+<template>
   <h1 class="text-white center">Задач пока нет</h1>
   <template v-if="true">
     <h3 class="text-white">Всего активных задач: 0</h3>
@@ -30,23 +30,17 @@ import { computed, ref } from "vue";
 
 export default {
   components: { AppStatus },
-  setup() {
+  async setup() {
     const store = useStore();
-    const isLoading = ref(false);
 
     const countUsers = computed(() => store.getters["Auth/getUserListLength"]);
     console.log(countUsers.value);
 
-    const getUsers = async () => {
-      isLoading.value = true;
-      await store.dispatch("Auth/readUserListFromDB");
-      isLoading.value = false;
-    };
+    await store.dispatch("Auth/readUserListFromDB");
 
     return {
       taskListLength: computed(() => store.getters["Tasks/taskListLength"]),
       countUsers,
-      getUsers,
     };
   },
 };
