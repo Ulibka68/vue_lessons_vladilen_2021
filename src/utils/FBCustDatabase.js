@@ -47,12 +47,13 @@ export async function NewData(
 
 export async function NewData(uid, blocks) {
   CheckFirebaseDatabaseLoad();
-  // const db: Database = fbAppDatabaseTs;
-  const db = fbAppDatabaseTs;
-  try {
-    await db.ref("post/" + uid).set(blocks);
 
-    return { result: true, msg: "string;" };
+  try {
+    const taskNewRef = await fbAppDatabaseTs.ref("tasks/" + uid).push();
+    blocks.createdAt = Date.now();
+    await taskNewRef.set(blocks);
+
+    return { result: true, msg: "", taskNewRef: taskNewRef.key };
   } catch (error) {
     return { result: false, msg: "Ошибка записи в бд " + error.message };
   }

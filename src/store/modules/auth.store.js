@@ -11,10 +11,10 @@ const EmptyUser = {
   provider: "email",
 };
 
-const state = {
+const state = () => ({
   logedUser: EmptyUser,
   isAuth: false,
-};
+});
 
 // getters
 // cartProducts: (state, getters, rootState)

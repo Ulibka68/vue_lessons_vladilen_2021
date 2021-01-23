@@ -29,7 +29,9 @@
 
 <script>
 // eslint-disable-next-line no-unused-vars
-import { computed, reactive, ref } from "vue";
+import { computed, reactive, ref, toRaw } from "vue";
+import { useStore } from "vuex";
+import { NewData } from "@/utils/FBCustDatabase";
 
 function zA(n) {
   if (n < 10) return "0" + n;
@@ -56,9 +58,33 @@ function StringToMs(dateString) {
 
 export default {
   setup() {
-    const handleSubmit = () => {
+    const store = useStore();
+    const uuid = computed(() => store.getters("Auth/currentUserUid"));
+
+    const handleSubmit = async () => {
       if (formValidate()) {
-        console.log(formData);
+        formData.status = "active";
+        // console.log(formData);
+        const rawData = toRaw(formData);
+        // console.log("rawData: ", rawData);
+
+        // записать в Firebase
+
+        const uuid2 = store.getters["Auth/currentUserUid"];
+
+        const resFB = await NewData(uuid2, rawData);
+
+        // результат возвращается в виде
+        // {result: true, msg: "", taskNewRef: "-MRi0CryREnCRqqHtsry"}
+        if (resFB.result) {
+          // запись в Firebase прошла успешно
+          rawData.key = resFB.taskNewRef;
+          store.commit("Tasks/addNewTask", rawData);
+        } else {
+          erors.err = [];
+          erors.err.push("Ошибка записи в базу данных");
+          erors.err.push(resFB.msg);
+        }
       }
     };
 
@@ -109,6 +135,7 @@ export default {
       handleSubmit,
       formData,
       erors,
+      uuid,
     };
   },
 };

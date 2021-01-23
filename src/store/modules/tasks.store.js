@@ -1,18 +1,27 @@
 export default {
   namespaced: true,
-  state() {
-    return { counter: 1 };
-  },
+
+  /*
+  В tasklist лежат записи вида
+
+  title: "",
+  date: "",
+  description: "",
+  status: "",
+  key:"MRi0CryREnCRqqHtsry"
+  */
+
+  state: () => ({
+    taskList: [],
+  }),
 
   mutations: {
-    incrCounter(state) {
-      state.counter++;
+    addNewTask(state, newTask) {
+      state.taskList.push(newTask);
     },
-    add(state, payload) {
-      // console.log(payload);
-      // state.counter += payload;
-      state.counter += payload.value; // redux style
-    },
+    // add(state, payload) {
+    //   state.counter += payload.value; // redux style
+    // },
   },
   getters: {
     counter(state) {
