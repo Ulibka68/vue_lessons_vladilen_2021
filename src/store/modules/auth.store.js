@@ -1,7 +1,11 @@
 // initial state
 
 import { fbAppAuth } from "@/utils/FBCustInit";
-import { addUser } from "@/utils/FBCustDatabase";
+import {
+  addUser,
+  fbAppDatabaseTs,
+  CheckFirebaseDatabaseLoad,
+} from "@/utils/FBCustDatabase";
 import store from "@/store";
 
 const EmptyUser = {
@@ -102,10 +106,11 @@ const actions = {
   },
 
   // eslint-disable-next-line no-unused-vars
-  async readUserListFromDB({ commit, state, getters, dispatch, rootState }) {
-    // const userList = await readUsers();
-    // console.log(userList);
-    // commit("storeUserList", userList);
+  async readUserListFromDB({ commit }) {
+    CheckFirebaseDatabaseLoad();
+    const snapshot = await fbAppDatabaseTs.ref("users/").once("value");
+    const userList = await snapshot.val();
+    console.log(userList);
   },
 
   // eslint-disable-next-line no-unused-vars

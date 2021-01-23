@@ -25,20 +25,28 @@ import AppStatus from "@/components/AppStatus";
 
 /* eslint-disable no-unused-vars */
 import { useStore } from "vuex";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 /* eslint-endable no-unused-vars */
 
 export default {
   components: { AppStatus },
   setup() {
     const store = useStore();
+    const isLoading = ref(false);
 
     const countUsers = computed(() => store.getters["Auth/getUserListLength"]);
     console.log(countUsers.value);
 
+    const getUsers = async () => {
+      isLoading.value = true;
+      await store.dispatch("Auth/readUserListFromDB");
+      isLoading.value = false;
+    };
+
     return {
       taskListLength: computed(() => store.getters["Tasks/taskListLength"]),
       countUsers,
+      getUsers,
     };
   },
 };
