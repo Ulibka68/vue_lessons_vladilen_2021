@@ -5,4 +5,5 @@ dist
 vue.config.js
 ./src/shims-vue.d.ts
 src/shims-vue.d.ts
+src/vuex.d.ts
 
