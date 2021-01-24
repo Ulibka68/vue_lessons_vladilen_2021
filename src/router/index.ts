@@ -1,30 +1,24 @@
-import { createRouter, createWebHistory } from "vue-router";
-import Tasks from "../views/Tasks.vue";
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import Home from '../views/Home.vue'
 
-const routes = [
+const routes: RouteRecordRaw[] = [
   {
-    path: "/",
-    name: "Tasks",
-    component: Tasks,
+    path: '/',
+    name: 'Home',
+    component: Home
   },
   {
-    path: "/new",
-    name: "New",
-    component: () => import("../views/New.vue"),
-  },
-  {
-    path: "/task/:id",
-    name: "Task",
-    props: true,
-    component: () => import("../views/Task.vue"),
-  },
-];
+    path: '/users',
+    name: 'About',
+    component: () => import('../views/Users.vue')
+  }
+]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
   routes,
-  linkActiveClass: "active",
-  linkExactActiveClass: "active",
-});
+  history: createWebHistory(),
+  linkExactActiveClass: 'active',
+  linkActiveClass: 'active'
+})
 
-export default router;
+export default router
