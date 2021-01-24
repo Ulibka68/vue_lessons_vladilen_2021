@@ -1,9 +1,15 @@
 import { createStore } from "vuex";
 
+interface task {
+  date: string;
+  status: string;
+  id: number;
+}
+
 export default createStore({
   state() {
     return {
-      tasks: JSON.parse(localStorage.getItem("my-tasks")) ?? [],
+      tasks: localStorage.getItem("my-tasks") ?? "[]",
     };
   },
   mutations: {
