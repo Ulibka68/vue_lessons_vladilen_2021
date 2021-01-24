@@ -1,5 +1,18 @@
 <template>
   <div class="card">
-    <h1>Пользователи</h1>
+    <h1>Users</h1>
+    <user-list></user-list>
   </div>
 </template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+import UserList from "@/components/UserList.vue";
+
+export default defineComponent({
+  name: "Users",
+  components: { UserList },
+});
+</script>
+
+<style scoped></style>
