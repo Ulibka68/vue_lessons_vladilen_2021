@@ -1,7 +1,19 @@
 import { createStore } from "vuex";
 
-export default createStore({
-  state() {
+interface task {
+  date: number;
+  status: string;
+  id: string;
+  description: string;
+  title: string;
+}
+
+interface tasksT {
+  tasks: task[];
+}
+
+export default createStore<tasksT>({
+  state(): tasksT {
     return {
       tasks: JSON.parse(localStorage.getItem("my-tasks")) ?? [],
     };
