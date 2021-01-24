@@ -1,6 +1,6 @@
 <template>
   <ul class="list">
-    <li class="list-item" v-for="user in users">
+    <li class="list-item" v-for="user in users" :key="user.id">
       {{ user.name }}
     </li>
   </ul>
