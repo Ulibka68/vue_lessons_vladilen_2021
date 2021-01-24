@@ -1,42 +1,42 @@
-import { createStore } from 'vuex'
+import { createStore } from "vuex";
 
 export default createStore({
   state() {
     return {
-      tasks: JSON.parse(localStorage.getItem('my-tasks')) ?? []
-    }
+      tasks: JSON.parse(localStorage.getItem("my-tasks")) ?? [],
+    };
   },
   mutations: {
     createTask(state, task) {
-      state.tasks.push(task)
-      localStorage.setItem('my-tasks', JSON.stringify(state.tasks))
+      state.tasks.push(task);
+      localStorage.setItem("my-tasks", JSON.stringify(state.tasks));
     },
     changeTask(state, task) {
-      const idx = state.tasks.findIndex(t => t.id === task.id)
-      state.tasks[idx] = task
-      localStorage.setItem('my-tasks', JSON.stringify(state.tasks))
-    }
+      const idx = state.tasks.findIndex((t) => t.id === task.id);
+      state.tasks[idx] = task;
+      localStorage.setItem("my-tasks", JSON.stringify(state.tasks));
+    },
   },
   actions: {
-    createTask({commit}, task) {
+    createTask({ commit }, task) {
       if (task.date < new Date()) {
-        task.status = 'cancelled'
+        task.status = "cancelled";
       }
-      commit('createTask', task)
+      commit("createTask", task);
     },
-    changeTask({commit}, task) {
-      commit('changeTask', task)
-    }
+    changeTask({ commit }, task) {
+      commit("changeTask", task);
+    },
   },
   getters: {
     activeTasksCount(state) {
-      return state.tasks.filter(t => t.status === 'active').length
+      return state.tasks.filter((t) => t.status === "active").length;
     },
     tasks(state) {
-      return state.tasks
+      return state.tasks;
     },
     taskById(_, getters) {
-      return id => getters.tasks.find(t => t.id === id)
-    }
-  }
-})
+      return (id) => getters.tasks.find((t) => t.id === id);
+    },
+  },
+});
