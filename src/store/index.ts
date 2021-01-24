@@ -15,7 +15,7 @@ interface tasksT {
 export default createStore<tasksT>({
   state(): tasksT {
     return {
-      tasks: JSON.parse(localStorage.getItem("my-tasks")) ?? [],
+      tasks: JSON.parse(localStorage.getItem("my-tasks") ?? "[]"),
     };
   },
   mutations: {
@@ -48,7 +48,7 @@ export default createStore<tasksT>({
       return state.tasks;
     },
     taskById(_, getters) {
-      return (id) => getters.tasks.find((t) => t.id === id);
+      return (id: string) => getters.tasks.find((t: task) => t.id === id);
     },
   },
 });

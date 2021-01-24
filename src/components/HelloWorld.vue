@@ -86,6 +86,11 @@ export default defineComponent({
   props: {
     msg: String,
   },
+  methods: {
+    log() {
+      this.$emit("custom-event");
+    },
+  },
 });
 </script>
 

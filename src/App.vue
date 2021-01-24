@@ -5,14 +5,16 @@
   </div>
 </template>
 
-<script>
-import TheNavbar from "./components/TheNavbar";
+<script lang="ts">
+import { defineComponent } from "vue";
+import TheNavbar from "@/components/TheNavbar";
 
-export default {
+export default defineComponent({
+  name: "App",
   components: {
     TheNavbar,
   },
-};
+});
 </script>
 
 <style></style>
