@@ -14,6 +14,14 @@ export default defineComponent({
   name: "UserList",
   async setup() {
     const { users } = await useUsers();
+
+    /*
+    users.value?.map( user => {
+      user.email
+    });
+
+     */
+
     return {
       users,
     };
