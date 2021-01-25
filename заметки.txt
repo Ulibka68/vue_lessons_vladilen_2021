@@ -1,0 +1,61 @@
+J:\_prg\Vue Vladilen\vue_lessons_vladilen_2021\node_modules\vue-router\dist\vue-router.d.ts
+
+
+export declare interface _RouteLocationBase {
+ meta: RouteMeta
+}
+
+export declare interface RouteMeta extends Record<string | number | symbol, any> {
+}
+
+type Overrided = Omit<YourInterface, 'overrideField'> & { overrideField: <type> };
+
+
+
+/**
+ * Returns object T, but with T[K] overridden to type U.
+ * @example
+ * type MyObject = { a: number, b: string }
+ * OverrideProperty<MyObject, "a", string> // returns { a: string, b: string }
+ */
+export type OverrideProperty<T, K extends keyof T, U> = Omit<T, K> & { [P in keyof Pick<T, K>]: U };
+
+
+================
+
+// a.ts - module
+export interface A {
+    x: string;
+}
+
+// b.ts - module
+import {A} from './a';
+
+type SomeOtherType = {
+  coolStuff: number
+}
+
+// @ts-ignore
+interface B extends A {
+    x: SomeOtherType;
+}
+
+=======================
+// vuex.d.ts
+import { ComponentCustomProperties } from 'vue'
+import { Store } from 'vuex'
+
+vue-router
+declare module '@vue/runtime-core' {
+  // declare your own store states
+  interface State {
+    count: number
+  }
+
+  // provide typings for `this.$store`
+  interface ComponentCustomProperties {
+    $store: Store<State>
+  }
+}
+
+

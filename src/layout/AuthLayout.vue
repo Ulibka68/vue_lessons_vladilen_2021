@@ -1,6 +1,8 @@
 <template>
-  <div class="home">
-    <h1>HELLO</h1>
+  <div class="container">
+    <div class="card">
+      <h1>AuthLayout</h1>
+    </div>
   </div>
 </template>
 
@@ -8,6 +10,6 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "Home",
+  name: "AuthLayout",
 });
 </script>
