@@ -24,7 +24,7 @@ export function useLoginForm() {
 
   const isTooManyAttempts = computed(() => submitCount.value >= 3);
 
-  watch(isTooManyAttempts, (val) => {
+  watch(isTooManyAttempts, (val: boolean) => {
     if (val) {
       setTimeout(() => {
         submitCount.value = 0;
