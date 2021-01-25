@@ -1,9 +1,13 @@
 import { useField, useForm } from "vee-validate";
 import * as yup from "yup";
 import { computed, watch } from "vue";
+import { useStore } from "@/store";
+import { useRouter } from "vue-router";
 
 export function useLoginForm() {
   const { handleSubmit, isSubmitting, submitCount } = useForm();
+  const store = useStore();
+  const router = useRouter();
 
   const { value: email, errorMessage: eErorr, handleBlur: eBlur } = useField(
     "email",
@@ -33,7 +37,10 @@ export function useLoginForm() {
   });
 
   // eslint-disable-next-line no-unused-vars
-  const onSubmit = handleSubmit((values) => {});
+  const onSubmit = handleSubmit(async (values) => {
+    await store.dispatch("auth/login", values);
+    router.push("/");
+  });
 
   return {
     email,
