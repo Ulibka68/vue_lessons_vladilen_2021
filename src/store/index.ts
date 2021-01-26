@@ -1,6 +1,7 @@
 import { createStore, Store, useStore as baseUseStore, createLogger, ActionContext } from "vuex";
 import { InjectionKey } from "vue";
 import { auth } from "./modules/auth.module";
+import { tRequestState, request } from "@/store/modules/request.module";
 import { error } from "@/utils/error";
 
 const plugins = [];
@@ -34,11 +35,11 @@ export const store = createStore<tRootState>({
         setMessage({ commit }: ActionContext<tRootState, tRootState>, message: tMessage) {
             commit("setMessage", message);
             setTimeout(() => {
-                commit("clearMessage");
+                commit("clearMessage", null, { root: true });
             }, 4000);
         },
     },
-    modules: { auth },
+    modules: { auth, request },
 });
 
 // define your own `useStore` composition function

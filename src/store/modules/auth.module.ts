@@ -50,7 +50,7 @@ export const auth: Module<tState, tRootState> = {
                     returnSecureToken: true,
                 });
                 commit("setToken", data.idToken);
-                dispatch("clearMessage", null, { root: true });
+                commit("clearMessage", null, { root: true });
             } catch (e) {
                 dispatch(
                     "setMessage",

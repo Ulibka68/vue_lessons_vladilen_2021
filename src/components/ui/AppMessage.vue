@@ -33,7 +33,7 @@
                 message,
                 title,
                 close: () => {
-                    store.commit("clearMessage");
+                    store.commit("clearMessage", null, { root: true });
                 },
             };
         },
