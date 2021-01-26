@@ -44,7 +44,7 @@ export const store = createStore<tRootState>({
       commit("setMessage", message);
       setTimeout(() => {
         commit("clearMessage");
-      }, 2000);
+      }, 4000);
     },
   },
   modules: { auth },

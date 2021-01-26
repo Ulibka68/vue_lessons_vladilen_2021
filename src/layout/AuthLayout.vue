@@ -9,7 +9,7 @@
 import { defineComponent } from "vue";
 
 import Auth from "@/views/Auth.vue";
-import AppMessage from "@/store/modules/ui/AppMessage.vue";
+import AppMessage from "@/ui/AppMessage.vue";
 
 export default defineComponent({
   name: "AuthLayout",
