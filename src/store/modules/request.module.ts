@@ -47,5 +47,16 @@ export const request: Module<tRequestState, tRootState> = {
                 dispatch("setMessage", { value: e.message, type: "danger" } as tMessage, { root: true });
             }
         },
+        async load({ commit, dispatch, getters }: ActionContext<tRequestState, tRootState>) {
+            try {
+                const token = store.getters["auth/token"];
+
+                const { data } = await axios.get(`/request.json?auth=${token}`);
+                const requests = Object.keys(data).map((id) => ({ ...data[id], id }));
+                commit("setRequests", requests);
+            } catch (e) {
+                dispatch("setMessage", { value: e.message, type: "danger" } as tMessage, { root: true });
+            }
+        },
     },
 };
