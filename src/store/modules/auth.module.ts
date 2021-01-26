@@ -1,5 +1,7 @@
 import { ActionContext, Commit, Module } from "vuex";
 import { tRootState } from "@/store/index";
+import axios from "axios";
+import { error } from "@/utils/error";
 
 export type tToken = null | string;
 
@@ -41,8 +43,18 @@ export const auth: Module<tState, tRootState> = {
 
   actions: {
     async login({ commit }: ActionContext<tState, tRootState>, payload) {
-      console.log("async login store payload : ", payload);
-      commit("setToken", "TEST TOKEN");
+      const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.VUE_APP_FB_KEY}`;
+      try {
+        const { data } = await axios.post(url, {
+          ...payload,
+          returnSecureToken: true,
+        });
+        commit("setToken", data.idToken);
+      } catch (e) {
+        console.log(error(e.response.data.error.message));
+      }
+
+      // v@mail.ru 1234567
     },
   },
 };
