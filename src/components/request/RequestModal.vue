@@ -35,9 +35,16 @@
 
     export default defineComponent({
         name: "RequestModalBody",
-        setup() {
+        emits: ["created"],
+        setup(_, { emit }) {
+            const submit22 = async (values: any) => {
+                console.log("asdasd");
+                console.log(values);
+                emit("created");
+            };
+
             return {
-                ...useRequestForm(),
+                ...useRequestForm(submit22),
             };
         },
     });
