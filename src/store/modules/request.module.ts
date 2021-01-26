@@ -19,14 +19,8 @@ export const request: Module<tRequestState, tRootState> = {
         };
     },
     getters: {
-        token(state: tRequestState) {
-            return state.token;
-        },
-        isAuthenticated(state: tRequestState) {
-            return !!state.token;
-        },
-        isAuthenticated2(_, getters) {
-            return !!getters.token;
+        requests(state: tRequestState) {
+            return state.requests;
         },
     },
 
@@ -45,6 +39,7 @@ export const request: Module<tRequestState, tRootState> = {
                 const token = store.getters["auth/token"];
 
                 const { data } = await axios.post(`/request.json?auth=${token}`, payload);
+                commit("addRequests", { ...payload, id: data.name });
                 dispatch("setMessage", { value: "Заявка успешно создана", type: "primary" } as tMessage, {
                     root: true,
                 });
