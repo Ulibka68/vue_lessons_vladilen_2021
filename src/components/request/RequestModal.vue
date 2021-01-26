@@ -31,7 +31,7 @@
 
 <script lang="ts">
     import { defineComponent } from "vue";
-    import { useRequestForm } from "@/use/request-form";
+    import { useRequestForm, tRequsetFormValues } from "@/use/request-form";
 
     export default defineComponent({
         name: "RequestModalBody",
@@ -39,11 +39,10 @@
         // eslint-disable-next-line no-unused-vars
         setup(_, { emit }) {
             // eslint-disable-next-line no-unused-vars
-            const submit22 = async (values: any, arg2: any) => {
+            const submit22 = async (values: tRequsetFormValues) => {
                 console.log("Вызвана submit22 из модуля RequestModal.vue");
                 console.log(values);
-                // emit("created");
-                return true;
+                emit("created");
             };
 
             return {

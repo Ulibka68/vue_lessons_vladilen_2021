@@ -1,9 +1,16 @@
 import { SubmissionHandler, useField, useForm } from "vee-validate";
 import * as yup from "yup";
 
-export function useRequestForm(fn: any) {
-    const { isSubmitting, handleSubmit } = useForm({
-        initialValues: { status: "active" },
+export interface tRequsetFormValues {
+    amount: number;
+    fio: string;
+    phone: string;
+    status: string;
+}
+
+export function useRequestForm(fn: SubmissionHandler<tRequsetFormValues>) {
+    const { isSubmitting, handleSubmit } = useForm<tRequsetFormValues>({
+        initialValues: { status: "active", amount: 0, fio: "", phone: "" },
     });
     const { value: fio, errorMessage: fError, handleBlur: fBlur } = useField("fio", yup.string().trim().required());
     const { value: phone, errorMessage: pError, handleBlur: pBlur } = useField("phone", yup.string().trim().required());
@@ -13,12 +20,16 @@ export function useRequestForm(fn: any) {
     );
     const { value: status } = useField("status");
 
+    /*
     const onSubmit = () => {
         console.log("onSubmit - handleSubmit(fn)");
         // fn(); - вот так функция вызывается
         if (typeof fn === "function") console.log("typeof fn === 'function' -> true");
         handleSubmit(fn);
     };
+
+     */
+    const onSubmit = handleSubmit(fn);
 
     return {
         status,
