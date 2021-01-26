@@ -36,11 +36,14 @@
     export default defineComponent({
         name: "RequestModalBody",
         emits: ["created"],
+        // eslint-disable-next-line no-unused-vars
         setup(_, { emit }) {
-            const submit22 = async (values: any) => {
-                console.log("asdasd");
+            // eslint-disable-next-line no-unused-vars
+            const submit22 = async (values: any, arg2: any) => {
+                console.log("Вызвана submit22 из модуля RequestModal.vue");
                 console.log(values);
-                emit("created");
+                // emit("created");
+                return true;
             };
 
             return {

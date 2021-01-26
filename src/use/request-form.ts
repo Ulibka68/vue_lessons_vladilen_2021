@@ -14,7 +14,9 @@ export function useRequestForm(fn: any) {
     const { value: status } = useField("status");
 
     const onSubmit = () => {
-        console.log("onSubmit - handleSubmit(fn)", fn);
+        console.log("onSubmit - handleSubmit(fn)");
+        // fn(); - вот так функция вызывается
+        if (typeof fn === "function") console.log("typeof fn === 'function' -> true");
         handleSubmit(fn);
     };
 
