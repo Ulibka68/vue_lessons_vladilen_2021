@@ -38,8 +38,11 @@ export function useLoginForm() {
 
   // eslint-disable-next-line no-unused-vars
   const onSubmit = handleSubmit(async (values) => {
-    await store.dispatch("auth/login", values);
-    router.push("/");
+    try {
+      await store.dispatch("auth/login", values);
+      router.push("/");
+      // eslint-disable-next-line no-empty
+    } catch (e) {}
   });
 
   return {

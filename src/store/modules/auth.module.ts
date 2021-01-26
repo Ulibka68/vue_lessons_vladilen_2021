@@ -42,7 +42,10 @@ export const auth: Module<tState, tRootState> = {
   },
 
   actions: {
-    async login({ commit }: ActionContext<tState, tRootState>, payload) {
+    async login(
+      { commit, dispatch }: ActionContext<tState, tRootState>,
+      payload
+    ) {
       const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.VUE_APP_FB_KEY}`;
       try {
         const { data } = await axios.post(url, {
@@ -50,8 +53,18 @@ export const auth: Module<tState, tRootState> = {
           returnSecureToken: true,
         });
         commit("setToken", data.idToken);
+        dispatch("clearMessage", null, { root: true });
       } catch (e) {
+        dispatch(
+          "setMessage",
+          {
+            value: error(e.response.data.error.message),
+            type: "danger",
+          },
+          { root: true }
+        );
         console.log(error(e.response.data.error.message));
+        throw new Error(e);
       }
 
       // v@mail.ru 1234567
