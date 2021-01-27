@@ -16,8 +16,9 @@
                 <td>{{ idx + 1 }}</td>
                 <td>{{ r.fio }}</td>
                 <td>{{ r.phone }}</td>
-                <td>{{ r.amount }}</td>
-                <td>{{ r.status }}</td>
+                <td>{{ currency(r.amount) }}</td>
+                <td><AppStatus :type="r.status" /></td>
+
                 <td>
                     <router-link v-slot="{ navigate }" custom :to="{ name: 'Request', params: { id: r.id } }">
                         <button class="btn primary" @click="navigate">Открыть</button>
@@ -30,10 +31,16 @@
 
 <script lang="ts">
     import { defineComponent } from "vue";
+    import { currency } from "@/utils/currency-formatter";
+    import AppStatus from "@/components/ui/AppStatus.vue";
 
     export default defineComponent({
         name: "RequestTable",
         props: ["request"],
+        components: { AppStatus },
+        setup() {
+            return { currency };
+        },
     });
 </script>
 
