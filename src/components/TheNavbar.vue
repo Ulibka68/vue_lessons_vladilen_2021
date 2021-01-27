@@ -4,7 +4,7 @@
     <ul class="navbar-menu">
       <li><router-link to="/">Заявки</router-link></li>
       <li><router-link to="/help">Помощь</router-link></li>
-      <li><a href="#">Сообщения</a></li>
+      <li><a href="#" @click.prevent="openSidebar">Сообщения</a></li>
       <li><a href="#" @click.prevent="logout">Выход</a></li>
     </ul>
   </nav>
@@ -25,6 +25,9 @@ export default defineComponent({
       logout: () => {
         store.commit("auth/logout");
         router.push("/auth");
+      },
+      openSidebar: () => {
+        store.commit("openSidebar");
       },
     };
   },

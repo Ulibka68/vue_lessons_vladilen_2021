@@ -24,7 +24,7 @@ if (process.env.NODE_ENV === "development") {
 // define your typings for the store state
 export interface tRootState {
   message: tMessage | null;
-  counter: number;
+  sidebar: boolean;
 }
 export type tMessage = { value: string; type: string };
 
@@ -33,7 +33,7 @@ export const key: InjectionKey<Store<tRootState>> = Symbol();
 
 export const store = createStore<tRootState>({
   state() {
-    return { message: null, counter: 1 };
+    return { message: null, sidebar: false };
   },
   plugins,
   mutations: {
@@ -42,6 +42,12 @@ export const store = createStore<tRootState>({
     },
     clearMessage(state: tRootState) {
       state.message = null;
+    },
+    openSidebar(state: tRootState) {
+      state.sidebar = true;
+    },
+    closeSidebar(state: tRootState) {
+      state.sidebar = false;
     },
   },
   actions: {
