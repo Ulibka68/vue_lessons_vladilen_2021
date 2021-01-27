@@ -20,8 +20,12 @@
         <td><AppStatus :type="r.status" /></td>
 
         <td>
-          <router-link :to="{ name: 'Request', params: { id: r.id } }">
-            Открыть
+          <router-link
+            v-slot="{ navigate }"
+            custom
+            :to="{ name: 'Request', params: { id: r.id } }"
+          >
+            <button class="btn" @click="navigate">Открыть</button>
           </router-link>
         </td>
         <td>{{ r.id }}</td>
@@ -29,12 +33,6 @@
     </tbody>
   </table>
 </template>
-
-<!--<td>-->
-<!--<router-link v-slot="{navigate}" custom :to="{name: 'Request', params: {id: r.id}}">-->
-<!--  <button class="btn" @click="navigate">Открыть</button>-->
-<!--</router-link>-->
-<!--</td>-->
 
 <script lang="ts">
 import { defineComponent } from "vue";

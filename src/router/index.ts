@@ -32,7 +32,7 @@ const routesPaths: tMyRouteRecord[] = [
     },
   },
   {
-    path: "/request",
+    path: "/request/:id",
     name: "Request",
     component: Request,
     meta: {
