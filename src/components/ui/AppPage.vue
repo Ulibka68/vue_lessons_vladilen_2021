@@ -1,23 +1,23 @@
 <template>
-    <div class="card">
-        <h1 class="card-title">
-            {{ title }}
-            <slot name="header" />
-        </h1>
-        <slot></slot>
-    </div>
+  <div class="card">
+    <h1 class="card-title">
+      {{ title }}
+      <slot name="header" />
+    </h1>
+    <slot></slot>
+  </div>
 </template>
 
 <script lang="ts">
-    import { defineComponent } from "vue";
+import { defineComponent } from "vue";
 
-    export default defineComponent({
-        name: "AppPage",
-        props: { title: { type: String, required: true } },
-        setup(props) {
-            document.title = `${props.title} | Клон Банка`;
-        },
-    });
+export default defineComponent({
+  name: "AppPage",
+  props: { title: { type: String, required: true } },
+  setup(props) {
+    document.title = `${props.title} | Клон Банка`;
+  },
+});
 </script>
 
 <style scoped></style>

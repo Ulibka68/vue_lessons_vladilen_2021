@@ -1,50 +1,40 @@
 <template>
-    <span :class="['badge', className]">{{ text }}</span>
+  <span :class="['badge', className]">{{ text }}</span>
 </template>
 
 <script lang="ts">
-    import { defineComponent, ref, watch } from "vue";
+// eslint-disable-next-line no-unused-vars
+import { defineComponent, ref, watch } from "vue";
+import { statusDescriptions, statusArr, tStatus } from "@/store";
 
-    export default defineComponent({
-        name: "AppStatus",
-        props: {
-            type: {
-                type: String,
-                required: true,
-                validator(value) {
-                    return ["active", "cancelled", "done", "pending"].includes(value);
-                },
-            },
-        },
-        setup(props) {
-            const classesMap = {
-                active: "primary",
-                cancelled: "danger",
-                done: "primary",
-                pending: "warning",
-            };
+export default defineComponent({
+  name: "AppStatus",
+  props: {
+    type: {
+      type: String,
+      required: true,
+      validator(value) {
+        return statusArr.includes(value as tStatus);
+      },
+    },
+  },
+  setup(props) {
+    // watch(props, (val) => {
+    //     className.value = statusDescriptions[val.type].className;
+    //     text.value = statusDescriptions[val.type].text;
+    // });
 
-            const textMap = {
-                active: "Активен",
-                cancelled: "Отменен",
-                done: "Завершен",
-                pending: "Выполняется",
-            };
+    // @ts-ignore
+    const className = ref(statusDescriptions[props.type].className);
+    // @ts-ignore
+    const text = ref(statusDescriptions[props.type].text);
 
-            watch(props, (val) => {
-                className.value = classesMap[val.type];
-                text.value = textMap[val.type];
-            });
-
-            const className = ref(classesMap[props.type]);
-            const text = ref(textMap[props.type]);
-
-            return {
-                className,
-                text,
-            };
-        },
-    });
+    return {
+      className,
+      text,
+    };
+  },
+});
 </script>
 
 <style scoped></style>

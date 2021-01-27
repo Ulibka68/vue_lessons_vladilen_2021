@@ -1,13 +1,13 @@
 <template>
-    <div class="loader"></div>
+  <div class="loader"></div>
 </template>
 
 <script lang="ts">
-    import { defineComponent } from "vue";
+import { defineComponent } from "vue";
 
-    export default defineComponent({
-        name: "AppLoader",
-    });
+export default defineComponent({
+  name: "AppLoader",
+});
 </script>
 
 <style scoped></style>

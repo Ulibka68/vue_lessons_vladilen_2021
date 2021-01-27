@@ -1,56 +1,58 @@
 <template>
-    <form @submit.prevent="onSubmit">
-        <div class="form-control" :class="{ invalid: fError }">
-            <label for="fio">ФИО</label>
-            <input type="text" id="fio" v-model="fio" @blur="fBlur" />
-            <small v-if="fError">{{ fError }}</small>
-        </div>
-        <div class="form-control" :class="{ invalid: pError }">
-            <label for="phone">Телефон</label>
-            <input type="text" id="phone" v-model="phone" @blur="pBlur" />
-            <small v-if="pError">{{ pError }}</small>
-        </div>
-        <div class="form-control" :class="{ invalid: aError }">
-            <label for="amount">Суммы</label>
-            <input type="number" id="amount" v-model.number="amount" @blur="aBlur" />
-            <small v-if="aError">{{ aError }}</small>
-        </div>
-        <div class="form-control">
-            <label for="status">Статус</label>
-            <select id="status" v-model="status">
-                <option value="done">Завершен</option>
-                <option value="canceled">Отменен</option>
-                <option value="active">Активен</option>
-                <option value="pending">Выполняется</option>
-            </select>
-        </div>
+  <form @submit.prevent="onSubmit">
+    <div class="form-control" :class="{ invalid: fError }">
+      <label for="fio">ФИО</label>
+      <input type="text" id="fio" v-model="fio" @blur="fBlur" />
+      <small v-if="fError">{{ fError }}</small>
+    </div>
+    <div class="form-control" :class="{ invalid: pError }">
+      <label for="phone">Телефон</label>
+      <input type="text" id="phone" v-model="phone" @blur="pBlur" />
+      <small v-if="pError">{{ pError }}</small>
+    </div>
+    <div class="form-control" :class="{ invalid: aError }">
+      <label for="amount">Суммы</label>
+      <input type="number" id="amount" v-model.number="amount" @blur="aBlur" />
+      <small v-if="aError">{{ aError }}</small>
+    </div>
+    <div class="form-control">
+      <label for="status">Статус</label>
+      <select id="status" v-model="status">
+        <option value="done">Завершен</option>
+        <option value="canceled">Отменен</option>
+        <option value="active">Активен</option>
+        <option value="pending">Выполняется</option>
+      </select>
+    </div>
 
-        <button type="submit" class="btn primary" :disabled="isSubmitting">Создать заявку</button>
-    </form>
+    <button type="submit" class="btn primary" :disabled="isSubmitting">
+      Создать заявку
+    </button>
+  </form>
 </template>
 
 <script lang="ts">
-    import { defineComponent } from "vue";
-    import { useRequestForm, tRequsetFormValues } from "@/use/request-form";
-    import { useStore } from "@/store";
+import { defineComponent } from "vue";
+import { useRequestForm, tRequsetFormValues } from "@/use/request-form";
+import { useStore } from "@/store";
 
-    export default defineComponent({
-        name: "RequestModalBody",
-        emits: ["created"],
-        // eslint-disable-next-line no-unused-vars
-        setup(_, { emit }) {
-            const store = useStore();
+export default defineComponent({
+  name: "RequestModalBody",
+  emits: ["created"],
+  // eslint-disable-next-line no-unused-vars
+  setup(_, { emit }) {
+    const store = useStore();
 
-            const submit22 = async (values: tRequsetFormValues) => {
-                await store.dispatch("request/create", values);
-                emit("created");
-            };
+    const submit22 = async (values: tRequsetFormValues) => {
+      await store.dispatch("request/create", values);
+      emit("created");
+    };
 
-            return {
-                ...useRequestForm(submit22),
-            };
-        },
-    });
+    return {
+      ...useRequestForm(submit22),
+    };
+  },
+});
 </script>
 
 <style scoped></style>
