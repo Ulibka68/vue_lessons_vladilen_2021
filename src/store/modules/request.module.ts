@@ -140,5 +140,47 @@ export const request: Module<tRequestState, tRootState> = {
         );
       }
     },
+
+    async remove(
+      { commit, dispatch, getters }: ActionContext<tRequestState, tRootState>,
+      id: string
+    ) {
+      try {
+        const token = store.getters["auth/token"];
+
+        await axios.delete(`/request/${id}.json?auth=${token}`);
+        dispatch("setMessage", { value: "Заявка удалена" } as tMessage, {
+          root: true,
+        });
+      } catch (e) {
+        dispatch(
+          "setMessage",
+          { value: e.message, type: "danger" } as tMessage,
+          { root: true }
+        );
+      }
+    },
+
+    async update(
+      { commit, dispatch, getters }: ActionContext<tRequestState, tRootState>,
+      request
+    ) {
+      try {
+        const token = store.getters["auth/token"];
+
+        await axios.put(`/request/${request.id}.json?auth=${token}`, request);
+        dispatch(
+          "setMessage",
+          { value: "Заявка обновлена", type: "primary" } as tMessage,
+          { root: true }
+        );
+      } catch (e) {
+        dispatch(
+          "setMessage",
+          { value: e.message, type: "danger" } as tMessage,
+          { root: true }
+        );
+      }
+    },
   },
 };
