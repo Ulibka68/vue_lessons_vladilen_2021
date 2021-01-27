@@ -102,6 +102,25 @@ export const request: Module<tRequestState, tRootState> = {
         );
       }
     },
+
+    async loadById(
+      { commit, dispatch, getters }: ActionContext<tRequestState, tRootState>,
+      id: string
+    ) {
+      try {
+        const token = store.getters["auth/token"];
+
+        const { data } = await axios.get(`/request/${id}.json?auth=${token}`);
+        return data;
+      } catch (e) {
+        dispatch(
+          "setMessage",
+          { value: e.message, type: "danger" } as tMessage,
+          { root: true }
+        );
+      }
+    },
+
     async load({
       commit,
       dispatch,
