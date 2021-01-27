@@ -7,6 +7,7 @@ import {
 import type { RouteRecordRaw } from "vue-router";
 import { store } from "@/store";
 import Home from "../views/Home.vue";
+import Request from "@/views/Request.vue";
 
 export type layoutType = { layout: "main" | "auth"; auth: boolean };
 type tMyRouteRecord = Omit<RouteRecordRaw, "meta"> & { meta: layoutType };
@@ -25,6 +26,15 @@ const routesPaths: tMyRouteRecord[] = [
     path: "/help",
     name: "Help",
     component: () => import("../views/Help.vue"),
+    meta: {
+      layout: "main",
+      auth: true,
+    },
+  },
+  {
+    path: "/request",
+    name: "Request",
+    component: Request,
     meta: {
       layout: "main",
       auth: true,
