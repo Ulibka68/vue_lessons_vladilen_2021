@@ -62,7 +62,9 @@ export interface Actions {
 // Define actions
 export const actions: ActionTree<State, RootState> & Actions = {
   async [ActionTypes.SIGNIN](
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     { commit },
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     payload: { username: string; password: string }
   ) {
     try {

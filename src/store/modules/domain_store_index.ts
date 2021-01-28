@@ -11,10 +11,23 @@ import {
 
 import { State as RootState } from "@/store";
 
-import DomainService, { ResponseDomain as Domain } from "@/services/domain";
-import RedirectionService, {
-  ResponseRedirection as Redirection
-} from "@/services/redirection";
+// import DomainService, { ResponseDomain as Domain } from "@/services/domain";
+// import RedirectionService, {
+//   ResponseRedirection as Redirection
+// } from "@/services/redirection";
+
+type Domain = { nameDomain: string };
+type Redirection = { nameRedirection: string };
+
+class DomainService {
+  public dmn: string;
+  constructor(pdmn?: string) {
+    this.dmn = pdmn ?? "a";
+  }
+  getDomains(teamId: string): Domain[] {
+    return [{ nameDomain: this.dmn }, { nameDomain: teamId }];
+  }
+}
 
 // Declare state
 export type State = {
@@ -85,8 +98,17 @@ export const actions: ActionTree<State, RootState> & Actions = {
     const domains = await domainService.getDomains(teamId);
     commit(MutationTypes.SET_DOMAINS, domains);
   },
-
   async [ActionTypes.FETCH_REDIRECTIONS](
+    { commit },
+    payload: { teamId: string; domainName: string }
+  ) {
+    commit(MutationTypes.SET_REDIRECTIONS, [
+      { nameRedirection: payload.teamId },
+      { nameRedirection: payload.domainName }
+    ]);
+  }
+
+  /* async [ActionTypes.FETCH_REDIRECTIONS](
     { commit },
     payload: { teamId: string; domainName: string }
   ) {
@@ -101,7 +123,7 @@ export const actions: ActionTree<State, RootState> & Actions = {
     );
 
     commit(MutationTypes.SET_REDIRECTIONS, redirections);
-  }
+  }*/
 };
 
 // Getters types
