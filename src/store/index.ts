@@ -25,7 +25,7 @@ export const store = createStore({
   modules: { AuthModule, DomainModule }
 });
 
-export function useStore(): Store {
+export function myUseStore(): Store {
   return store as Store;
 }
 

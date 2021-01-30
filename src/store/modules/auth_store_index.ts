@@ -14,6 +14,7 @@ import { State as RootState } from "@/store";
 // Declare state
 export type State = {
   isAuthenticated: boolean;
+  userName?: string;
 };
 
 // Create initial state
@@ -26,15 +27,22 @@ export enum MutationTypes {
   SET_USER_AUTHENTICATED = "SET_USER_AUTHENTICATED"
 }
 
+const mutationArray = ["setUserName", "SET_USER_AUTHENTICATED"];
+export type tMutation = typeof mutationArray[number];
+
 // Mutation contracts
 export type Mutations<S = State> = {
   [MutationTypes.SET_USER_AUTHENTICATED](state: S): void;
+  setUserName(state: State): void;
 };
 
 // Define mutations
 const mutations: MutationTree<State> & Mutations = {
   [MutationTypes.SET_USER_AUTHENTICATED](state: State) {
     state.isAuthenticated = true;
+  },
+  setUserName(state: State) {
+    state.userName = "a";
   }
 };
 
