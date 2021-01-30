@@ -8,7 +8,7 @@
 import { defineComponent, ref } from "vue";
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { myUseStore } from "@/store";
-import { MutationTypes } from "@/store/modules/auth_store_index";
+import { MutationTypes } from "@/store/modules/auth";
 // import { main } from "@/ts-learn/ts1";
 // import { main } from "@/ts-learn/ts4-strEnum";
 /* eslint-enable @typescript-eslint/no-unused-vars */
